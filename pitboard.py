@@ -51,22 +51,15 @@ class Card(object):
     Represent a single letter or symbol on the board
     '''
     def __init__(self, char, path, background, reflection):
-        ac.console('*%s*' % char)
         self.char = char
         self.background = background
         self.reflection = reflection
-        if path:
-            self.texture = ac.newTexture(path)
-        else:
-            self.texture = None
+        self.texture = ac.newTexture(path)
 
         # Get width/height from filename
         r = re.match(r'[^_]+_(\d+)_(\d+).png', os.path.basename(path))
         if r:
             self.width, self.height = [int(x) for x in r.groups()]
-        elif char == ' ':  # Special case for whitespace
-            self.width = 15
-            self.height = 50
         else:
             self.width = 40
             self.height = 50
@@ -74,11 +67,10 @@ class Card(object):
         ac.console('%s, width: %d, height: %d' % (char, self.width, self.height))
 
     def render(self, x, y):
-        if self.texture:
-            ac.glColor4f(1, 1, 1, 1)
-            ac.glQuadTextured(x, y, self.width, self.height, self.background)
-            ac.glQuadTextured(x, y, self.width, self.height, self.texture)
-            ac.glQuadTextured(x, y, self.width, self.height, self.reflection)
+        ac.glColor4f(1, 1, 1, 1)
+        ac.glQuadTextured(x, y, self.width, self.height, self.background)
+        ac.glQuadTextured(x, y, self.width, self.height, self.texture)
+        ac.glQuadTextured(x, y, self.width, self.height, self.reflection)
 
 
 class Row(object):
@@ -123,7 +115,6 @@ class Board(object):
     Represents the board itself
     '''
     def __init__(self, library):
-        self.display = False
         self.rows = (
             Row(x=10, y=110, max_width=200, library=library),
             Row(x=10, y=170, max_width=200, library=library),
@@ -134,12 +125,11 @@ class Board(object):
         self.texture = ac.newTexture('apps/python/pitboard/imgs/board.png')
 
     def render(self):
-        if self.display:
-            ac.glColor4f(1, 1, 1, 1)
-            ac.glQuadTextured(0, 30, 260, 380, self.texture)
+        ac.glColor4f(1, 1, 1, 1)
+        ac.glQuadTextured(0, 30, 260, 380, self.texture)
 
-            for row in self.rows:
-                row.render()
+        for row in self.rows:
+            row.render()
 
 
 class UI(object):
@@ -147,12 +137,12 @@ class UI(object):
     Object that deals with everything related to the app's widget
     '''
     def __init__(self, session_):
+        self.session = session_
+        self.widget = None
         self.labels = {}
+        self.textures = {}
         self.library = self._create_library()
         self.board = Board(self.library)
-        self.session = session_
-        self.textures = {}
-        self.widget = None
 
         self._create_widget()
 
@@ -162,7 +152,7 @@ class UI(object):
         '''
         library = {}
         chars = string.ascii_uppercase + string.digits + \
-            ''.join(CHARS_MAPS.keys()) + ' '
+            ''.join(CHARS_MAPS.keys())
 
         bg = ac.newTexture('apps/python/pitboard/imgs/card_bg.png')
         reflect = ac.newTexture('apps/python/pitboard/imgs/card_reflect.png')
@@ -176,8 +166,8 @@ class UI(object):
             path = glob.glob(
                 os.path.join('apps/python/pitboard/imgs/', '%s_*_*.png' % pchar)
             )
-            path = path[0] if path else ''
-            library[char] = Card(char, path, bg, reflect)
+            if path:
+                library[char] = Card(char, path[0], bg, reflect)
 
         return library
 
@@ -228,27 +218,16 @@ class Session(object):
     def _reset(self):
         self.current_lap = 0
         self.laps = 0
-        self.position = 0
         self.spline_pos = 0
 
     def render(self):
         self.ui.render()
 
     def update_data(self):
-        self.ui.board.display = True
         if self._is_race():
-            self.current_lap = info.graphics.completedLaps
-            # TODO: for practice, quali
-            # self.position = ac.getCarLeaderboardPosition(0)
-            self.position = ac.getCarRealTimeLeaderboardPosition(0) + 1
-            self.laps = info.graphics.numberOfLaps
+            self.current_lap = info.graphics.completedLaps + 1  # 0 indexed
             self.spline_pos = info.graphics.normalizedCarPosition
-
-            self.ui.board.rows[0].set_text(
-                'P%d - L%d' % (self.position, self.laps - self.current_lap))
-            self.ui.board.rows[2].set_text('(baR)')
-            self.ui.board.rows[3].set_text('3.2:44-')
-            self.ui.board.rows[4].set_text('%verylongaew')
+            self.laps = info.graphics.numberOfLaps
 
 
 def acMain(ac_version):
@@ -269,6 +248,11 @@ def acUpdate(deltaT):
 
     try:
         session.update_data()
+        session.ui.board.rows[0].set_text('DEF-')
+        session.ui.board.rows[1].set_text('foo+')
+        session.ui.board.rows[2].set_text('(baR)')
+        session.ui.board.rows[3].set_text('3.2:44-')
+        session.ui.board.rows[4].set_text('%verylongaew')
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
