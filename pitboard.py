@@ -57,12 +57,14 @@ class Card(object):
         self.texture = ac.newTexture(path)
 
         # Get width/height from filename
-        r = re.match(r'._(\d+)_(\d+).png', os.path.basename(path))
+        r = re.match(r'[^_]+_(\d+)_(\d+).png', os.path.basename(path))
         if r:
-            self.width, self.height = r.groups()
+            self.width, self.height = [int(x) for x in r.groups()]
         else:
             self.width = 40
             self.height = 50
+
+        ac.console('%s, width: %d, height: %d' % (char, self.width, self.height))
 
     def render(self, x, y):
         ac.glColor4f(1, 1, 1, 1)
@@ -79,6 +81,7 @@ class Row(object):
         self.x = x  # Coordinates of top-left corner of the row
         self.y = y
         self.max_width = max_width
+        self.library = library
         self.width = 0
         self.cards = []
 
@@ -92,15 +95,18 @@ class Row(object):
             self.width += card.width
 
     def render(self):
+        x = self.x
         for card in self.cards:
-            card.render()
+            card.render(x, self.y)
+            x += card.width
 
     def set_text(self, text):
-        for letter in text:
+        self._clear()
+        for letter in text.upper():
             try:
                 card = self.library[letter]
             except KeyError:
-                card = None  # FIXME: use default letter
+                card = self.library['?']
             self._add_card(card)
 
 
@@ -122,6 +128,9 @@ class Board(object):
         ac.glColor4f(1, 1, 1, 1)
         ac.glQuadTextured(0, 30, 260, 380, self.texture)
 
+        for row in self.rows:
+            row.render()
+
 
 class UI(object):
     '''
@@ -136,14 +145,14 @@ class UI(object):
         self.board = Board(self.library)
 
         self._create_widget()
-        # self._create_labels()
 
     def _create_library(self):
         '''
         Create a library of all available cards
         '''
         library = {}
-        chars = string.ascii_uppercase + string.digits + CHARS_MAPS.keys()
+        chars = string.ascii_uppercase + string.digits + \
+            ''.join(CHARS_MAPS.keys())
 
         bg = ac.newTexture('apps/python/pitboard/imgs/card_bg.png')
         reflect = ac.newTexture('apps/python/pitboard/imgs/card_reflect.png')
@@ -160,6 +169,8 @@ class UI(object):
             if path:
                 library[char] = Card(char, path[0], bg, reflect)
 
+        return library
+
     def _create_widget(self):
         self.widget = ac.newApp('pitboard')
         ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y)
@@ -173,9 +184,6 @@ class UI(object):
         ac.setText(label, text)
         ac.setPosition(label, x, y)
         self.labels[name] = label
-
-    def _create_labels(self):
-        self._create_label('message1', '', 10, 30)
 
     def hide_bg(self):
         ac.setBackgroundOpacity(self.widget, 0)
@@ -215,9 +223,6 @@ class Session(object):
     def render(self):
         self.ui.render()
 
-    def update_ui(self):
-        pass
-
     def update_data(self):
         if self._is_race():
             self.current_lap = info.graphics.completedLaps + 1  # 0 indexed
@@ -243,7 +248,11 @@ def acUpdate(deltaT):
 
     try:
         session.update_data()
-        session.update_ui()
+        session.ui.board.rows[0].set_text('DEF-')
+        session.ui.board.rows[1].set_text('foo+')
+        session.ui.board.rows[2].set_text('(baR)')
+        session.ui.board.rows[3].set_text('3.2:44-')
+        session.ui.board.rows[4].set_text('%verylongaew')
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
