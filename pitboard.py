@@ -12,8 +12,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Copyright (C) 2014 - Mathias Andre
 
+import glob
 import os
 import platform
+import re
+import string  # pylint: disable=W0402
 import sys
 import traceback
 
@@ -29,7 +32,95 @@ from pitboardDLL.sim_info import info
 APP_SIZE_X = 260
 APP_SIZE_Y = 40
 
+# Mapping for special characters filenames
+CHARS_MAPS = {
+    '(': 'lpar',
+    ')': 'rpar',
+    '+': 'plus',
+    '-': 'minus',
+    '.': 'dot',
+    ':': 'colon',
+    '?': 'qmark',
+}
+
 session = None
+
+
+class Card(object):
+    '''
+    Represent a single letter or symbol on the board
+    '''
+    def __init__(self, char, path, background, reflection):
+        self.char = char
+        self.background = background
+        self.reflection = reflection
+        self.texture = ac.newTexture(path)
+
+        # Get width/height from filename
+        r = re.match(r'._(\d+)_(\d+).png', os.path.basename(path))
+        if r:
+            self.width, self.height = r.groups()
+        else:
+            self.width = 40
+            self.height = 50
+
+    def render(self, x, y):
+        ac.glColor4f(1, 1, 1, 1)
+        ac.glQuadTextured(x, y, self.width, self.height, self.background)
+        ac.glQuadTextured(x, y, self.width, self.height, self.texture)
+        ac.glQuadTextured(x, y, self.width, self.height, self.reflection)
+
+
+class Row(object):
+    '''
+    Represents a row of cards
+    '''
+    def __init__(self, x, y, max_width, library):
+        self.x = x  # Coordinates of top-left corner of the row
+        self.y = y
+        self.max_width = max_width
+        self.width = 0
+        self.cards = []
+
+    def _clear(self):
+        self.cards = []
+        self.width = 0
+
+    def _add_card(self, card):
+        if self.width + card.width <= self.max_width:
+            self.cards.append(card)
+            self.width += card.width
+
+    def render(self):
+        for card in self.cards:
+            card.render()
+
+    def set_text(self, text):
+        for letter in text:
+            try:
+                card = self.library[letter]
+            except KeyError:
+                card = None  # FIXME: use default letter
+            self._add_card(card)
+
+
+class Board(object):
+    '''
+    Represents the board itself
+    '''
+    def __init__(self, library):
+        self.rows = (
+            Row(x=10, y=110, max_width=200, library=library),
+            Row(x=10, y=170, max_width=200, library=library),
+            Row(x=10, y=230, max_width=200, library=library),
+            Row(x=10, y=290, max_width=200, library=library),
+            Row(x=10, y=350, max_width=200, library=library),
+        )
+        self.texture = ac.newTexture('apps/python/pitboard/imgs/board.png')
+
+    def render(self):
+        ac.glColor4f(1, 1, 1, 1)
+        ac.glQuadTextured(0, 30, 260, 380, self.texture)
 
 
 class UI(object):
@@ -41,10 +132,33 @@ class UI(object):
         self.widget = None
         self.labels = {}
         self.textures = {}
+        self.library = self._create_library()
+        self.board = Board(self.library)
 
         self._create_widget()
         # self._create_labels()
-        self._load_textures()
+
+    def _create_library(self):
+        '''
+        Create a library of all available cards
+        '''
+        library = {}
+        chars = string.ascii_uppercase + string.digits + CHARS_MAPS.keys()
+
+        bg = ac.newTexture('apps/python/pitboard/imgs/card_bg.png')
+        reflect = ac.newTexture('apps/python/pitboard/imgs/card_reflect.png')
+
+        for char in chars:
+            try:
+                pchar = CHARS_MAPS[char]
+            except KeyError:
+                pchar = char
+
+            path = glob.glob(
+                os.path.join('apps/python/pitboard/imgs/', '%s_*_*.png' % pchar)
+            )
+            if path:
+                library[char] = Card(char, path[0], bg, reflect)
 
     def _create_widget(self):
         self.widget = ac.newApp('pitboard')
@@ -63,19 +177,11 @@ class UI(object):
     def _create_labels(self):
         self._create_label('message1', '', 10, 30)
 
-    def _load_textures(self):
-        self.textures['board'] = ac.newTexture(
-            'apps/python/pitboard/imgs/board.png')
-        self.textures['A'] = ac.newTexture(
-            'apps/python/pitboard/imgs/A.png')
-
     def hide_bg(self):
         ac.setBackgroundOpacity(self.widget, 0)
 
     def render(self):
-        ac.glColor4f(1, 1, 1, 1)
-        ac.glQuadTextured(0, 30, 260, 380, self.textures['board'])
-        ac.glQuadTextured(10, 110, 40, 50, self.textures['A'])
+        self.board.render()
 
     def set_bg_color(self, color):
         ac.setBackgroundColor(self.widget, *color[:-1])
