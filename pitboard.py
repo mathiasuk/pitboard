@@ -32,6 +32,7 @@ sys.path.insert(
 from pitboardDLL.sim_info import info
 
 OPACITY = 0.8
+DISPLAY_TIMEOUT = 15
 
 APP_SIZE_X = 260
 APP_SIZE_Y = 40
@@ -413,8 +414,8 @@ class Session(object):
             else:
                 text += ['', '']
 
-            if self.current_lap > 0 and info.graphics.iCurrentTime < 15 * 1000 \
-                    or self.laps - self.current_lap == 1:
+            if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
+                    self.current_lap > 0 or self.laps - self.current_lap == 1:
                 # Display the board for the first 30 seconds, or once passed
                 # the finish line
                 self.ui.board.display = True
