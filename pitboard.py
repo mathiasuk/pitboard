@@ -31,6 +31,8 @@ sys.path.insert(
 
 from pitboardDLL.sim_info import info
 
+OPACITY = 0.8
+
 APP_SIZE_X = 260
 APP_SIZE_Y = 40
 TEX_PATH = 'apps/python/pitboard/imgs/'
@@ -131,7 +133,7 @@ class Card(object):
 
     def render(self, x, y):
         if self.texture:
-            ac.glColor4f(1, 1, 1, 1)
+            ac.glColor4f(1, 1, 1, OPACITY)
             ac.glQuadTextured(x, y, self.width, self.height, self.background)
             ac.glQuadTextured(x, y, self.width, self.height, self.texture)
             ac.glQuadTextured(x, y, self.width, self.height, self.reflection)
@@ -186,6 +188,7 @@ class Board(object):
             Row(x=10, y=230, max_width=200, library=library),
             Row(x=10, y=290, max_width=200, library=library),
             Row(x=10, y=350, max_width=200, library=library),
+            Row(x=10, y=410, max_width=200, library=library),
         )
         self.texture = ac.newTexture(os.path.join(TEX_PATH, 'board.png'))
         logo_path = os.path.join(TEX_PATH, 'logo.png')
@@ -196,8 +199,8 @@ class Board(object):
 
     def render(self):
         if self.display:
-            ac.glColor4f(1, 1, 1, 1)
-            ac.glQuadTextured(0, 30, 260, 380, self.texture)
+            ac.glColor4f(1, 1, 1, OPACITY)
+            ac.glQuadTextured(0, 30, 260, 440, self.texture)
 
             if self.logo:
                 ac.glQuadTextured(10, 40, 240, 60, self.logo)
@@ -329,6 +332,9 @@ class Session(object):
         '''
         Returns the last available split time between two cars as a string
         '''
+        if not car1 or not car2:
+            return None
+
         # Get the last common sector (i.e: the last sector from the car behind)
         if car1.position > car2.position:
             last_sector = car1.last_sector
@@ -387,19 +393,30 @@ class Session(object):
             text.append('P%d - L%d' %
                         (car.position, self.laps - self.current_lap - 1))
 
-            if ahead:
-                split = self.get_split(car, ahead)
-                if split:
-                    text.append(ahead.name)
-                    text.append(split)
+            split = self.get_split(car, ahead)
+            if ahead and split:
+                text.append(ahead.name)
+                text.append(split)
+            else:
+                text += ['', '']
 
-            if behind:
-                split = self.get_split(car, behind)
-                if split:
-                    text.append(split)
-                    text.append(behind.name)
+            last_lap = info.graphics.iLastTime
+            if last_lap:
+                s, ms = divmod(last_lap, 1000)
+                m, s = divmod(s, 60)
+                text.append('%d:%d.%d' % (m, s, ms))
 
-            if self.current_lap > 0 and info.graphics.iCurrentTime < 15 * 1000:
+            split = self.get_split(car, behind)
+            if behind and split:
+                text.append(split)
+                text.append(behind.name)
+            else:
+                text += ['', '']
+
+            if self.current_lap > 0 and info.graphics.iCurrentTime < 15 * 1000 \
+                    or self.laps - self.current_lap == 1:
+                # Display the board for the first 30 seconds, or once passed
+                # the finish line
                 self.ui.board.display = True
             else:
                 self.ui.board.display = False
