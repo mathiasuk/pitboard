@@ -46,8 +46,8 @@ CHARS_MAPS = {
     '?': 'qmark',
 }
 
-# Define sectors frequency (0, 0.05, 0.1, .., 0.95)
-SECTORS = [x / 100.0 for x in range(0, 100, 5)]
+# Define sectors frequency (0, 0.1, .., 0.9)
+SECTORS = [x / 100.0 for x in range(0, 100, 10)]
 
 session = None
 
@@ -63,7 +63,7 @@ class Car(object):
         self.last_sector = None
         self.next_sector = None
         # Create a dict of sectors and timestamps
-        # {0: None, 0.05: None, ... 0.95: None}
+        # {0: None, 0.1: None, ... 0.9: None}
         self.sectors = dict([(x, None) for x in SECTORS])
 
     def _set_next_sector(self, spline):
@@ -77,35 +77,32 @@ class Car(object):
             self.next_sector = 0
 
     def update_data(self):
-        # The name can change if in no-booking mode
-        self.name = ac.getDriverName(self.index)
-        self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
 
-        spline_pos = ac.getCarState(
+        self.spline_pos = ac.getCarState(
             self.index, acsys.CS.NormalizedSplinePosition)
 
         # Check if we've started a new sector, and store the current timestamp
         if self.next_sector is None:
-            self._set_next_sector(spline_pos)
-            ac.console('set initial sector %d, %f' % (self.index, self.next_sector))
+            self._set_next_sector(self.spline_pos)
         else:
+            spline_pos = self.spline_pos
 
             # Workaround to handle the last sector (0.96 is the same position
             # as -0.04)
             if self.next_sector == 0 and spline_pos >= max(SECTORS):
                 spline_pos -= 1
 
-            if self.index == 0:
-                ac.console('spline: %.2f, sector: %.2f' % (spline_pos, self.next_sector))
+            if spline_pos >= self.next_sector:
+                # The name can change if in no-booking mode
+                self.name = ac.getDriverName(self.index)
+                self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
 
-            if spline_pos >= self.next_sector :
                 # Store the current timestamp
                 self.sectors[self.next_sector] = datetime.now()
 
                 # Store the last known sector and set the next expected
                 self.last_sector = self.next_sector
                 self._set_next_sector(spline_pos)
-                ac.console('set new sector %d, %f' % (self.index, self.next_sector))
 
 
 class Card(object):
@@ -208,6 +205,19 @@ class Board(object):
             for row in self.rows:
                 row.render()
 
+    def update_rows(self, text):
+        row = 0
+
+        for line in text:
+            self.rows[row].set_text(line)
+            row += 1
+            if row >= len(self.rows):
+                break
+
+        # Clear the rest of the board
+        for row in range(row, len(self.rows)):
+            self.rows[row].set_text('')
+
 
 class UI(object):
     '''
@@ -295,39 +305,49 @@ class Session(object):
     def _reset(self):
         self.current_lap = 0
         self.laps = 0
-        self.position = 0
-        self.spline_pos = 0
         self.cars = []
+
+    def get_car_by_position(self, position):
+        '''
+        Returns the car in the given position, or None
+        '''
+        for car in self.cars:
+            if car.position == position:
+                return car
+        return None
+
+    def get_player_car(self):
+        '''
+        Return the play's car or None
+        '''
+        try:
+            return self.cars[0]
+        except IndexError:
+            return None
 
     def get_split(self, car1, car2):
         '''
-        Returns the last possible split time between two cars
+        Returns the last available split time between two cars as a string
         '''
-        reverse = False
-
-        if car1.position > car2.position:
-            # car1 is behind
-            car1, car2 = car2, car1
-            reverse = True
-
         # Get the last common sector (i.e: the last sector from the car behind)
-        last_sector = car2.last_sector
+        if car1.position > car2.position:
+            last_sector = car1.last_sector
+        else:
+            last_sector = car2.last_sector
+
         if last_sector is None:
             # Car hasn't done a sector yet
             return None
+
         s1 = car1.sectors[last_sector]
         s2 = car2.sectors[last_sector]
 
         if not (s1 and s2):
             return None
 
-        split = (s2 - s1).total_seconds()
+        split = (s1 - s2).total_seconds()
 
-        if not reverse:
-            # If car1 is ahead, then we use a negative
-            split *= -1
-
-        return split
+        return '%+.2f' % split
 
     def render(self):
         self.ui.render()
@@ -347,34 +367,46 @@ class Session(object):
             car.update_data()
 
     def update_data(self):
-        self.ui.board.display = True
-
         self.update_cars()
+
+        text = []
 
         if self._is_race():
             self.current_lap = info.graphics.completedLaps
             # TODO: for practice, quali
-            # self.position = ac.getCarLeaderboardPosition(0)
-            self.position = ac.getCarRealTimeLeaderboardPosition(0) + 1
+            # position = ac.getCarLeaderboardPosition(0)
             self.laps = info.graphics.numberOfLaps
-            self.spline_pos = info.graphics.normalizedCarPosition
 
-            self.ui.board.rows[0].set_text(
-                'P%d - L%d' % (self.position, self.laps - self.current_lap))
+            car = self.get_player_car()
+            if not car:
+                return
 
-            self.ui.board.rows[1].set_text('split ')
-            self.ui.board.rows[2].set_text('%s' % self.cars[0].name[:3])
-            self.ui.board.rows[3].set_text('%s' % self.cars[1].name[:3])
+            ahead = self.get_car_by_position(car.position - 1)
+            behind = self.get_car_by_position(car.position + 1)
 
-            split = self.get_split(self.cars[0], self.cars[1])
+            text.append('P%d - L%d' %
+                (car.position, self.laps - self.current_lap - 1))
 
-            if split:
-                split = '%.2f' % split
+            if ahead:
+                split = self.get_split(car, ahead)
+                if split:
+                    text.append(ahead.name)
+                    text.append(split)
+
+            if behind:
+                split = self.get_split(car, behind)
+                if split:
+                    text.append(split)
+                    text.append(behind.name)
+
+            if car.spline_pos > 0 and car.spline_pos < 0.2:
+                self.ui.board.display = True
             else:
-                split = 'none'
+                self.ui.board.display = False
 
-            self.ui.board.rows[4].set_text(split)
 
+        if not self.ui.board.display:
+            self.ui.board.update_rows(text)
 
 
 def acMain(ac_version):
