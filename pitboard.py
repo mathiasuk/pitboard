@@ -385,7 +385,7 @@ class Session(object):
             behind = self.get_car_by_position(car.position + 1)
 
             text.append('P%d - L%d' %
-                (car.position, self.laps - self.current_lap - 1))
+                        (car.position, self.laps - self.current_lap - 1))
 
             if ahead:
                 split = self.get_split(car, ahead)
@@ -399,11 +399,10 @@ class Session(object):
                     text.append(split)
                     text.append(behind.name)
 
-            if car.spline_pos > 0 and car.spline_pos < 0.2:
+            if self.current_lap > 0 and info.graphics.iCurrentTime < 15 * 1000:
                 self.ui.board.display = True
             else:
                 self.ui.board.display = False
-
 
         if not self.ui.board.display:
             self.ui.board.update_rows(text)
