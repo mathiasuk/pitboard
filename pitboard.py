@@ -25,8 +25,7 @@ import ac
 import acsys
 
 sys.path.insert(
-    0, os.path.join(os.path.dirname(__file__),
-                    'pitboardDLL/%s' % platform.architecture()[0])
+    0, 'apps/python/pitboard/pitboardDLL/%s/' % platform.architecture()[0]
 )
 
 from pitboardDLL.sim_info import info
@@ -49,6 +48,11 @@ CHARS_MAPS = {
     '?': 'qmark',
 }
 
+PRACTICE = 0
+QUALIFY = 1
+RACE = 2
+HOTLAP = 3
+
 # Define sectors frequency (0, 0.1, .., 0.9)
 SECTORS = [x / 100.0 for x in range(0, 100, 10)]
 
@@ -59,31 +63,22 @@ class Car(object):
     '''
     Store information about car
     '''
-    def __init__(self, index, name):
+    def __init__(self, index, name, session_type):
         self.index = index
         self.name = name
         self.position = -1
-        self.last_sector = None
-        self.next_sector = None
-        # Create a dict of sectors and timestamps
-        # {0: None, 0.1: None, ... 0.9: None}
-        self.sectors = dict([(x, None) for x in SECTORS])
 
-    def _set_next_sector(self, spline):
+        if session_type == RACE:
+            self.last_sector = None
+            self.next_sector = None
+            # Create a dict of sectors and timestamps
+            # {0: None, 0.1: None, ... 0.9: None}
+            self.sectors = dict([(x, None) for x in SECTORS])
+
+    def _update_data_race(self):
         '''
-        Set next_sector based on the given spline
-        0.01 -> 0.05, 0.05 -> 0.1
+        Update race specific data
         '''
-        try:
-            self.next_sector = [x for x in SECTORS if x > spline][0]
-        except IndexError:
-            self.next_sector = 0
-
-    def update_data(self):
-
-        self.spline_pos = ac.getCarState(
-            self.index, acsys.CS.NormalizedSplinePosition)
-
         # Check if we've started a new sector, and store the current timestamp
         if self.next_sector is None:
             self._set_next_sector(self.spline_pos)
@@ -96,16 +91,32 @@ class Car(object):
                 spline_pos -= 1
 
             if spline_pos >= self.next_sector:
-                # The name can change if in no-booking mode
-                self.name = ac.getDriverName(self.index)
-                self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
-
                 # Store the current timestamp
                 self.sectors[self.next_sector] = datetime.now()
 
                 # Store the last known sector and set the next expected
                 self.last_sector = self.next_sector
                 self._set_next_sector(spline_pos)
+
+    def _set_next_sector(self, spline):
+        '''
+        Set next_sector based on the given spline
+        0.01 -> 0.05, 0.05 -> 0.1
+        '''
+        try:
+            self.next_sector = [x for x in SECTORS if x > spline][0]
+        except IndexError:
+            self.next_sector = 0
+
+    def update_data(self, session_type):
+        self.spline_pos = ac.getCarState(
+            self.index, acsys.CS.NormalizedSplinePosition)
+
+        # The name can change if in no-booking mode
+        self.name = ac.getDriverName(self.index)
+        self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
+
+        self._update_data_race()
 
 
 class Card(object):
@@ -300,16 +311,70 @@ class Session(object):
         self.ui = None
         self._reset()
 
-    def _is_race(self):
+    def _check_session(self):
         '''
-        Return true if the current session is a race
+        Set the current session ID and the number of laps,
+        Reset if a new session has started
         '''
-        return info.graphics.session == 2  # Only run in race mode
+        session_type = info.graphics.session
+        current_lap = info.graphics.completedLaps
+
+        if session_type != self.session_type and self.session_type != -1 or \
+                current_lap < self.current_lap:
+            # Session has been restarted or changed
+            self._reset()
+
+        self.current_lap = current_lap
+        self.session_type = session_type
+
+    def _update_board_race(self):
+        text = []
+
+        car = self.get_player_car()
+        if not car:
+            return text
+
+        ahead = self.get_car_by_position(car.position - 1)
+        behind = self.get_car_by_position(car.position + 1)
+
+        text.append('P%d - L%d' %
+                    (car.position, self.laps - self.current_lap - 1))
+
+        split = self.get_split(car, ahead)
+        if ahead and split:
+            text.append(ahead.name)
+            text.append(split)
+        else:
+            text += ['', '']
+
+        last_lap = info.graphics.iLastTime
+        if last_lap:
+            s, ms = divmod(last_lap, 1000)
+            m, s = divmod(s, 60)
+            text.append('%d:%d.%d' % (m, s, ms))
+
+        split = self.get_split(car, behind)
+        if behind and split:
+            text.append(split)
+            text.append(behind.name)
+        else:
+            text += ['', '']
+
+        if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
+                self.current_lap > 0 or self.laps - self.current_lap == 1:
+            # Display the board for the first 30 seconds, or once passed
+            # the finish line
+            self.ui.board.display = True
+        else:
+            self.ui.board.display = False
+
+        return text
 
     def _reset(self):
         self.current_lap = 0
         self.laps = 0
         self.cars = []
+        self.session_type = -1
 
     def get_car_by_position(self, position):
         '''
@@ -356,9 +421,6 @@ class Session(object):
 
         return '%+.2f' % split
 
-    def render(self):
-        self.ui.render()
-
     def update_cars(self):
         for i in range(ac.getCarsCount()):
             try:
@@ -368,62 +430,31 @@ class Session(object):
                 if name == -1:
                     # No such car
                     break
-                car = Car(i, name)
+                car = Car(i, name, self.session_type)
                 self.cars.append(car)
 
-            car.update_data()
+            car.update_data(self.session_type)
 
-    def update_data(self):
-        self.update_cars()
+    def update_board(self):
+        if self.ui.board.display:
+            # We don't update the board if it's currently displayed
+            return
 
         text = []
 
-        if self._is_race():
-            self.current_lap = info.graphics.completedLaps
+        if self.session_type == RACE:
+            text = self._update_board_race
+
+        self.ui.board.update_rows(text)
+
+    def update_data(self):
+        self._check_session()
+        self.update_cars()
+
+        if self.session_type == RACE:
             # TODO: for practice, quali
             # position = ac.getCarLeaderboardPosition(0)
             self.laps = info.graphics.numberOfLaps
-
-            car = self.get_player_car()
-            if not car:
-                return
-
-            ahead = self.get_car_by_position(car.position - 1)
-            behind = self.get_car_by_position(car.position + 1)
-
-            text.append('P%d - L%d' %
-                        (car.position, self.laps - self.current_lap - 1))
-
-            split = self.get_split(car, ahead)
-            if ahead and split:
-                text.append(ahead.name)
-                text.append(split)
-            else:
-                text += ['', '']
-
-            last_lap = info.graphics.iLastTime
-            if last_lap:
-                s, ms = divmod(last_lap, 1000)
-                m, s = divmod(s, 60)
-                text.append('%d:%d.%d' % (m, s, ms))
-
-            split = self.get_split(car, behind)
-            if behind and split:
-                text.append(split)
-                text.append(behind.name)
-            else:
-                text += ['', '']
-
-            if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
-                    self.current_lap > 0 or self.laps - self.current_lap == 1:
-                # Display the board for the first 30 seconds, or once passed
-                # the finish line
-                self.ui.board.display = True
-            else:
-                self.ui.board.display = False
-
-        if not self.ui.board.display:
-            self.ui.board.update_rows(text)
 
 
 def acMain(ac_version):
@@ -444,6 +475,7 @@ def acUpdate(deltaT):
 
     try:
         session.update_data()
+        session.update_board()
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
@@ -454,7 +486,7 @@ def render_callback(deltaT):
     global session  # pylint: disable=W0602
 
     try:
-        session.render()
+        session.ui.render()
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
         session.ac.console('pitboard Error (logged to file)')
