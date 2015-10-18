@@ -114,7 +114,11 @@ class Car(object):
 
         # The name can change if in no-booking mode
         self.name = ac.getDriverName(self.index)
-        self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
+
+        if session_type == RACE:
+            self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
+        else:
+            self.position = ac.getCarLeaderboardPosition(self.index) + 1
 
         self._update_data_race()
 
@@ -327,7 +331,54 @@ class Session(object):
         self.current_lap = current_lap
         self.session_type = session_type
 
+    def _update_board_quali(self):
+        '''
+        Displays:
+         Position
+         Name of car ahead in the standings (if any)
+         Last laptime
+        '''
+        text = []
+
+        car = self.get_player_car()
+        if not car:
+            return text
+
+        ahead = self.get_car_by_position(car.position - 1)
+
+        text.append('P%d' % car.position)
+
+        if ahead:
+            text.append(ahead.name)
+            text.append('')
+        else:
+            text += ['', '']
+
+        last_lap = info.graphics.iLastTime
+        if last_lap:
+            s, ms = divmod(last_lap, 1000)
+            m, s = divmod(s, 60)
+            text.append('%d:%d.%d' % (m, s, ms))
+
+        if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
+                self.current_lap > 0:
+            # Display the board for the first 30 seconds
+            self.ui.board.display = True
+        else:
+            self.ui.board.display = False
+
+        return text
+
     def _update_board_race(self):
+        '''
+        Displays:
+         Position - Laps left
+         Name of car ahead (if any)
+         Split to car ahead (if any)
+         Last laptime
+         Split to car behind (if any)
+         Name of car behind (if any)
+        '''
         text = []
 
         car = self.get_player_car()
@@ -369,6 +420,20 @@ class Session(object):
             self.ui.board.display = False
 
         return text
+
+    def _update_cars(self):
+        for i in range(ac.getCarsCount()):
+            try:
+                car = self.cars[i]
+            except IndexError:
+                name = ac.getDriverName(i)
+                if name == -1:
+                    # No such car
+                    break
+                car = Car(i, name, self.session_type)
+                self.cars.append(car)
+
+            car.update_data(self.session_type)
 
     def _reset(self):
         self.current_lap = 0
@@ -421,20 +486,6 @@ class Session(object):
 
         return '%+.2f' % split
 
-    def update_cars(self):
-        for i in range(ac.getCarsCount()):
-            try:
-                car = self.cars[i]
-            except IndexError:
-                name = ac.getDriverName(i)
-                if name == -1:
-                    # No such car
-                    break
-                car = Car(i, name, self.session_type)
-                self.cars.append(car)
-
-            car.update_data(self.session_type)
-
     def update_board(self):
         if self.ui.board.display:
             # We don't update the board if it's currently displayed
@@ -443,17 +494,17 @@ class Session(object):
         text = []
 
         if self.session_type == RACE:
-            text = self._update_board_race
+            text = self._update_board_race()
+        elif self.session_type in (PRACTICE, QUALIFY, HOTLAP):
+            text = self._update_board_quali()
 
         self.ui.board.update_rows(text)
 
     def update_data(self):
         self._check_session()
-        self.update_cars()
+        self._update_cars()
 
         if self.session_type == RACE:
-            # TODO: for practice, quali
-            # position = ac.getCarLeaderboardPosition(0)
             self.laps = info.graphics.numberOfLaps
 
 
