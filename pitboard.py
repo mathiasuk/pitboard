@@ -84,6 +84,7 @@ class Car(object):
             self._set_next_sector(self.spline_pos)
         else:
             spline_pos = self.spline_pos
+            self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
 
             # Workaround to handle the last sector (0.96 is the same position
             # as -0.04)
@@ -116,11 +117,9 @@ class Car(object):
         self.name = ac.getDriverName(self.index)
 
         if session_type == RACE:
-            self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
+            self._update_data_race()
         else:
             self.position = ac.getCarLeaderboardPosition(self.index) + 1
-
-        self._update_data_race()
 
 
 class Card(object):
@@ -356,7 +355,8 @@ class Session(object):
 
         split = (s1 - s2).total_seconds()
 
-        return '%+.2f' % split
+        split = '%+.2f' % split
+        return split.rstrip('0').rstrip('.')
 
     def _get_splits(self, player):
         '''
@@ -441,8 +441,8 @@ class Session(object):
         if ahead and splits[ahead]:
             text.append(ahead.name)
             line = splits[ahead]
-            if self.last_splits[ahead]:
-                text += ' (%s)' % self.last_splits[ahead]
+            if ahead in self.last_splits:
+                line += '(%s)' % self.last_splits[ahead]
             text.append(line)
         else:
             text += ['', '']
@@ -455,8 +455,8 @@ class Session(object):
 
         if behind and splits[behind]:
             line = splits[behind]
-            if self.last_splits[behind]:
-                text += ' (%s)' % self.last_splits[behind]
+            if behind in self.last_splits:
+                line += '(%s)' % self.last_splits[behind]
             text.append(line)
             text.append(behind.name)
         else:
@@ -466,11 +466,14 @@ class Session(object):
                 self.current_lap > 0 or self.laps - self.current_lap == 1:
             # Display the board for the first 30 seconds, or once passed
             # the finish line
+
+            # Save the current splits when the board is displayed
+            if self.ui.board.display == False:
+                self.last_splits = splits
+
             self.ui.board.display = True
         else:
             self.ui.board.display = False
-
-        self.last_splits = splits
 
         return text
 
@@ -507,9 +510,6 @@ class Session(object):
             return None
 
     def update_board(self):
-        if self.ui.board.display:
-            # We don't update the board if it's currently displayed
-            return
 
         text = []
 
@@ -518,7 +518,9 @@ class Session(object):
         elif self.session_type in (PRACTICE, QUALIFY, HOTLAP):
             text = self._update_board_quali()
 
-        self.ui.board.update_rows(text)
+        if not self.ui.board.display:
+            # We only update the board if it's not displayed
+            self.ui.board.update_rows(text)
 
     def update_data(self):
         self._check_session()
