@@ -331,6 +331,50 @@ class Session(object):
         self.current_lap = current_lap
         self.session_type = session_type
 
+    def _get_split(self, car1, car2):
+        '''
+        Returns the last available split time between two cars as a string
+        '''
+        if not car1 or not car2:
+            return None
+
+        # Get the last common sector (i.e: the last sector from the car behind)
+        if car1.position > car2.position:
+            last_sector = car1.last_sector
+        else:
+            last_sector = car2.last_sector
+
+        if last_sector is None:
+            # Car hasn't done a sector yet
+            return None
+
+        s1 = car1.sectors[last_sector]
+        s2 = car2.sectors[last_sector]
+
+        if not (s1 and s2):
+            return None
+
+        split = (s1 - s2).total_seconds()
+
+        return '%+.2f' % split
+
+    def _get_splits(self, player):
+        '''
+        Returns a dict of cars and their split time with the player
+        '''
+        splits = {}
+        for car in self.cars[1:]:
+            splits[car] = self._get_split(player, car)
+
+        return splits
+
+    def _reset(self):
+        self.current_lap = 0
+        self.laps = 0
+        self.cars = []
+        self.session_type = -1
+        self.last_splits = {}
+
     def _update_board_quali(self):
         '''
         Displays:
@@ -391,10 +435,15 @@ class Session(object):
         text.append('P%d - L%d' %
                     (car.position, self.laps - self.current_lap - 1))
 
-        split = self.get_split(car, ahead)
-        if ahead and split:
+        # Get current split times
+        splits = self._get_splits(car)
+
+        if ahead and splits[ahead]:
             text.append(ahead.name)
-            text.append(split)
+            line = splits[ahead]
+            if self.last_splits[ahead]:
+                text += ' (%s)' % self.last_splits[ahead]
+            text.append(line)
         else:
             text += ['', '']
 
@@ -404,9 +453,11 @@ class Session(object):
             m, s = divmod(s, 60)
             text.append('%d:%d.%d' % (m, s, ms))
 
-        split = self.get_split(car, behind)
-        if behind and split:
-            text.append(split)
+        if behind and splits[behind]:
+            line = splits[behind]
+            if self.last_splits[behind]:
+                text += ' (%s)' % self.last_splits[behind]
+            text.append(line)
             text.append(behind.name)
         else:
             text += ['', '']
@@ -418,6 +469,8 @@ class Session(object):
             self.ui.board.display = True
         else:
             self.ui.board.display = False
+
+        self.last_splits = splits
 
         return text
 
@@ -434,12 +487,6 @@ class Session(object):
                 self.cars.append(car)
 
             car.update_data(self.session_type)
-
-    def _reset(self):
-        self.current_lap = 0
-        self.laps = 0
-        self.cars = []
-        self.session_type = -1
 
     def get_car_by_position(self, position):
         '''
@@ -458,33 +505,6 @@ class Session(object):
             return self.cars[0]
         except IndexError:
             return None
-
-    def get_split(self, car1, car2):
-        '''
-        Returns the last available split time between two cars as a string
-        '''
-        if not car1 or not car2:
-            return None
-
-        # Get the last common sector (i.e: the last sector from the car behind)
-        if car1.position > car2.position:
-            last_sector = car1.last_sector
-        else:
-            last_sector = car2.last_sector
-
-        if last_sector is None:
-            # Car hasn't done a sector yet
-            return None
-
-        s1 = car1.sectors[last_sector]
-        s2 = car2.sectors[last_sector]
-
-        if not (s1 and s2):
-            return None
-
-        split = (s1 - s2).total_seconds()
-
-        return '%+.2f' % split
 
     def update_board(self):
         if self.ui.board.display:
