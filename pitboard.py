@@ -10,7 +10,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# Copyright (C) 2014 - Mathias Andre
+# Copyright (C) 2014 - Mathias André
 
 import glob
 import os
@@ -324,26 +324,11 @@ class UI(object):
         self.hide_bg()
         ac.addRenderCallback(self.widget, render_callback)
 
-    def _create_label(self, name, text, x, y):
-        label = ac.addLabel(self.widget, name)
-        ac.setText(label, text)
-        ac.setPosition(label, x, y)
-        self.labels[name] = label
-
     def hide_bg(self):
         ac.setBackgroundOpacity(self.widget, 0)
 
     def render(self):
         self.board.render()
-
-    def set_bg_color(self, color):
-        ac.setBackgroundColor(self.widget, *color[:-1])
-
-    def set_title(self, text):
-        ac.setTitle(self.widget, text)
-
-    def show_bg(self):
-        ac.setBackgroundOpacity(self.widget, 0.7)
 
 
 class Session(object):
