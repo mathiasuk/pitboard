@@ -60,22 +60,27 @@ SECTORS = [n / 100.0 for n in range(0, 100, 10)]
 session = None
 
 
+def seconds_to_str(seconds):
+    '''
+    Convert a time in seconds to a formatted string
+    '''
+    if seconds > -15 and seconds < 15:
+        seconds = '%+.1f' % seconds
+    else:
+        seconds = '%+d' % round(seconds)
+
+    # Strip heading 0: 0.1 -> .1
+    if seconds[1] == 0:
+        seconds = seconds[0] + seconds[2:]
+
+    return seconds.rstrip('0').rstrip('.')
+
+
 def split_to_str(split):
     '''
     Convert a split (timedelta) to a formatted string
     '''
-    split = split.total_seconds()
-
-    if split > -15 and split < 15:
-        split = '%+.1f' % split
-    else:
-        split = '%+d' % round(split)
-
-    # Strip heading 0: 0.1 -> .1
-    if split[1] == 0:
-        split = split[0] + split[2:]
-
-    return split.rstrip('0').rstrip('.')
+    return seconds_to_str(split.total_seconds())
 
 
 def time_to_str(laptime, show_ms=True):
@@ -96,9 +101,11 @@ class Car(object):
     Store information about car
     '''
     def __init__(self, index, name, session_type):
+        self.best_lap = None
         self.index = index
         self.name = name
         self.position = -1
+        self.spline_pos = 0
 
         if session_type == RACE:
             self.last_sector = None
@@ -152,6 +159,9 @@ class Car(object):
             self._update_data_race()
         else:
             self.position = ac.getCarLeaderboardPosition(self.index)
+            best_lap = ac.getCarState(self.index, acsys.CS.BestLap)
+            if best_lap > 0:
+                self.best_lap = best_lap
 
 
 class Card(object):
@@ -406,6 +416,12 @@ class Session(object):
         '''
         text = []
 
+        current_time = info.graphics.iCurrentTime
+        is_in_pit = info.graphics.isInPit
+        last_lap = info.graphics.iLastTime
+        pit_limiter_on = info.physics.pitLimiterOn
+        time_left = info.graphics.sessionTimeLeft
+
         car = self.get_player_car()
         if not car:
             return text
@@ -417,24 +433,24 @@ class Session(object):
         # Display name of car ahead in the standings (if any)
         if ahead:
             text.append(ahead.name)
-            text.append('')
+            if car.best_lap and ahead.best_lap:
+                text.append(seconds_to_str((car.best_lap - ahead.best_lap) / 1000.0))
+            else:
+                text.append('')
         else:
             text += ['', '']
 
         # Display own lap time
         # TODO: display delta to best time
-        last_lap = info.graphics.iLastTime
         if last_lap:
             text.append(time_to_str(last_lap))
 
         # Display time left in session
         text.append('')
-        text.append('LEFT: ' +
-                    time_to_str(info.graphics.sessionTimeLeft, show_ms=False))
+        text.append('LEFT: ' + time_to_str(time_left, show_ms=False))
 
-        if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
-                self.current_lap > 0 and \
-                (not info.physics.pitLimiterOn or not info.graphics.isInPit):
+        if current_time < DISPLAY_TIMEOUT * 1000 and self.current_lap > 0 and \
+                (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
             self.ui.board.display = True
         else:
@@ -552,6 +568,8 @@ class Session(object):
 
         if not self.ui.board.display:
             # We only update the board if it's not displayed
+            # FIXME: at the moment we lost the last text update since we
+            # set self.ui.board.display before returning the text
             self.ui.board.update_rows(text)
 
     def update_data(self):
