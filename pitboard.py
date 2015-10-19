@@ -30,11 +30,12 @@ sys.path.insert(
 
 from pitboardDLL.sim_info import info
 
-OPACITY = 0.8
 DISPLAY_TIMEOUT = 15
+OPACITY = 0.8
+SCALE = 1.0
 
-APP_SIZE_X = 260
-APP_SIZE_Y = 40
+APP_SIZE_X = 260 * SCALE
+APP_SIZE_Y = 30
 TEX_PATH = 'apps/python/pitboard/imgs/'
 
 # Mapping for special characters filenames
@@ -156,13 +157,16 @@ class Card(object):
         # Get width/height from filename
         r = re.match(r'[^_]+_(\d+)_(\d+).png', os.path.basename(path))
         if r:
-            self.width, self.height = [int(x) for x in r.groups()]
+            width, height = [int(x) for x in r.groups()]
         elif char == ' ':  # Special case for whitespace
-            self.width = 15
-            self.height = 50
+            width = 15
+            height = 50
         else:
-            self.width = 40
-            self.height = 50
+            width = 40
+            height = 50
+
+        self.width = width * SCALE
+        self.height = height * SCALE
 
     def render(self, x, y):
         if self.texture:
@@ -215,14 +219,17 @@ class Board(object):
     '''
     def __init__(self, library):
         self.display = False
-        self.rows = (
-            Row(x=10, y=110, max_width=240, library=library),
-            Row(x=10, y=170, max_width=240, library=library),
-            Row(x=10, y=230, max_width=240, library=library),
-            Row(x=10, y=290, max_width=240, library=library),
-            Row(x=10, y=350, max_width=240, library=library),
-            Row(x=10, y=410, max_width=240, library=library),
-        )
+
+        # Create 6 rows starting from 80 pixels, every 60 pixels
+        self.rows = [
+            Row(
+                x=10 * SCALE,
+                y=APP_SIZE_Y + y * SCALE,
+                max_width=240 * SCALE,
+                library=library
+            ) for y in range(80, 440, 60)
+        ]
+
         self.texture = ac.newTexture(os.path.join(TEX_PATH, 'board.png'))
         logo_path = os.path.join(TEX_PATH, 'logo.png')
         if os.path.exists(logo_path):
@@ -233,10 +240,12 @@ class Board(object):
     def render(self):
         if self.display:
             ac.glColor4f(1, 1, 1, OPACITY)
-            ac.glQuadTextured(0, 30, 260, 440, self.texture)
+            ac.glQuadTextured(0, APP_SIZE_Y, 260 * SCALE, 440 * SCALE,
+                              self.texture)
 
             if self.logo:
-                ac.glQuadTextured(10, 40, 240, 60, self.logo)
+                ac.glQuadTextured(10 * SCALE, APP_SIZE_Y + 10 * SCALE,
+                                  240 * SCALE, 60 * SCALE, self.logo)
 
             for row in self.rows:
                 row.render()
@@ -419,6 +428,7 @@ class Session(object):
             m, s = divmod(s, 60)
             text.append('%d:%d.%d' % (m, s, ms))
 
+        # TODO: hide board in pits
         if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
                 self.current_lap > 0:
             # Display the board for the first 30 seconds
