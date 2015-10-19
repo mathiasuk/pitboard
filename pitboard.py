@@ -54,9 +54,23 @@ RACE = 2
 HOTLAP = 3
 
 # Define sectors frequency (0, 0.1, .., 0.9)
-SECTORS = [x / 100.0 for x in range(0, 100, 10)]
+SECTORS = [n / 100.0 for n in range(0, 100, 10)]
 
 session = None
+
+
+def split_to_str(split):
+    '''
+    Convert a split (timedelta) to a formatted string
+    '''
+    split = split.total_seconds()
+
+    if split > -15 and split < 15:
+        split = '%+.1f' % split
+    else:
+        split = '%+d' % round(split)
+
+    return split.rstrip('0').rstrip('.')
 
 
 class Car(object):
@@ -353,10 +367,7 @@ class Session(object):
         if not (s1 and s2):
             return None
 
-        split = (s1 - s2).total_seconds()
-
-        split = '%+.2f' % split
-        return split.rstrip('0').rstrip('.')
+        return s1 - s2
 
     def _get_splits(self, player):
         '''
@@ -440,9 +451,10 @@ class Session(object):
 
         if ahead and splits[ahead]:
             text.append(ahead.name)
-            line = splits[ahead]
+            line = split_to_str(splits[ahead])
             if ahead in self.last_splits:
-                line += '(%s)' % self.last_splits[ahead]
+                line += '(%s)' % split_to_str(
+                    splits[ahead] - self.last_splits[ahead])
             text.append(line)
         else:
             text += ['', '']
@@ -454,9 +466,10 @@ class Session(object):
             text.append('%d:%d.%d' % (m, s, ms))
 
         if behind and splits[behind]:
-            line = splits[behind]
+            line = split_to_str(splits[behind])
             if behind in self.last_splits:
-                line += '(%s)' % self.last_splits[behind]
+                line += '(%s)' % split_to_str(
+                    splits[behind] - self.last_splits[behind])
             text.append(line)
             text.append(behind.name)
         else:
@@ -468,7 +481,7 @@ class Session(object):
             # the finish line
 
             # Save the current splits when the board is displayed
-            if self.ui.board.display == False:
+            if self.ui.board.display is False:
                 self.last_splits = splits
 
             self.ui.board.display = True
