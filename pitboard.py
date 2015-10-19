@@ -78,6 +78,19 @@ def split_to_str(split):
     return split.rstrip('0').rstrip('.')
 
 
+def time_to_str(laptime, show_ms=True):
+    '''
+    Convert a laptime in ms to a string formatted as mm:ss.ms
+    '''
+    s, ms = divmod(laptime, 1000)
+    m, s = divmod(s, 60)
+
+    if show_ms:
+        return '%d:%02d.%d' % (m, s, ms)
+    else:
+        return '%d:%02d' % (m, s)
+
+
 class Car(object):
     '''
     Store information about car
@@ -138,7 +151,7 @@ class Car(object):
         if session_type == RACE:
             self._update_data_race()
         else:
-            self.position = ac.getCarLeaderboardPosition(self.index) + 1
+            self.position = ac.getCarLeaderboardPosition(self.index)
 
 
 class Card(object):
@@ -416,22 +429,28 @@ class Session(object):
 
         text.append('P%d' % car.position)
 
+        # Display name of car ahead in the standings (if any)
         if ahead:
             text.append(ahead.name)
             text.append('')
         else:
             text += ['', '']
 
+        # Display own lap time
+        # TODO: display delta to best time
         last_lap = info.graphics.iLastTime
         if last_lap:
-            s, ms = divmod(last_lap, 1000)
-            m, s = divmod(s, 60)
-            text.append('%d:%d.%d' % (m, s, ms))
+            text.append(time_to_str(last_lap))
 
-        # TODO: hide board in pits
+        # Display time left in session
+        text.append('')
+        text.append('LEFT: ' +
+                    time_to_str(info.graphics.sessionTimeLeft, show_ms=False))
+
         if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
-                self.current_lap > 0:
-            # Display the board for the first 30 seconds
+                self.current_lap > 0 and \
+                (not info.physics.pitLimiterOn or not info.graphics.isInPit):
+            # Display the board for the first 30 seconds, if not in pits
             self.ui.board.display = True
         else:
             self.ui.board.display = False
@@ -477,9 +496,7 @@ class Session(object):
         # Display own lap time
         last_lap = info.graphics.iLastTime
         if last_lap:
-            s, ms = divmod(last_lap, 1000)
-            m, s = divmod(s, 60)
-            text.append('%d:%d.%d' % (m, s, ms))
+            text.append(time_to_str(last_lap))
 
         # Display split to car behind (if any)
         if behind and splits[behind]:
