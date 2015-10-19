@@ -70,6 +70,10 @@ def split_to_str(split):
     else:
         split = '%+d' % round(split)
 
+    # Strip heading 0: 0.1 -> .1
+    if split[1] == 0:
+        split = split[0] + split[2:]
+
     return split.rstrip('0').rstrip('.')
 
 
@@ -212,12 +216,12 @@ class Board(object):
     def __init__(self, library):
         self.display = False
         self.rows = (
-            Row(x=10, y=110, max_width=200, library=library),
-            Row(x=10, y=170, max_width=200, library=library),
-            Row(x=10, y=230, max_width=200, library=library),
-            Row(x=10, y=290, max_width=200, library=library),
-            Row(x=10, y=350, max_width=200, library=library),
-            Row(x=10, y=410, max_width=200, library=library),
+            Row(x=10, y=110, max_width=240, library=library),
+            Row(x=10, y=170, max_width=240, library=library),
+            Row(x=10, y=230, max_width=240, library=library),
+            Row(x=10, y=290, max_width=240, library=library),
+            Row(x=10, y=350, max_width=240, library=library),
+            Row(x=10, y=410, max_width=240, library=library),
         )
         self.texture = ac.newTexture(os.path.join(TEX_PATH, 'board.png'))
         logo_path = os.path.join(TEX_PATH, 'logo.png')
@@ -449,26 +453,29 @@ class Session(object):
         # Get current split times
         splits = self._get_splits(car)
 
+        # Display split to car ahead (if any)
         if ahead and splits[ahead]:
             text.append(ahead.name)
             line = split_to_str(splits[ahead])
             if ahead in self.last_splits:
-                line += '(%s)' % split_to_str(
+                line += ' (%s)' % split_to_str(
                     splits[ahead] - self.last_splits[ahead])
             text.append(line)
         else:
             text += ['', '']
 
+        # Display own lap time
         last_lap = info.graphics.iLastTime
         if last_lap:
             s, ms = divmod(last_lap, 1000)
             m, s = divmod(s, 60)
             text.append('%d:%d.%d' % (m, s, ms))
 
+        # Display split to car behind (if any)
         if behind and splits[behind]:
             line = split_to_str(splits[behind])
             if behind in self.last_splits:
-                line += '(%s)' % split_to_str(
+                line += ' (%s)' % split_to_str(
                     splits[behind] - self.last_splits[behind])
             text.append(line)
             text.append(behind.name)
