@@ -34,6 +34,7 @@ from pitboardDLL.sim_info import info
 DISPLAY_TIMEOUT = 15
 OPACITY = 0.8
 SCALE = 1.0
+SHORT_NAMES = True
 
 APP_SIZE_X = 260 * SCALE
 APP_SIZE_Y = 30
@@ -148,6 +149,15 @@ class Car(object):
             self.next_sector = [x for x in SECTORS if x > spline][0]
         except IndexError:
             self.next_sector = 0
+
+    def get_name(self):
+        '''
+        Returns the driver's name
+        '''
+        if SHORT_NAMES:
+            return self.name[:3]
+        else:
+            return self.name
 
     def update_data(self, session_type):
         self.spline_pos = ac.getCarState(
@@ -433,7 +443,7 @@ class Session(object):
 
         # Display name of car ahead in the standings (if any)
         if ahead:
-            text.append(ahead.name)
+            text.append(ahead.get_name())
             if car.best_lap and ahead.best_lap:
                 text.append(seconds_to_str((car.best_lap - ahead.best_lap) / 1000.0))
             else:
@@ -490,7 +500,7 @@ class Session(object):
 
         # Display split to car ahead (if any)
         if ahead and splits[ahead]:
-            text.append(ahead.name)
+            text.append(ahead.get_name())
             line = split_to_str(splits[ahead])
             if ahead in self.last_splits:
                 line += ' (%s)' % split_to_str(
@@ -511,7 +521,7 @@ class Session(object):
                 line += ' (%s)' % split_to_str(
                     splits[behind] - self.last_splits[behind])
             text.append(line)
-            text.append(behind.name)
+            text.append(behind.get_name())
         else:
             text += ['', '']
 
