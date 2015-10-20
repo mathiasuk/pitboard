@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -452,11 +453,15 @@ class Session(object):
         if current_time < DISPLAY_TIMEOUT * 1000 and self.current_lap > 0 and \
                 (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
+
+            # Update the text when the board is displayed
+            if self.ui.board.display is False:
+                self.ui.board.update_rows(text)
             self.ui.board.display = True
         else:
             self.ui.board.display = False
 
-        return text
+        return
 
     def _update_board_race(self):
         '''
@@ -515,15 +520,15 @@ class Session(object):
             # Display the board for the first 30 seconds, or once passed
             # the finish line
 
-            # Save the current splits when the board is displayed
+            # Update the text and save the current splits when the board is
+            # displayed
             if self.ui.board.display is False:
+                self.ui.board.update_rows(text)
                 self.last_splits = splits
 
             self.ui.board.display = True
         else:
             self.ui.board.display = False
-
-        return text
 
     def _update_cars(self):
         for i in range(ac.getCarsCount()):
@@ -558,19 +563,10 @@ class Session(object):
             return None
 
     def update_board(self):
-
-        text = []
-
         if self.session_type == RACE:
-            text = self._update_board_race()
+            self._update_board_race()
         elif self.session_type in (PRACTICE, QUALIFY, HOTLAP):
-            text = self._update_board_quali()
-
-        if not self.ui.board.display:
-            # We only update the board if it's not displayed
-            # FIXME: at the moment we lost the last text update since we
-            # set self.ui.board.display before returning the text
-            self.ui.board.update_rows(text)
+            self._update_board_quali()
 
     def update_data(self):
         self._check_session()
