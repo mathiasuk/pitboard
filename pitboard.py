@@ -62,11 +62,13 @@ SECTORS = [n / 100.0 for n in range(0, 100, 10)]
 session = None
 
 
-def seconds_to_str(seconds):
+def seconds_to_str(seconds, precise=False):
     '''
     Convert a time in seconds to a formatted string
     '''
-    if seconds > -15 and seconds < 15:
+    if precise:
+        seconds = '%+.3f' % seconds
+    elif seconds > -15 and seconds < 15:
         seconds = '%+.1f' % seconds
     else:
         seconds = '%+d' % round(seconds)
@@ -445,20 +447,24 @@ class Session(object):
         if ahead:
             text.append(ahead.get_name())
             if car.best_lap and ahead.best_lap:
-                text.append(seconds_to_str((car.best_lap - ahead.best_lap) / 1000.0))
+                text.append(
+                    seconds_to_str(
+                        (car.best_lap - ahead.best_lap) / 1000.0,
+                        precise=True
+                    )
+                )
             else:
                 text.append('')
         else:
             text += ['', '']
 
         # Display own lap time
-        # TODO: display delta to best time
-        if last_lap:
-            text.append(time_to_str(last_lap))
+        if last_lap and car.best_lap:
+            text.append(time_to_str(car.best_lap))
+            text.append(seconds_to_str(last_lap - car.best_lap))
 
         # Display time left in session
-        text.append('')
-        text.append('LEFT: ' + time_to_str(time_left, show_ms=False))
+        text.append('LEFT ' + time_to_str(time_left, show_ms=False))
 
         if current_time < DISPLAY_TIMEOUT * 1000 and self.current_lap > 0 and \
                 (not pit_limiter_on or not is_in_pit):
