@@ -34,7 +34,7 @@ from pitboardDLL.sim_info import info
 DISPLAY_TIMEOUT = 15
 OPACITY = 0.8
 SCALE = 1.0
-SHORT_NAMES = True
+SHORT_NAMES = False
 
 DEBUG = False
 
@@ -72,10 +72,11 @@ def debug(msg):
         ac.log('Pitboard: %s' % msg)
 
 
-def seconds_to_str(seconds, precise=False):
+def ms_to_str(ms, precise=True):
     '''
-    Convert a time in seconds to a formatted string
+    Convert a time in milliseconds to a formatted string
     '''
+    seconds = ms / 1000.0
     if precise:
         seconds = '%+.3f' % seconds
     elif seconds > -15 and seconds < 15:
@@ -94,7 +95,7 @@ def split_to_str(split):
     '''
     Convert a split (timedelta) to a formatted string
     '''
-    return seconds_to_str(split.total_seconds())
+    return ms_to_str(split.total_seconds() * 1000, precise=False)
 
 
 def time_to_str(laptime, show_ms=True):
@@ -474,10 +475,7 @@ class Session(object):
             text.append(ahead.get_name())
             if car.best_lap and ahead.best_lap:
                 text.append(
-                    seconds_to_str(
-                        (car.best_lap - ahead.best_lap) / 1000.0,
-                        precise=True
-                    )
+                    ms_to_str((car.best_lap - ahead.best_lap))
                 )
             else:
                 text.append('')
@@ -486,10 +484,10 @@ class Session(object):
 
         # Display own lap time
         if last_lap and car.best_lap:
-            text.append(time_to_str(car.last_lap))
+            text.append(time_to_str(car.best_lap))
             delta = (last_lap - car.best_lap)
             if delta:
-                text.append(seconds_to_str(delta))
+                text.append(ms_to_str(delta))
             else:
                 text.append('')
 
