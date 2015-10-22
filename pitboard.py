@@ -35,6 +35,8 @@ DISPLAY_TIMEOUT = 15
 OPACITY = 0.8
 SCALE = 1.0
 
+DEBUG = False
+
 APP_SIZE_X = 260 * SCALE
 APP_SIZE_Y = 30
 TEX_PATH = 'apps/python/pitboard/imgs/'
@@ -59,6 +61,14 @@ HOTLAP = 3
 SECTORS = [n / 100.0 for n in range(0, 100, 10)]
 
 session = None
+
+
+def debug(msg):
+    '''
+    Log message to file
+    '''
+    if DEBUG:
+        ac.log('Pitboard: %s' % msg)
 
 
 def seconds_to_str(seconds):
@@ -457,6 +467,9 @@ class Session(object):
             # Update the text when the board is displayed
             if self.ui.board.display is False:
                 self.ui.board.update_rows(text)
+                debug('Updating board (quali), lap: %d' % self.current_lap)
+				# TODO: debug cars
+                debug('Text:\n %s \n' % '\n'.join(text))
             self.ui.board.display = True
         else:
             self.ui.board.display = False
@@ -523,6 +536,10 @@ class Session(object):
             # Update the text and save the current splits when the board is
             # displayed
             if self.ui.board.display is False:
+                debug('Updating board (race), lap: %d' % self.current_lap)
+                debug('Last splits: %s' % self.last_splits)
+                debug('Current splits: %s' % splits)
+                debug('Text:\n %s \n' % '\n'.join(text))
                 self.ui.board.update_rows(text)
                 self.last_splits = splits
 
@@ -608,5 +625,5 @@ def render_callback(deltaT):
         session.ui.render()
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        session.ac.console('pitboard Error (logged to file)')
-        session.ac.log(repr(traceback.format_exception(exc_type, exc_value, exc_traceback)))
+        ac.console('pitboard Error (logged to file)')
+        ac.log(repr(traceback.format_exception(exc_type, exc_value, exc_traceback)))
