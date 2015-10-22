@@ -64,7 +64,6 @@ SECTORS = [n / 100.0 for n in range(0, 100, 10)]
 session = None
 
 
-<<<<<<< HEAD
 def debug(msg):
     '''
     Log message to file
@@ -73,10 +72,7 @@ def debug(msg):
         ac.log('Pitboard: %s' % msg)
 
 
-def seconds_to_str(seconds):
-=======
 def seconds_to_str(seconds, precise=False):
->>>>>>> 971367acbdff751bdaa9523d4299eb372d861399
     '''
     Convert a time in seconds to a formatted string
     '''
