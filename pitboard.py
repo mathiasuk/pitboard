@@ -105,7 +105,7 @@ def time_to_str(laptime, show_ms=True):
     m, s = divmod(s, 60)
 
     if show_ms:
-        return '%d:%02d.%d' % (m, s, ms)
+        return '%d:%02d.%03d' % (m, s, ms)
     else:
         return '%d:%02d' % (m, s)
 
@@ -127,6 +127,22 @@ class Car(object):
             # Create a dict of sectors and timestamps
             # {0: None, 0.1: None, ... 0.9: None}
             self.sectors = dict([(x, None) for x in SECTORS])
+
+    def __repr__(self):
+        data = [
+            'Index: %d' % self.index,
+            'Name: %s' % self.name,
+            'Position: %d' % self.position,
+            'Spline: %.2f' % self.spline_pos,
+            'Best: %s' % self.best_lap
+        ]
+        if hasattr(self, 'last_sector'):
+            data.extend([
+                'Last sector: %s' % self.last_sector,
+                'Next sector: %s' % self.next_sector,
+                'Sectors: %s' % self.sectors,
+            ])
+        return ', '.join(data)
 
     def _update_data_race(self):
         '''
@@ -470,21 +486,26 @@ class Session(object):
 
         # Display own lap time
         if last_lap and car.best_lap:
-            text.append(time_to_str(car.best_lap))
-            text.append(seconds_to_str(last_lap - car.best_lap))
+            text.append(time_to_str(car.last_lap))
+            delta = (last_lap - car.best_lap)
+            if delta:
+                text.append(seconds_to_str(delta))
+            else:
+                text.append('')
 
         # Display time left in session
         text.append('LEFT ' + time_to_str(time_left, show_ms=False))
 
-        if current_time < DISPLAY_TIMEOUT * 1000 and self.current_lap > 0 and \
-                (not pit_limiter_on or not is_in_pit):
+        if current_time > 500 and current_time < DISPLAY_TIMEOUT * 1000 and \
+                self.current_lap > 0 and (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
 
             # Update the text when the board is displayed
             if self.ui.board.display is False:
                 self.ui.board.update_rows(text)
                 debug('Updating board (quali), lap: %d' % self.current_lap)
-				# TODO: debug cars
+                for car in self.cars:
+                    debug(car)
                 debug('Text:\n %s \n' % '\n'.join(text))
             self.ui.board.display = True
         else:
