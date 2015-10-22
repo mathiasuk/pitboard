@@ -34,6 +34,7 @@ from pitboardDLL.sim_info import info
 DISPLAY_TIMEOUT = 15
 OPACITY = 0.8
 SCALE = 1.0
+SHORT_NAMES = True
 
 DEBUG = False
 
@@ -63,6 +64,7 @@ SECTORS = [n / 100.0 for n in range(0, 100, 10)]
 session = None
 
 
+<<<<<<< HEAD
 def debug(msg):
     '''
     Log message to file
@@ -72,10 +74,15 @@ def debug(msg):
 
 
 def seconds_to_str(seconds):
+=======
+def seconds_to_str(seconds, precise=False):
+>>>>>>> 971367acbdff751bdaa9523d4299eb372d861399
     '''
     Convert a time in seconds to a formatted string
     '''
-    if seconds > -15 and seconds < 15:
+    if precise:
+        seconds = '%+.3f' % seconds
+    elif seconds > -15 and seconds < 15:
         seconds = '%+.1f' % seconds
     else:
         seconds = '%+d' % round(seconds)
@@ -158,6 +165,15 @@ class Car(object):
             self.next_sector = [x for x in SECTORS if x > spline][0]
         except IndexError:
             self.next_sector = 0
+
+    def get_name(self):
+        '''
+        Returns the driver's name
+        '''
+        if SHORT_NAMES:
+            return self.name[:3]
+        else:
+            return self.name
 
     def update_data(self, session_type):
         self.spline_pos = ac.getCarState(
@@ -443,22 +459,26 @@ class Session(object):
 
         # Display name of car ahead in the standings (if any)
         if ahead:
-            text.append(ahead.name)
+            text.append(ahead.get_name())
             if car.best_lap and ahead.best_lap:
-                text.append(seconds_to_str((car.best_lap - ahead.best_lap) / 1000.0))
+                text.append(
+                    seconds_to_str(
+                        (car.best_lap - ahead.best_lap) / 1000.0,
+                        precise=True
+                    )
+                )
             else:
                 text.append('')
         else:
             text += ['', '']
 
         # Display own lap time
-        # TODO: display delta to best time
-        if last_lap:
-            text.append(time_to_str(last_lap))
+        if last_lap and car.best_lap:
+            text.append(time_to_str(car.best_lap))
+            text.append(seconds_to_str(last_lap - car.best_lap))
 
         # Display time left in session
-        text.append('')
-        text.append('LEFT: ' + time_to_str(time_left, show_ms=False))
+        text.append('LEFT ' + time_to_str(time_left, show_ms=False))
 
         if current_time < DISPLAY_TIMEOUT * 1000 and self.current_lap > 0 and \
                 (not pit_limiter_on or not is_in_pit):
@@ -503,7 +523,7 @@ class Session(object):
 
         # Display split to car ahead (if any)
         if ahead and splits[ahead]:
-            text.append(ahead.name)
+            text.append(ahead.get_name())
             line = split_to_str(splits[ahead])
             if ahead in self.last_splits:
                 line += ' (%s)' % split_to_str(
@@ -524,7 +544,7 @@ class Session(object):
                 line += ' (%s)' % split_to_str(
                     splits[behind] - self.last_splits[behind])
             text.append(line)
-            text.append(behind.name)
+            text.append(behind.get_name())
         else:
             text += ['', '']
 
