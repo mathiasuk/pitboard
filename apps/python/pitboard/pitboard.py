@@ -444,6 +444,7 @@ class Session(object):
 
     def _reset(self):
         self.current_lap = 0
+        self.last_best_lap = None
         self.laps = 0
         self.cars = []
         self.scale = FULLSIZE_SCALE
@@ -503,7 +504,11 @@ class Session(object):
         # Display own lap time
         if last_lap and car.best_lap:
             text.append(time_to_str(car.best_lap))
-            delta = (last_lap - car.best_lap)
+            if self.last_best_lap and car.best_lap != self.last_best_lap:
+                # There is a new best lap
+                delta = (last_lap - self.last_best_lap)
+            else:
+                delta = (last_lap - car.best_lap)
             if delta:
                 text.append(ms_to_str(delta))
             else:
@@ -521,10 +526,13 @@ class Session(object):
             # Update the text when the board is displayed
             if self.ui.board.display is False:
                 self.ui.board.update_rows(text)
+                self.last_best_lap = car.best_lap
                 debug('Updating board (quali), lap: %d' % self.current_lap)
+
                 for car in self.cars:
                     debug(car)
                 debug('Text:\n %s \n' % '\n'.join(text))
+
             self.ui.board.display = True
         else:
             self.ui.board.display = False
