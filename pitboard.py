@@ -31,14 +31,17 @@ sys.path.insert(
 
 from pitboardDLL.sim_info import info
 
-DISPLAY_TIMEOUT = 15
+DISPLAY_TIMEOUT = 30
+FULLSIZE_TIMEOUT = 15
 OPACITY = 0.8
-SCALE = 1.0
+FULLSIZE_SCALE = 1.0
+SMALLSIZE_SCALE = 0.5
+ZOOM_TRANSITION = 0.25
 SHORT_NAMES = False
 
 DEBUG = False
 
-APP_SIZE_X = 260 * SCALE
+APP_SIZE_X = 260 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
 TEX_PATH = 'apps/python/pitboard/imgs/'
 
@@ -443,6 +446,7 @@ class Session(object):
         self.current_lap = 0
         self.laps = 0
         self.cars = []
+        self.scale = FULLSIZE_SCALE
         self.session_type = -1
         self.last_splits = {}
 
@@ -455,7 +459,7 @@ class Session(object):
         '''
         text = []
 
-        current_time = info.graphics.iCurrentTime
+        current_time = info.graphics.iCurrentTime / 1000  # convert to seconds
         is_in_pit = info.graphics.isInPit
         last_lap = info.graphics.iLastTime
         pit_limiter_on = info.physics.pitLimiterOn
@@ -493,9 +497,18 @@ class Session(object):
         # Display time left in session
         text.append('LEFT ' + time_to_str(time_left, show_ms=False))
 
-        if current_time > 500 and current_time < DISPLAY_TIMEOUT * 1000 and \
+        if current_time > 0.5 and current_time < DISPLAY_TIMEOUT and \
                 self.current_lap > 0 and (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
+
+            if current_time > FULLSIZE_TIMEOUT:
+                # Set the scale
+                if current_time <= FULLSIZE_TIMEOUT + ZOOM_TRANSITION:
+                    self.scale = FULLSIZE_SCALE - \
+                        ((current_time - FULLSIZE_TIMEOUT) / ZOOM_TRANSITION) \
+                        * (FULLSIZE_SCALE - SMALLSIZE_SCALE)
+                else:
+                    self.scale = SMALLSIZE_SCALE
 
             # Update the text when the board is displayed
             if self.ui.board.display is False:
@@ -507,6 +520,7 @@ class Session(object):
             self.ui.board.display = True
         else:
             self.ui.board.display = False
+            self.scale = FULLSIZE_SCALE
 
         return
 
@@ -617,8 +631,7 @@ class Session(object):
         '''
         Render the UI at the given scale
         '''
-        scale = SCALE
-        self.ui.render(scale)
+        self.ui.render(self.scale)
 
     def update_board(self):
         if self.session_type == RACE:
