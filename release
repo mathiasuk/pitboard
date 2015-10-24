@@ -1,0 +1,16 @@
+#!/bin/bash
+
+APPNAME="pitboard"
+
+if [ "X$1" = X ]; then
+    echo "Usage: ./release RELEASE_NUMBER"
+    exit 1
+fi
+
+RELEASE=$1
+
+cp LICENSE "apps/python/$APPNAME/"
+
+zip -r "$APPNAME-$RELEASE.zip" apps content 
+
+rm "apps/python/$APPNAME/LICENSE"
