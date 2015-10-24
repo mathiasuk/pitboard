@@ -531,7 +531,7 @@ class Session(object):
         behind = self.get_car_by_position(car.position + 1)
 
         text.append('P%d - L%d' %
-                    (car.position, self.laps - self.current_lap - 1))
+                    (car.position, self.laps - self.current_lap))
 
         # Get current split times
         splits = self._get_splits(car)
@@ -564,7 +564,7 @@ class Session(object):
             text += ['', '']
 
         if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
-                self.current_lap > 0 or self.laps - self.current_lap == 1:
+                self.current_lap > 0 or self.laps - self.current_lap == 0:
             # Display the board for the first 30 seconds, or once passed
             # the finish line
 
