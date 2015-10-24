@@ -450,6 +450,21 @@ class Session(object):
         self.session_type = -1
         self.last_splits = {}
 
+    def _set_scale(self, current_time):
+        '''
+        Set the board based on the current time
+        '''
+        if current_time > FULLSIZE_TIMEOUT:
+            # Set the scale
+            if current_time <= FULLSIZE_TIMEOUT + ZOOM_TRANSITION:
+                self.scale = FULLSIZE_SCALE - \
+                    ((current_time - FULLSIZE_TIMEOUT) / ZOOM_TRANSITION) \
+                    * (FULLSIZE_SCALE - SMALLSIZE_SCALE)
+            else:
+                self.scale = SMALLSIZE_SCALE
+        else:
+            self.scale = FULLSIZE_SCALE
+
     def _update_board_quali(self):
         '''
         Displays:
@@ -501,14 +516,7 @@ class Session(object):
                 self.current_lap > 0 and (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
 
-            if current_time > FULLSIZE_TIMEOUT:
-                # Set the scale
-                if current_time <= FULLSIZE_TIMEOUT + ZOOM_TRANSITION:
-                    self.scale = FULLSIZE_SCALE - \
-                        ((current_time - FULLSIZE_TIMEOUT) / ZOOM_TRANSITION) \
-                        * (FULLSIZE_SCALE - SMALLSIZE_SCALE)
-                else:
-                    self.scale = SMALLSIZE_SCALE
+            self._set_scale(current_time)
 
             # Update the text when the board is displayed
             if self.ui.board.display is False:
@@ -536,6 +544,9 @@ class Session(object):
         '''
         text = []
 
+        current_time = info.graphics.iCurrentTime / 1000  # convert to seconds
+        last_lap = info.graphics.iLastTime
+
         car = self.get_player_car()
         if not car:
             return text
@@ -561,7 +572,6 @@ class Session(object):
             text += ['', '']
 
         # Display own lap time
-        last_lap = info.graphics.iLastTime
         if last_lap:
             text.append(time_to_str(last_lap))
 
@@ -576,10 +586,12 @@ class Session(object):
         else:
             text += ['', '']
 
-        if info.graphics.iCurrentTime < DISPLAY_TIMEOUT * 1000 and \
+        if current_time < DISPLAY_TIMEOUT and \
                 self.current_lap > 0 or self.laps - self.current_lap == 0:
             # Display the board for the first 30 seconds, or once passed
             # the finish line
+
+            self._set_scale(current_time)
 
             # Update the text and save the current splits when the board is
             # displayed
@@ -594,6 +606,7 @@ class Session(object):
             self.ui.board.display = True
         else:
             self.ui.board.display = False
+            self.scale = FULLSIZE_SCALE
 
     def _update_cars(self):
         for i in range(ac.getCarsCount()):
