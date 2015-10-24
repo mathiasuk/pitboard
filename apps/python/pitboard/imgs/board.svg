@@ -823,11 +823,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="391.23435"
-     inkscape:cy="311.94134"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="41.110782"
+     inkscape:cy="391.77067"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="true"
      showguides="false"
      inkscape:window-width="1600"
@@ -853,33 +853,26 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     style="display:inline">
-    <path
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 927.71593,509.95533 c -6.66667,-2.9e-4 -10.28585,0.28585 -15,5 -4.71415,4.71414 -5,8.33305 -5,15 l 0,839.99997 c 0,6.6664 0.28605,10.2861 5,15 4.71394,4.714 8.33333,4.9997 15,5 l 479.99997,0 c 6.6667,-3e-4 10.2861,-0.286 15,-5 4.714,-4.7139 5,-8.3336 5,-15 l 0,-839.99997 c 0,-6.66695 -0.2858,-10.28586 -5,-15 -4.7141,-4.71415 -8.3333,-5.00029 -15,-5 l -479.99997,0 z m 0,20 479.99997,0 0,60 -479.99997,0 0,-60 z m 0,140 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,99.99997 -479.99997,0 0,-99.99997 z m 0,119.99997 479.99997,0 0,100 -479.99997,0 0,-50 0,-50 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z"
-       id="rect3359"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/tmp/board.png"
-       inkscape:export-xdpi="44.948921"
-       inkscape:export-ydpi="44.948921" />
-  </g>
-  <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
      style="display:inline">
     <rect
-       style="fill:#1a1a1a;fill-opacity:0;display:inline"
+       style="fill:#b3b3b3;fill-opacity:1"
+       id="rect3669"
+       width="320.66757"
+       height="218.47099"
+       x="-230.51146"
+       y="594.8891" />
+    <rect
+       style="display:inline;fill:#1a1a1a;fill-opacity:0"
        id="rect4231-8-0"
-       width="50"
+       width="36"
        height="100"
-       x="14.999995"
+       x="22"
        y="602.36218"
-       inkscape:export-xdpi="44.940868"
-       inkscape:export-ydpi="44.940868"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45"
        inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png" />
     <rect
        style="fill:#1a1a1a;fill-opacity:1"
@@ -893,19 +886,19 @@
        inkscape:export-filename="/tmp/pit.png" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
-       x="14.979995"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none"
+       x="19.030001"
        y="684.49219"
        id="text4272"
        sodipodi:linespacing="125%"
-       inkscape:export-xdpi="44.940868"
-       inkscape:export-ydpi="44.940868"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45"
        inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png"><tspan
          sodipodi:role="line"
          id="tspan4274"
-         x="14.979995"
+         x="19.030001"
          y="684.49219"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">0</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffffff">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
@@ -2108,7 +2101,7 @@
        inkscape:export-ydpi="45" />
     <g
        id="g6668"
-       transform="translate(-14.142136,-22.223356)">
+       transform="translate(-7.6674347,142.3789)">
       <rect
          inkscape:export-ydpi="45"
          inkscape:export-xdpi="45"
@@ -2162,31 +2155,31 @@
         <polygon
            id="rect3935-11-24-6-8-8"
            class="st30"
-           points="159.6,13.5 173,13.5 148.6,80.9 135,80.9 "
+           points="135,80.9 159.6,13.5 173,13.5 148.6,80.9 "
            transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
            style="fill:#cc0000" />
         <polygon
            id="rect3935-11-24-8-1-2-2"
            class="st31"
-           points="134.4,47.8 142.8,47.8 130.8,80.9 122.3,80.9 "
+           points="122.3,80.9 134.4,47.8 142.8,47.8 130.8,80.9 "
            transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
            style="fill:#9eabb0" />
         <polygon
            id="rect4227-3-4-4"
            class="st32"
-           points="177.2,13.7 243.8,13.7 240,24.3 173.2,24.3 "
+           points="173.2,24.3 177.2,13.7 243.8,13.7 240,24.3 "
            style="fill:url(#rect4227-3-4-4_1_)"
            transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)" />
         <polygon
            id="rect4227-5-8-5-5"
            class="st33"
-           points="171.5,30.4 216.7,30.4 212.4,42.5 167.2,42.5 "
+           points="167.2,42.5 171.5,30.4 216.7,30.4 212.4,42.5 "
            style="fill:url(#rect4227-5-8-5-5_1_)"
            transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)" />
         <polygon
            id="rect3935-11-24-8-0-9-5-5"
            class="st31"
-           points="112.7,72.6 121,72.6 118,80.9 109.6,80.9 "
+           points="109.6,80.9 112.7,72.6 121,72.6 118,80.9 "
            transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
            style="fill:#9eabb0" />
         <g
@@ -2235,7 +2228,7 @@
     <g
        class="st34"
        id="g5291"
-       transform="matrix(2.1346672,0,0,2.1346672,-362.4102,-9.6082352)"
+       transform="matrix(1.4377973,0,0,1.4316955,-86.734278,169.08653)"
        style="fill:#4d4d4d;enable-background:new"
        inkscape:export-filename="/tmp/logo.png"
        inkscape:export-xdpi="45"
@@ -2256,8 +2249,8 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="551.58118"
-       y="132.03328"
+       x="547.44922"
+       y="283.20053"
        id="text5303"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/tmp/logo.png"
@@ -2265,9 +2258,34 @@
        inkscape:export-ydpi="45"><tspan
          sodipodi:role="line"
          id="tspan5305"
-         x="551.58118"
-         y="132.03328"
+         x="547.44922"
+         y="283.20053"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#e6e6e6">0xd</tspan></text>
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 160.5,152.36133 c -6.66667,-2.9e-4 -10.28585,0.28585 -15,5 -4.71415,4.71414 -5,8.33305 -5,15 l 0,839.99997 c 0,6.6664 0.28605,10.2861 5,15 4.71394,4.714 8.33333,4.9997 15,5 l 479.99997,0 c 6.6667,-3e-4 10.2861,-0.286 15,-5 4.714,-4.7139 5,-8.3336 5,-15 l 0,-839.99997 c 0,-6.66695 -0.2858,-10.28586 -5,-15 -4.7141,-4.71415 -8.3333,-5.00029 -15,-5 l -479.99997,0 z m 0,20 479.99997,0 0,60 -479.99997,0 0,-60 z m 0,140 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,99.99997 -479.99997,0 0,-99.99997 z m 0,119.99997 479.99997,0 0,100 -479.99997,0 0,-50 0,-50 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z"
+       id="rect3359"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/tmp/board.png"
+       inkscape:export-xdpi="44.948921"
+       inkscape:export-ydpi="44.948921" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="740"
+       y="-97.637794"
+       id="text4770"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4772"
+         x="740"
+         y="-97.637794" /></text>
   </g>
   <g
      inkscape:groupmode="layer"

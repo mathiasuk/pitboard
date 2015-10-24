@@ -31,6 +31,7 @@ sys.path.insert(
 
 from pitboardDLL.sim_info import info
 
+# Customisable constants
 DISPLAY_TIMEOUT = 30
 FULLSIZE_TIMEOUT = 15
 OPACITY = 0.8
@@ -44,6 +45,14 @@ DEBUG = False
 APP_SIZE_X = 260 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
 TEX_PATH = 'apps/python/pitboard/imgs/'
+
+# Define colours
+COLOURS = {
+    'w': (1, 1, 1),
+    'y': (1, 204 / 255, 0),
+}
+
+DEFAULT_COLOUR = 'w'  # Default is to use white which is transparent
 
 # Mapping for special characters filenames
 CHARS_MAPS = {
@@ -234,14 +243,35 @@ class Card(object):
         self.width = width
         self.height = height
 
-    def render(self, x, y, scale):
+    def render(self, x, y, scale, colour):
         if self.texture:
             width = self.width * scale
             height = self.height * scale
             ac.glColor4f(1, 1, 1, OPACITY)
             ac.glQuadTextured(x, y, width, height, self.background)
+
+            # Render text with colour
+            args = colour + (OPACITY, )
+            ac.glColor4f(*args)
             ac.glQuadTextured(x, y, width, height, self.texture)
+
+            ac.glColor4f(1, 1, 1, OPACITY)
             ac.glQuadTextured(x, y, width, height, self.reflection)
+
+
+class Text(object):
+    '''
+    Represent text on the board, including the optional colour
+    '''
+    def __init__(self, text='', colour=''):
+        self.text = text
+        if colour:
+            self.colour = colour
+        else:
+            self.colour = DEFAULT_COLOUR * len(self.text)
+
+    def __repr__(self):
+        return self.text
 
 
 class Row(object):
@@ -255,31 +285,33 @@ class Row(object):
         self.library = library
         self.width = 0
         self.cards = []
+        self.colours = []
 
     def _clear(self):
         self.cards = []
         self.width = 0
 
-    def _add_card(self, card):
+    def _add_card(self, card, colour):
         if self.width + card.width <= self.max_width:
             self.cards.append(card)
+            self.colours.append(COLOURS[colour])
             self.width += card.width
 
     def render(self, scale):
         x = self.x * scale
         y = APP_SIZE_Y + self.y * scale
-        for card in self.cards:
-            card.render(x, y, scale)
+        for card, colour in zip(self.cards, self.colours):
+            card.render(x, y, scale, colour)
             x += card.width * scale
 
     def set_text(self, text):
         self._clear()
-        for letter in text.upper():
+        for letter, colour in zip(text.text.upper(), text.colour):
             try:
                 card = self.library[letter]
             except KeyError:
                 card = self.library['?']
-            self._add_card(card)
+            self._add_card(card, colour)
 
 
 class Board(object):
@@ -326,7 +358,7 @@ class Board(object):
 
         # Clear the rest of the board
         for row in range(row, len(self.rows)):
-            self.rows[row].set_text('')
+            self.rows[row].set_text(Text())
 
 
 class UI(object):
@@ -487,35 +519,35 @@ class Session(object):
 
         ahead = self.get_car_by_position(car.position - 1)
 
-        text.append('P%d' % car.position)
+        text.append(Text('P%d' % car.position))
 
         # Display name of car ahead in the standings (if any)
         if ahead:
-            text.append(ahead.get_name())
+            text.append(Text(ahead.get_name()))
             if car.best_lap and ahead.best_lap:
                 text.append(
-                    ms_to_str((car.best_lap - ahead.best_lap))
+                    Text(ms_to_str((car.best_lap - ahead.best_lap)))
                 )
             else:
-                text.append('')
+                text.append(Text())
         else:
-            text += ['', '']
+            text += [Text(), Text()]
 
         # Display own lap time
         if last_lap and car.best_lap:
-            text.append(time_to_str(car.best_lap))
+            text.append(Text(time_to_str(car.best_lap)))
             if self.last_best_lap and car.best_lap != self.last_best_lap:
                 # There is a new best lap
                 delta = (last_lap - self.last_best_lap)
             else:
                 delta = (last_lap - car.best_lap)
             if delta:
-                text.append(ms_to_str(delta))
+                text.append(Text(ms_to_str(delta)))
             else:
-                text.append('')
+                text.append(Text())
 
         # Display time left in session
-        text.append('LEFT ' + time_to_str(time_left, show_ms=False))
+        text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
 
         if current_time > 0.5 and current_time < DISPLAY_TIMEOUT and \
                 self.current_lap > 0 and (not pit_limiter_on or not is_in_pit):
@@ -531,7 +563,7 @@ class Session(object):
 
                 for car in self.cars:
                     debug(car)
-                debug('Text:\n %s \n' % '\n'.join(text))
+                debug('Text:\n %s \n' % '\n'.join([str(t) for t in text]))
 
             self.ui.board.display = True
         else:
@@ -562,26 +594,26 @@ class Session(object):
         ahead = self.get_car_by_position(car.position - 1)
         behind = self.get_car_by_position(car.position + 1)
 
-        text.append('P%d - L%d' %
-                    (car.position, self.laps - self.current_lap))
+        text.append(Text('P%d - L%d' %
+                         (car.position, self.laps - self.current_lap)))
 
         # Get current split times
         splits = self._get_splits(car)
 
         # Display split to car ahead (if any)
         if ahead and splits[ahead]:
-            text.append(ahead.get_name())
+            text.append(Text(ahead.get_name()))
             line = split_to_str(splits[ahead])
             if ahead in self.last_splits:
                 line += ' (%s)' % split_to_str(
                     splits[ahead] - self.last_splits[ahead])
-            text.append(line)
+            text.append(Text(line))
         else:
-            text += ['', '']
+            text += [Text(), Text()]
 
         # Display own lap time
         if last_lap:
-            text.append(time_to_str(last_lap))
+            text.append(Text(time_to_str(last_lap)))
 
         # Display split to car behind (if any)
         if behind and splits[behind]:
@@ -589,10 +621,10 @@ class Session(object):
             if behind in self.last_splits:
                 line += ' (%s)' % split_to_str(
                     splits[behind] - self.last_splits[behind])
-            text.append(line)
-            text.append(behind.get_name())
+            text.append(Text(line))
+            text.append(Text(behind.get_name()))
         else:
-            text += ['', '']
+            text += [Text(), Text()]
 
         if current_time < DISPLAY_TIMEOUT and \
                 self.current_lap > 0 or self.laps - self.current_lap == 0:
