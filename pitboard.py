@@ -228,15 +228,17 @@ class Card(object):
             width = 40
             height = 50
 
-        self.width = width * SCALE
-        self.height = height * SCALE
+        self.width = width
+        self.height = height
 
-    def render(self, x, y):
+    def render(self, x, y, scale):
         if self.texture:
+            width = self.width * scale
+            height = self.height * scale
             ac.glColor4f(1, 1, 1, OPACITY)
-            ac.glQuadTextured(x, y, self.width, self.height, self.background)
-            ac.glQuadTextured(x, y, self.width, self.height, self.texture)
-            ac.glQuadTextured(x, y, self.width, self.height, self.reflection)
+            ac.glQuadTextured(x, y, width, height, self.background)
+            ac.glQuadTextured(x, y, width, height, self.texture)
+            ac.glQuadTextured(x, y, width, height, self.reflection)
 
 
 class Row(object):
@@ -260,11 +262,12 @@ class Row(object):
             self.cards.append(card)
             self.width += card.width
 
-    def render(self):
-        x = self.x
+    def render(self, scale):
+        x = self.x * scale
+        y = APP_SIZE_Y + self.y * scale
         for card in self.cards:
-            card.render(x, self.y)
-            x += card.width
+            card.render(x, y, scale)
+            x += card.width * scale
 
     def set_text(self, text):
         self._clear()
@@ -285,12 +288,8 @@ class Board(object):
 
         # Create 6 rows starting from 80 pixels, every 60 pixels
         self.rows = [
-            Row(
-                x=10 * SCALE,
-                y=APP_SIZE_Y + y * SCALE,
-                max_width=240 * SCALE,
-                library=library
-            ) for y in range(80, 440, 60)
+            Row(x=10, y=y, max_width=240, library=library)
+            for y in range(80, 440, 60)
         ]
 
         self.texture = ac.newTexture(os.path.join(TEX_PATH, 'board.png'))
@@ -300,18 +299,18 @@ class Board(object):
         else:
             self.logo = None
 
-    def render(self):
+    def render(self, scale):
         if self.display:
             ac.glColor4f(1, 1, 1, OPACITY)
-            ac.glQuadTextured(0, APP_SIZE_Y, 260 * SCALE, 440 * SCALE,
+            ac.glQuadTextured(0, APP_SIZE_Y, 260 * scale, 440 * scale,
                               self.texture)
 
             if self.logo:
-                ac.glQuadTextured(10 * SCALE, APP_SIZE_Y + 10 * SCALE,
-                                  240 * SCALE, 60 * SCALE, self.logo)
+                ac.glQuadTextured(10 * scale, APP_SIZE_Y + 10 * scale,
+                                  240 * scale, 60 * scale, self.logo)
 
             for row in self.rows:
-                row.render()
+                row.render(scale)
 
     def update_rows(self, text):
         row = 0
@@ -377,8 +376,8 @@ class UI(object):
     def hide_bg(self):
         ac.setBackgroundOpacity(self.widget, 0)
 
-    def render(self):
-        self.board.render()
+    def render(self, scale):
+        self.board.render(scale)
 
 
 class Session(object):
@@ -614,6 +613,13 @@ class Session(object):
         except IndexError:
             return None
 
+    def render(self):
+        '''
+        Render the UI at the given scale
+        '''
+        scale = SCALE
+        self.ui.render(scale)
+
     def update_board(self):
         if self.session_type == RACE:
             self._update_board_race()
@@ -657,7 +663,7 @@ def render_callback(deltaT):
     global session  # pylint: disable=W0602
 
     try:
-        session.ui.render()
+        session.render()
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
