@@ -410,7 +410,7 @@ class UI(object):
         self.library = self._create_library()
         self.board = Board(self.library)
         self.session = session_
-        self.textures = {}
+        self.prefs_button = None
         self.widget = None
 
         self._create_widget()
@@ -446,6 +446,27 @@ class UI(object):
         ac.setIconPosition(self.widget, -10000, -10000)
         ac.drawBorder(self.widget, 0)
         self.hide_bg()
+
+        # Create prefs button
+        self.prefs_button = ac.addButton(self.widget, '')
+        ac.setPosition(self.prefs_button, 7, 7)
+        ac.setSize(self.prefs_button, 16, 16)
+        ac.setBackgroundOpacity(self.prefs_button, 0)
+        ac.drawBorder(self.prefs_button, 0)
+        ac.setBackgroundTexture(self.prefs_button,
+                                os.path.join(TEX_PATH, 'prefs.png'))
+#        ac.addOnClickedListener(self.prefs_button, click_button_options)
+
+        # TODO:
+        # - Spinner for DISPLAY_TIMEOUT
+        # - Spinner for FULLSIZE_TIMEOUT
+        # - Spinner for OPACITY
+        # - Opacity for small?
+        # - Spinner for FULLSIZE_SCALE
+        # - Spinner for SMALLSIZE_SCALE
+        # - Button for SHORT_NAMES
+        # - Button for DETAILED_DELTA
+
         ac.addRenderCallback(self.widget, render_callback)
 
     def hide_bg(self):
