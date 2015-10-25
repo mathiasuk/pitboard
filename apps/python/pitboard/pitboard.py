@@ -13,6 +13,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Copyright (C) 2014 - Mathias André
 
+from __future__ import unicode_literals
+
 import glob
 import os
 import platform
@@ -32,15 +34,16 @@ sys.path.insert(
 from pitboardDLL.sim_info import info
 
 # Customisable constants
-DISPLAY_TIMEOUT = 30
+DISPLAY_TIMEOUT = 45
 FULLSIZE_TIMEOUT = 15
 OPACITY = 0.8
 FULLSIZE_SCALE = 1.0
 SMALLSIZE_SCALE = 0.5
 ZOOM_TRANSITION = 0.25
 SHORT_NAMES = False
+DETAILED_DELTA = True
 
-DEBUG = False
+DEBUG = True
 
 APP_SIZE_X = 260 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
@@ -64,6 +67,7 @@ CHARS_MAPS = {
     '\\': 'bslash',
     ':': 'colon',
     '.': 'dot',
+    '|': 'downarrow',
     '!': 'emark',
     '=': 'equal',
     '>': 'gt',
@@ -74,6 +78,7 @@ CHARS_MAPS = {
     '+': 'plus',
     '?': 'qmark',
     ')': 'rpar',
+    '^': 'uparrow',
     '_': 'uscore',
 }
 
@@ -96,9 +101,10 @@ def debug(msg):
         ac.log('Pitboard: %s' % msg)
 
 
-def ms_to_str(ms, precise=True):
+def ms_to_str(ms, precise=True, arrows=False):
     '''
     Convert a time in milliseconds to a formatted string
+    If arrows is true ↑ and ↓ will be used instead of +/-
     '''
     seconds = ms / 1000.0
     if precise:
@@ -112,14 +118,20 @@ def ms_to_str(ms, precise=True):
     if seconds[1] == 0:
         seconds = seconds[0] + seconds[2:]
 
+    if arrows:
+        if seconds[0] == '+':
+            seconds = '^' + seconds[1:]
+        else:
+            seconds = '|' + seconds[1:]
+
     return seconds.rstrip('0').rstrip('.')
 
 
-def split_to_str(split):
+def split_to_str(split, arrows=False):
     '''
     Convert a split (timedelta) to a formatted string
     '''
-    return ms_to_str(split.total_seconds() * 1000, precise=False)
+    return ms_to_str(split.total_seconds() * 1000, precise=False, arrows=arrows)
 
 
 def time_to_str(laptime, show_ms=True):
@@ -631,12 +643,17 @@ class Session(object):
         # Display split to car ahead (if any)
         if ahead and splits[ahead]:
             text.append(Text(ahead.get_name()))
-            line = split_to_str(splits[ahead])
+            line = split_to_str(splits[ahead], arrows=True)
             colour = len(line) * 'r'
 
             if ahead in self.last_splits:
                 delta = splits[ahead] - self.last_splits[ahead]
-                line += ' (%s)' % split_to_str(delta)
+
+                if DETAILED_DELTA:
+                    line += ' (%s)' % split_to_str(delta)
+                else:
+                    line += ' (%s)' % split_to_str(delta)[0]
+
                 if delta.total_seconds() > 0:
                     colour += 'r'
                 else:
@@ -652,12 +669,17 @@ class Session(object):
 
         # Display split to car behind (if any)
         if behind and splits[behind]:
-            line = split_to_str(splits[behind])
+            line = split_to_str(splits[behind], arrows=True)
             colour = len(line) * 'g'
 
             if behind in self.last_splits:
                 delta = splits[behind] - self.last_splits[behind]
-                line += ' (%s)' % split_to_str(delta)
+
+                if DETAILED_DELTA:
+                    line += ' (%s)' % split_to_str(delta)
+                else:
+                    line += ' (%s)' % split_to_str(delta)[0]
+
                 if delta.total_seconds() > 0:
                     colour += 'r'
                 else:
