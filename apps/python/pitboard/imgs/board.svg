@@ -823,17 +823,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="325.9152"
-     inkscape:cy="731.24329"
+     inkscape:zoom="3.5759513"
+     inkscape:cx="-5.7547354"
+     inkscape:cy="425.19879"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="true"
      showguides="false"
      inkscape:window-width="1600"
-     inkscape:window-height="900"
+     inkscape:window-height="836"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:snap-global="true">
     <inkscape:grid
@@ -930,9 +930,9 @@
     <rect
        style="display:inline;fill:#1a1a1a;fill-opacity:0"
        id="rect4231-8-0"
-       width="64"
+       width="46"
        height="100"
-       x="8"
+       x="17"
        y="602.36218"
        inkscape:export-xdpi="45"
        inkscape:export-ydpi="45"
@@ -954,21 +954,6 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
-       x="7.2399998"
-       y="684.49219"
-       id="text4272"
-       sodipodi:linespacing="125%"
-       inkscape:export-xdpi="45"
-       inkscape:export-ydpi="45"
-       inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png"><tspan
-         sodipodi:role="line"
-         id="tspan4274"
-         x="7.2399998"
-         y="684.49219"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffffff">&amp;</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
@@ -2351,5 +2336,13 @@
          style="fill:#ff0202;fill-opacity:1"
          id="path4772" />
     </g>
+    <path
+       inkscape:connector-curvature="0"
+       d="m 19.477995,659.87959 13.06401,1.6e-4 0,-44.65633 14.91599,0 0,0 0,44.65633 13.06401,-1.6e-4 -20.522,32.13878 z"
+       id="path2050"
+       style="fill:#ffffff"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45" />
   </g>
 </svg>

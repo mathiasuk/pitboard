@@ -154,6 +154,7 @@ class Car(object):
     def __init__(self, index, name, session_type):
         self.best_lap = None
         self.index = index
+        self.lap = -1
         self.name = name
         self.position = -1
         self.spline_pos = 0
@@ -190,7 +191,6 @@ class Car(object):
             self._set_next_sector(self.spline_pos)
         else:
             spline_pos = self.spline_pos
-            self.position = ac.getCarRealTimeLeaderboardPosition(self.index) + 1
 
             # Workaround to handle the last sector (0.96 is the same position
             # as -0.04)
@@ -227,6 +227,7 @@ class Car(object):
     def update_data(self, session_type):
         self.spline_pos = ac.getCarState(
             self.index, acsys.CS.NormalizedSplinePosition)
+        self.lap = ac.getCarState(self.index, acsys.CS.LapCount)
 
         # The name can change if in no-booking mode
         self.name = ac.getDriverName(self.index)
@@ -727,6 +728,12 @@ class Session(object):
                 self.cars.append(car)
 
             car.update_data(self.session_type)
+
+        # Update the cars' race position, we could use
+        # ac.getCarRealTimeLeaderboardPosition but it's not always reliabe:
+        for i, car in enumerate(
+                sorted(self.cars, key=lambda car: (-car.lap, -car.spline_pos))):
+            car.position = i + 1
 
     def get_car_by_position(self, position):
         '''
