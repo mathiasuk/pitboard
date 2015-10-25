@@ -48,6 +48,8 @@ TEX_PATH = 'apps/python/pitboard/imgs/'
 
 # Define colours
 COLOURS = {
+    'g': (0, 204 / 255, 0),
+    'r': (1, 40 / 255, 0),
     'w': (1, 1, 1),
     'y': (1, 204 / 255, 0),
 }
@@ -56,13 +58,22 @@ DEFAULT_COLOUR = 'w'  # Default is to use white which is transparent
 
 # Mapping for special characters filenames
 CHARS_MAPS = {
-    '(': 'lpar',
-    ')': 'rpar',
-    '+': 'plus',
-    '-': 'minus',
-    '.': 'dot',
+    '&': 'amp',
+    '*': 'asterisk',
+    '\\': 'bslash',
     ':': 'colon',
+    '.': 'dot',
+    '!': 'emark',
+    '=': 'equal',
+    '>': 'gt',
+    '(': 'lpar',
+    '<': 'lt',
+    '-': 'minus',
+    '#': 'num',
+    '+': 'plus',
     '?': 'qmark',
+    ')': 'rpar',
+    '_': 'uscore',
 }
 
 PRACTICE = 0

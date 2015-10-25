@@ -823,11 +823,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="41.110782"
-     inkscape:cy="391.77067"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="303.09384"
+     inkscape:cy="561.4763"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer3"
      showgrid="true"
      showguides="false"
      inkscape:window-width="1600"
@@ -858,22 +858,22 @@
      inkscape:label="Layer 2"
      style="display:inline">
     <rect
+       style="display:inline;fill:#1a1a1a;fill-opacity:0"
+       id="rect4231-8-0"
+       width="50"
+       height="100"
+       x="15"
+       y="602.36218"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45"
+       inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png" />
+    <rect
        style="fill:#b3b3b3;fill-opacity:1"
        id="rect3669"
        width="320.66757"
        height="218.47099"
        x="-230.51146"
        y="594.8891" />
-    <rect
-       style="display:inline;fill:#1a1a1a;fill-opacity:0"
-       id="rect4231-8-0"
-       width="36"
-       height="100"
-       x="22"
-       y="602.36218"
-       inkscape:export-xdpi="45"
-       inkscape:export-ydpi="45"
-       inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png" />
     <rect
        style="fill:#1a1a1a;fill-opacity:1"
        id="rect4231"
@@ -887,7 +887,7 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none"
-       x="19.030001"
+       x="11.065"
        y="684.49219"
        id="text4272"
        sodipodi:linespacing="125%"
@@ -896,9 +896,9 @@
        inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png"><tspan
          sodipodi:role="line"
          id="tspan4274"
-         x="19.030001"
+         x="11.065"
          y="684.49219"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffffff">1</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffffff">L</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
@@ -1456,7 +1456,7 @@
          style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">F</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff2800;fill-opacity:1;stroke:none;font-family:Sans;"
        x="246.655"
        y="513.37006"
        id="text4272-6-6-1-59"
@@ -1468,7 +1468,7 @@
          id="tspan4274-2-5-6-2"
          x="246.655"
          y="513.37006"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">U</tspan></text>
+         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff2800;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold;fill-opacity:1;">U</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
@@ -1744,7 +1744,7 @@
          style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans;"
        x="172.955"
        y="624.73004"
        id="text4272-29-3-6"
@@ -1756,7 +1756,7 @@
          id="tspan4274-04-5-0"
          x="172.955"
          y="624.73004"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">+</tspan></text>
+         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold;fill-opacity:1;">+</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
