@@ -278,7 +278,12 @@ class Text(object):
     def __init__(self, text='', colour=''):
         self.text = text
         if colour:
-            self.colour = colour
+            # If the colour string is shorter than the text we
+            # complete it with the last given colour
+            if len(text) > len(colour):
+                self.colour = colour + colour[-1] * (len(text) - len(colour))
+            else:
+                self.colour = colour
         else:
             self.colour = DEFAULT_COLOUR * len(self.text)
 
@@ -301,6 +306,7 @@ class Row(object):
 
     def _clear(self):
         self.cards = []
+        self.colours = []
         self.width = 0
 
     def _add_card(self, card, colour):
@@ -349,7 +355,7 @@ class Board(object):
             self.logo = ac.newTexture(logo_path)
             return
 
-        logo_path = os.path.join(TEX_PATH, 'logo.png' % name)
+        logo_path = os.path.join(TEX_PATH, 'logo.png')
         if os.path.exists(logo_path):
             self.logo = ac.newTexture(logo_path)
         else:
@@ -547,7 +553,7 @@ class Session(object):
             text.append(Text(ahead.get_name()))
             if car.best_lap and ahead.best_lap:
                 text.append(
-                    Text(ms_to_str((car.best_lap - ahead.best_lap)))
+                    Text(ms_to_str((car.best_lap - ahead.best_lap)), 'r')
                 )
             else:
                 text.append(Text())
@@ -563,7 +569,8 @@ class Session(object):
             else:
                 delta = (last_lap - car.best_lap)
             if delta:
-                text.append(Text(ms_to_str(delta)))
+                colour = 'g' if delta < 0 else 'r'
+                text.append(Text(ms_to_str(delta), colour))
             else:
                 text.append(Text())
 
@@ -625,10 +632,17 @@ class Session(object):
         if ahead and splits[ahead]:
             text.append(Text(ahead.get_name()))
             line = split_to_str(splits[ahead])
+            colour = len(line) * 'r'
+
             if ahead in self.last_splits:
-                line += ' (%s)' % split_to_str(
-                    splits[ahead] - self.last_splits[ahead])
-            text.append(Text(line))
+                delta = splits[ahead] - self.last_splits[ahead]
+                line += ' (%s)' % split_to_str(delta)
+                if delta.total_seconds() > 0:
+                    colour += 'r'
+                else:
+                    colour += 'g'
+
+            text.append(Text(line, colour))
         else:
             text += [Text(), Text()]
 
@@ -639,10 +653,17 @@ class Session(object):
         # Display split to car behind (if any)
         if behind and splits[behind]:
             line = split_to_str(splits[behind])
+            colour = len(line) * 'g'
+
             if behind in self.last_splits:
-                line += ' (%s)' % split_to_str(
-                    splits[behind] - self.last_splits[behind])
-            text.append(Text(line))
+                delta = splits[behind] - self.last_splits[behind]
+                line += ' (%s)' % split_to_str(delta)
+                if delta.total_seconds() > 0:
+                    colour += 'r'
+                else:
+                    colour += 'g'
+
+            text.append(Text(line, colour))
             text.append(Text(behind.get_name()))
         else:
             text += [Text(), Text()]
@@ -660,7 +681,9 @@ class Session(object):
                 debug('Updating board (race), lap: %d' % self.current_lap)
                 debug('Last splits: %s' % self.last_splits)
                 debug('Current splits: %s' % splits)
-                debug('Text:\n %s \n' % '\n'.join(text))
+                for car in self.cars:
+                    debug(car)
+                debug('Text:\n %s \n' % '\n'.join([str(t) for t in text]))
                 self.ui.board.update_rows(text)
                 self.last_splits = splits
 
