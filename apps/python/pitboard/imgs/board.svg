@@ -824,16 +824,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="303.09384"
-     inkscape:cy="561.4763"
+     inkscape:cx="325.9152"
+     inkscape:cy="731.24329"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="true"
      showguides="false"
      inkscape:window-width="1600"
-     inkscape:window-height="836"
+     inkscape:window-height="900"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:snap-global="true">
     <inkscape:grid
@@ -854,28 +854,98 @@
   </metadata>
   <g
      inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="Layer 2"
+     id="layer3"
+     inkscape:label="Layer"
      style="display:inline">
+    <rect
+       style="fill:url(#linearGradient5250);fill-opacity:1;stroke:none"
+       id="rect4472"
+       width="80"
+       height="100.00001"
+       x="160"
+       y="432.36218"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
+    <rect
+       style="display:inline;fill:url(#linearGradient5373-28);fill-opacity:1;stroke:none"
+       id="rect4472-0-7"
+       width="80"
+       height="100.00001"
+       x="240"
+       y="432.00507"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
+    <rect
+       style="display:inline;fill:url(#linearGradient5373-62);fill-opacity:1;stroke:none"
+       id="rect4472-0-5"
+       width="80"
+       height="100.00001"
+       x="320"
+       y="432.005"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
+    <rect
+       style="display:inline;fill:url(#linearGradient5373-9);fill-opacity:1;stroke:none"
+       id="rect4472-0-50"
+       width="80"
+       height="100.00001"
+       x="160"
+       y="552.00507"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
+    <rect
+       style="display:inline;fill:url(#linearGradient5373-0);fill-opacity:1;stroke:none"
+       id="rect4472-0-56"
+       width="80"
+       height="100.00001"
+       x="240"
+       y="552.005"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
+    <rect
+       style="display:inline;fill:url(#linearGradient5373-7);fill-opacity:1;stroke:none"
+       id="rect4472-0-95"
+       width="80"
+       height="100.00001"
+       x="320"
+       y="552.005"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
+    <rect
+       style="display:inline;fill:url(#linearGradient5373-4);fill-opacity:1;stroke:none"
+       id="rect4472-0-3"
+       width="80"
+       height="100.00001"
+       x="400"
+       y="552.005"
+       inkscape:export-filename="/tmp/pit.png"
+       inkscape:export-xdpi="60.43364"
+       inkscape:export-ydpi="60.43364" />
     <rect
        style="display:inline;fill:#1a1a1a;fill-opacity:0"
        id="rect4231-8-0"
-       width="50"
+       width="64"
        height="100"
-       x="15"
+       x="8"
        y="602.36218"
        inkscape:export-xdpi="45"
        inkscape:export-ydpi="45"
        inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png" />
     <rect
-       style="fill:#b3b3b3;fill-opacity:1"
+       style="display:inline;fill:#b3b3b3;fill-opacity:1"
        id="rect3669"
        width="320.66757"
        height="218.47099"
        x="-230.51146"
        y="594.8891" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231"
        width="80"
        height="100"
@@ -886,8 +956,8 @@
        inkscape:export-filename="/tmp/pit.png" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none"
-       x="11.065"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
+       x="7.2399998"
        y="684.49219"
        id="text4272"
        sodipodi:linespacing="125%"
@@ -896,12 +966,12 @@
        inkscape:export-filename="/scratch/src/pitboard/imgs/0_25_50.png"><tspan
          sodipodi:role="line"
          id="tspan4274"
-         x="11.065"
+         x="7.2399998"
          y="684.49219"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffffff">L</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffffff">&amp;</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-180.00002"
        y="302.36218"
        id="text4272-6"
@@ -912,10 +982,10 @@
          id="tspan4274-2"
          x="-180.00002"
          y="302.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">E</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">E</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-110.00001"
        y="372.36218"
        id="text4272-6-4"
@@ -926,10 +996,10 @@
          id="tspan4274-2-3"
          x="-110.00001"
          y="372.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">K</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">K</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-140.00002"
        y="222.36218"
        id="text4272-6-6"
@@ -940,10 +1010,10 @@
          id="tspan4274-2-5"
          x="-140.00002"
          y="222.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">B</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">B</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-40.000008"
        y="222.36218"
        id="text4272-6-5"
@@ -954,10 +1024,10 @@
          id="tspan4274-2-8"
          x="-40.000008"
          y="222.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">C</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">C</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="39.999996"
        y="232.36218"
        id="text4272-6-0"
@@ -968,10 +1038,10 @@
          id="tspan4274-2-87"
          x="39.999996"
          y="232.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">D</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">D</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-120.00001"
        y="302.36218"
        id="text4272-6-47"
@@ -982,10 +1052,10 @@
          id="tspan4274-2-9"
          x="-120.00001"
          y="302.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">F</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">F</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-60.000008"
        y="292.36218"
        id="text4272-6-3"
@@ -996,10 +1066,10 @@
          id="tspan4274-2-2"
          x="-60.000008"
          y="292.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">G</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">G</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="9.9999952"
        y="302.36218"
        id="text4272-6-1"
@@ -1010,10 +1080,10 @@
          id="tspan4274-2-28"
          x="9.9999952"
          y="302.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">H</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">H</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="70"
        y="302.36218"
        id="text4272-6-16"
@@ -1024,10 +1094,10 @@
          id="tspan4274-2-37"
          x="70"
          y="302.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">I</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">I</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-170.82501"
        y="364.49222"
        id="text4272-6-58"
@@ -1038,10 +1108,10 @@
          id="tspan4274-2-6"
          x="-170.82501"
          y="364.49222"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">J</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">J</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-30.000006"
        y="372.36218"
        id="text4272-6-7"
@@ -1052,10 +1122,10 @@
          id="tspan4274-2-20"
          x="-30.000006"
          y="372.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">L</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">L</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="19.999996"
        y="382.36218"
        id="text4272-6-32"
@@ -1066,10 +1136,10 @@
          id="tspan4274-2-97"
          x="19.999996"
          y="382.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">M</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">M</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-190.82501"
        y="434.49222"
        id="text4272-6-6-8"
@@ -1080,10 +1150,10 @@
          id="tspan4274-2-5-2"
          x="-190.82501"
          y="434.49222"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">N</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">N</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-130.82501"
        y="444.49222"
        id="text4272-6-6-5"
@@ -1094,10 +1164,10 @@
          id="tspan4274-2-5-3"
          x="-130.82501"
          y="444.49222"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">O</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">O</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-50.825005"
        y="444.49222"
        id="text4272-6-6-9"
@@ -1108,10 +1178,10 @@
          id="tspan4274-2-5-35"
          x="-50.825005"
          y="444.49222"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">P</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">P</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="9.1749954"
        y="444.49222"
        id="text4272-6-6-81"
@@ -1122,10 +1192,10 @@
          id="tspan4274-2-5-0"
          x="9.1749954"
          y="444.49222"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">Q</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">Q</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-200.00002"
        y="512.36218"
        id="text4272-6-6-52"
@@ -1136,10 +1206,10 @@
          id="tspan4274-2-5-39"
          x="-200.00002"
          y="512.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">R</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">R</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-140.00002"
        y="512.36218"
        id="text4272-6-6-6"
@@ -1150,10 +1220,10 @@
          id="tspan4274-2-5-7"
          x="-140.00002"
          y="512.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">S</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">S</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-90.000008"
        y="512.36218"
        id="text4272-6-6-7"
@@ -1164,10 +1234,10 @@
          id="tspan4274-2-5-73"
          x="-90.000008"
          y="512.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">T</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">T</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-40.000008"
        y="512.36218"
        id="text4272-6-6-1"
@@ -1178,10 +1248,10 @@
          id="tspan4274-2-5-6"
          x="-40.000008"
          y="512.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">U</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">U</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-90.000008"
        y="582.36218"
        id="text4272-6-6-19"
@@ -1192,10 +1262,10 @@
          id="tspan4274-2-5-48"
          x="-90.000008"
          y="582.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">X</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-40.000008"
        y="592.36218"
        id="text4272-6-6-78"
@@ -1206,10 +1276,10 @@
          id="tspan4274-2-5-50"
          x="-40.000008"
          y="592.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">Y</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">Y</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="29.999996"
        y="592.36218"
        id="text4272-6-6-89"
@@ -1220,10 +1290,10 @@
          id="tspan4274-2-5-78"
          x="29.999996"
          y="592.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">Z</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">Z</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="29.999996"
        y="522.36218"
        id="text4272-6-6-1-2"
@@ -1234,10 +1304,10 @@
          id="tspan4274-2-5-6-7"
          x="29.999996"
          y="522.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">V</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">V</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="-190.00002"
        y="592.36218"
        id="text4272-6-6-1-5"
@@ -1248,9 +1318,9 @@
          id="tspan4274-2-5-6-4"
          x="-190.00002"
          y="592.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">W</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">W</tspan></text>
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-2"
        width="80"
        height="100"
@@ -1260,7 +1330,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4"
        width="80"
        height="100"
@@ -1270,7 +1340,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-2"
        width="80"
        height="100"
@@ -1280,7 +1350,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-2-5"
        width="80"
        height="100"
@@ -1290,7 +1360,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-2-5-7"
        width="80"
        height="100"
@@ -1300,7 +1370,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-8"
        width="80"
        height="100"
@@ -1310,7 +1380,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-2-8"
        width="80"
        height="100"
@@ -1320,7 +1390,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-23"
        width="80"
        height="100"
@@ -1330,7 +1400,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-80"
        width="80"
        height="100"
@@ -1340,7 +1410,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-2-7"
        width="80"
        height="100"
@@ -1350,7 +1420,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-7"
        width="40"
        height="100"
@@ -1360,7 +1430,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-2-9"
        width="80"
        height="100"
@@ -1370,7 +1440,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-1"
        width="80"
        height="100"
@@ -1380,7 +1450,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-2-2"
        width="80"
        height="100"
@@ -1390,7 +1460,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-4"
        width="80"
        height="100"
@@ -1400,7 +1470,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-2-3"
        width="80"
        height="100"
@@ -1410,7 +1480,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-5"
        width="80"
        height="100"
@@ -1420,7 +1490,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-2-28"
        width="80"
        height="100"
@@ -1430,7 +1500,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/pit.png" />
     <rect
-       style="fill:#1a1a1a;fill-opacity:1"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-4-6"
        width="80"
        height="100"
@@ -1441,7 +1511,7 @@
        inkscape:export-filename="/tmp/pit.png" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="171.2"
        y="514.13507"
        id="text4272-6-47-6"
@@ -1453,10 +1523,10 @@
          id="tspan4274-2-9-7"
          x="171.2"
          y="514.13507"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">F</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">F</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff2800;fill-opacity:1;stroke:none;font-family:Sans;"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ff2800;fill-opacity:1;stroke:none"
        x="246.655"
        y="513.37006"
        id="text4272-6-6-1-59"
@@ -1468,10 +1538,10 @@
          id="tspan4274-2-5-6-2"
          x="246.655"
          y="513.37006"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ff2800;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold;fill-opacity:1;">U</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ff2800;fill-opacity:1">U</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="329.98499"
        y="514.13501"
        id="text4272-6-6-78-1"
@@ -1483,10 +1553,10 @@
          id="tspan4274-2-5-50-4"
          x="329.98499"
          y="514.13501"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">Y</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">Y</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="168.185"
        y="394.49222"
        id="text4272-6-6-9-9"
@@ -1498,10 +1568,10 @@
          id="tspan4274-2-5-35-5"
          x="168.185"
          y="394.49222"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">P</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">P</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="720"
        y="232.36218"
        id="text4272-0"
@@ -1512,10 +1582,10 @@
          id="tspan4274-1"
          x="720"
          y="232.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">1</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">1</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="254.98"
        y="394.49219"
        id="text4272-1"
@@ -1527,10 +1597,10 @@
          id="tspan4274-15"
          x="254.98"
          y="394.49219"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">2</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">2</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="860"
        y="242.36218"
        id="text4272-67"
@@ -1541,10 +1611,10 @@
          id="tspan4274-3"
          x="860"
          y="242.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">3</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="740"
        y="312.36218"
        id="text4272-12"
@@ -1555,10 +1625,10 @@
          id="tspan4274-5"
          x="740"
          y="312.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">4</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">4</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="810"
        y="312.36218"
        id="text4272-9"
@@ -1569,10 +1639,10 @@
          id="tspan4274-02"
          x="810"
          y="312.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">5</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">5</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="880"
        y="312.36218"
        id="text4272-5"
@@ -1583,10 +1653,10 @@
          id="tspan4274-8"
          x="880"
          y="312.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">6</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">6</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="730"
        y="382.36218"
        id="text4272-2"
@@ -1597,10 +1667,10 @@
          id="tspan4274-6"
          x="730"
          y="382.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">7</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">7</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="860"
        y="382.36218"
        id="text4272-49"
@@ -1611,10 +1681,10 @@
          id="tspan4274-154"
          x="860"
          y="382.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">9</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">9</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="790"
        y="382.36218"
        id="text4272-29"
@@ -1625,10 +1695,10 @@
          id="tspan4274-04"
          x="790"
          y="382.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">8</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">8</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="750"
        y="462.36218"
        id="text4272-7"
@@ -1639,10 +1709,10 @@
          id="tspan4274-53"
          x="750"
          y="462.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">0</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">0</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="770"
        y="522.36218"
        id="text4272-29-3"
@@ -1653,10 +1723,10 @@
          id="tspan4274-04-5"
          x="770"
          y="522.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">+</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">+</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="810"
        y="592.36218"
        id="text4272-29-6"
@@ -1667,10 +1737,10 @@
          id="tspan4274-04-6"
          x="810"
          y="592.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">-</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">-</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="860"
        y="492.36218"
        id="text4272-7-9"
@@ -1681,10 +1751,10 @@
          id="tspan4274-53-1"
          x="860"
          y="492.36218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">.</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">.</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="341.685"
        y="386.93219"
        id="text4272-29-6-2"
@@ -1696,10 +1766,10 @@
          id="tspan4274-04-6-8"
          x="341.685"
          y="386.93219"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">-</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">-</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="411.065"
        y="394.49219"
        id="text4272-6-7-6"
@@ -1711,10 +1781,10 @@
          id="tspan4274-2-20-6"
          x="411.065"
          y="394.49219"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">L</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">L</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="499.03"
        y="393.86218"
        id="text4272-0-0"
@@ -1726,10 +1796,10 @@
          id="tspan4274-1-4"
          x="499.03"
          y="393.86218"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">1</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">1</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="575.02502"
        y="394.21933"
        id="text4272-67-5"
@@ -1741,10 +1811,10 @@
          id="tspan4274-3-2"
          x="575.02502"
          y="394.21933"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">3</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans;"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="172.955"
        y="624.73004"
        id="text4272-29-3-6"
@@ -1756,10 +1826,10 @@
          id="tspan4274-04-5-0"
          x="172.955"
          y="624.73004"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold;fill-opacity:1;">+</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00;fill-opacity:1">+</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="254.98"
        y="633.505"
        id="text4272-7-0"
@@ -1771,10 +1841,10 @@
          id="tspan4274-53-0"
          x="254.98"
          y="633.505"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">0</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">0</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="327.535"
        y="608.935"
        id="text4272-7-9-8"
@@ -1786,10 +1856,10 @@
          id="tspan4274-53-1-4"
          x="327.535"
          y="608.935"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">.</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">.</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="374.98001"
        y="633.505"
        id="text4272-5-2"
@@ -1801,10 +1871,10 @@
          id="tspan4274-8-9"
          x="374.98001"
          y="633.505"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">6</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">6</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="181.685"
        y="746.57507"
        id="text4272-29-6-9"
@@ -1816,10 +1886,10 @@
          id="tspan4274-04-6-6"
          x="181.685"
          y="746.57507"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">-</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">-</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="254.98"
        y="752.83002"
        id="text4272-9-4"
@@ -1831,10 +1901,10 @@
          id="tspan4274-02-0"
          x="254.98"
          y="752.83002"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">5</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">5</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="347.535"
        y="728.935"
        id="text4272-7-9-88"
@@ -1846,10 +1916,10 @@
          id="tspan4274-53-1-0"
          x="347.535"
          y="728.935"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">.</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">.</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="414.98001"
        y="753.505"
        id="text4272-29-34"
@@ -1861,10 +1931,10 @@
          id="tspan4274-04-50"
          x="414.98001"
          y="753.505"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">8</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">8</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="166.655"
        y="874.13507"
        id="text4272-6-1-0"
@@ -1876,10 +1946,10 @@
          id="tspan4274-2-28-1"
          x="166.655"
          y="874.13507"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">H</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">H</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="249.175"
        y="874.13501"
        id="text4272-94"
@@ -1891,10 +1961,10 @@
          id="tspan4274-67"
          x="249.175"
          y="874.13501"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">A</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">A</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffcc00;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffcc00;fill-opacity:1;stroke:none"
        x="319.185"
        y="874.13501"
        id="text4272-6-32-2"
@@ -1906,9 +1976,9 @@
          id="tspan4274-2-97-2"
          x="319.185"
          y="874.13501"
-         style="font-size:90px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffcc00;font-family:Helvetica Neue LT Com;-inkscape-font-specification:Helvetica Neue LT Com Bold">M</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#ffcc00">M</tspan></text>
     <rect
-       style="fill:url(#linearGradient5316);fill-opacity:1;stroke:none"
+       style="display:inline;fill:url(#linearGradient5316);fill-opacity:1;stroke:none"
        id="rect4472-0"
        width="80"
        height="100.00001"
@@ -1918,7 +1988,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373);fill-opacity:1;stroke:none"
        id="rect4472-0-0"
        width="80"
        height="100.00001"
@@ -1928,7 +1998,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-6);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-6);fill-opacity:1;stroke:none"
        id="rect4472-0-9"
        width="80"
        height="100.00001"
@@ -1938,7 +2008,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-1);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-1);fill-opacity:1;stroke:none"
        id="rect4472-0-1"
        width="80"
        height="100.00001"
@@ -1948,7 +2018,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-2);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-2);fill-opacity:1;stroke:none"
        id="rect4472-0-19"
        width="80"
        height="100.00001"
@@ -1958,7 +2028,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-8);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-8);fill-opacity:1;stroke:none"
        id="rect4472-0-12"
        width="80"
        height="100.00001"
@@ -1968,7 +2038,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-81);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-81);fill-opacity:1;stroke:none"
        id="rect4472-0-91"
        width="80"
        height="100.00001"
@@ -1978,7 +2048,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-3);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-3);fill-opacity:1;stroke:none"
        id="rect4472-0-2"
        width="80"
        height="100.00001"
@@ -1988,7 +2058,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-815);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-815);fill-opacity:1;stroke:none"
        id="rect4472-0-24"
        width="80"
        height="100.00001"
@@ -1998,7 +2068,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-67);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-67);fill-opacity:1;stroke:none"
        id="rect4472-0-11"
        width="80"
        height="100.00001"
@@ -2008,7 +2078,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-45);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-45);fill-opacity:1;stroke:none"
        id="rect4472-0-96"
        width="80"
        height="100.00001"
@@ -2018,7 +2088,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-64);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-64);fill-opacity:1;stroke:none"
        id="rect4472-0-23"
        width="80"
        height="100.00001"
@@ -2028,7 +2098,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:url(#linearGradient5373-88);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient5373-88);fill-opacity:1;stroke:none"
        id="rect4472-0-73"
        width="80"
        height="100.00001"
@@ -2038,7 +2108,7 @@
        inkscape:export-xdpi="60.43364"
        inkscape:export-ydpi="60.43364" />
     <rect
-       style="fill:#0000ff;fill-opacity:0.94520545;stroke:none"
+       style="display:inline;fill:#0000ff;fill-opacity:0.94520545;stroke:none"
        id="rect3924"
        width="120"
        height="109.99999"
@@ -2046,7 +2116,7 @@
        y="492.36218"
        transform="translate(-4.9229925e-6,0)" />
     <rect
-       style="fill:#0000ff;fill-opacity:0.94520545;stroke:none"
+       style="display:inline;fill:#0000ff;fill-opacity:0.94520545;stroke:none"
        id="rect4694"
        width="60.000004"
        height="100.00002"
@@ -2054,7 +2124,7 @@
        y="602.36218"
        transform="translate(-4.9229925e-6,0)" />
     <rect
-       style="fill:#0000ff;fill-opacity:0.94520545;stroke:none"
+       style="display:inline;fill:#0000ff;fill-opacity:0.94520545;stroke:none"
        id="rect4696"
        width="100"
        height="180.00002"
@@ -2062,7 +2132,7 @@
        y="702.36218"
        transform="translate(-4.9229925e-6,0)" />
     <rect
-       style="fill:#0000ff;fill-opacity:0.94520545;stroke:none"
+       style="display:inline;fill:#0000ff;fill-opacity:0.94520545;stroke:none"
        id="rect4698"
        width="120"
        height="104.99998"
@@ -2072,7 +2142,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot4713"
-       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
          id="flowRegion4715"><rect
            id="rect4717"
            width="163.89725"
@@ -2080,7 +2150,7 @@
            x="-45.709404"
            y="579.61078" /></flowRegion><flowPara
          id="flowPara4719" /></flowRoot>    <rect
-       style="fill:#1a1a1a;fill-opacity:1;display:inline"
+       style="display:inline;fill:#1a1a1a;fill-opacity:1"
        id="rect4231-8-8"
        width="1"
        height="1"
@@ -2090,7 +2160,7 @@
        inkscape:export-ydpi="60.43364"
        inkscape:export-filename="/tmp/bg.png" />
     <rect
-       style="fill:url(#linearGradient4767);fill-opacity:1;stroke:none;display:inline"
+       style="display:inline;fill:url(#linearGradient4767);fill-opacity:1;stroke:none"
        id="rect4472-0-91-5"
        width="80"
        height="100.00001"
@@ -2099,137 +2169,29 @@
        inkscape:export-filename="/tmp/reflect.png"
        inkscape:export-xdpi="45"
        inkscape:export-ydpi="45" />
-    <g
-       id="g6668"
-       transform="translate(-7.6674347,142.3789)">
-      <rect
-         inkscape:export-ydpi="45"
-         inkscape:export-xdpi="45"
-         inkscape:export-filename="/tmp/logo.png"
-         id="rect5261"
-         height="120"
-         width="480"
-         class="st0"
-         y="29.983301"
-         x="167.66743" />
-      <g
-         inkscape:export-ydpi="45"
-         inkscape:export-xdpi="45"
-         inkscape:export-filename="/tmp/logo.png"
-         transform="matrix(1.25,0,0,1.25,40.667433,18.828551)"
-         id="g6500">
-        <g
-           id="text2985-4-9-4-4"
-           transform="matrix(0.92620764,0,-0.27730108,0.79957156,26.424168,-52.044455)">
-          <path
-             id="path3520"
-             inkscape:connector-curvature="0"
-             class="st29"
-             d="m 201.8,160.3 c 0,2.1 -1.1,3.2 -3.2,3.2 l -11.6,0 c -2.1,0 -3.2,-1.1 -3.2,-3.2 l 0,-28.8 c 0,-2.1 1.1,-3.2 3.2,-3.2 l 11.5,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,28.8 0.1,0 z m -5.3,-1.4 0,-26.3 -7.2,0 0,26.3 7.2,0 z"
-             style="fill:#ffffff" />
-          <path
-             id="path3522"
-             inkscape:connector-curvature="0"
-             class="st29"
-             d="m 223.7,160.3 c 0,2.1 -1.1,3.2 -3.2,3.2 l -11.5,0 c -2.1,0 -3.2,-1.1 -3.2,-3.2 l 0,-28.8 c 0,-2.1 1.1,-3.2 3.2,-3.2 l 11.5,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,28.8 z m -5.1,-1.4 0,-26.3 -7.2,0 0,26.3 7.2,0 z"
-             style="fill:#ffffff" />
-          <path
-             id="path3524"
-             inkscape:connector-curvature="0"
-             class="st29"
-             d="m 245.3,160.3 c 0,2.1 -1.1,3.2 -3.2,3.2 l -14,0 0,-35.2 14,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,9.1 c 0,1.1 -0.4,2.1 -1.1,2.8 -0.2,0 -0.9,0.8 -2.8,1.7 1.7,1.1 2.6,1.7 2.8,1.9 0.8,0.8 1.1,1.7 1.1,2.8 l 0,10.5 z m -5.5,-19.1 0,-8.5 -6.6,0 0,10.4 4,0 2.6,-1.9 z m 0.2,17.7 0,-10 -2.6,-1.7 -4.2,0 0,11.7 6.8,0 0,0 z"
-             style="fill:#ffffff" />
-          <path
-             id="path3526"
-             inkscape:connector-curvature="0"
-             class="st29"
-             d="m 267.4,163.5 -5.3,0 -1.1,-6.6 -6.6,0 -1.1,6.6 -5.3,0 0,0 6.8,-35.2 5.5,0 7.1,35.2 z m -7.2,-11.2 -2.6,-15.9 -2.6,15.9 5.2,0 z"
-             style="fill:#ffffff" />
-          <path
-             id="path3528"
-             inkscape:connector-curvature="0"
-             class="st29"
-             d="m 288.4,163.5 -5.4,0 -5.9,-16.5 c 0,0 0,-1.1 0,-3.2 l 5.1,0 0,-11.2 -6.6,0 0,30.7 -5.3,0 0,-35.2 14,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,12.9 c 0,1.5 -0.6,2.5 -1.5,2.8 -0.6,0.2 -1.7,0.4 -3.4,0.4 l 5.8,16.1 z"
-             style="fill:#ffffff" />
-        </g>
-        <polygon
-           id="rect3935-11-24-6-8-8"
-           class="st30"
-           points="135,80.9 159.6,13.5 173,13.5 148.6,80.9 "
-           transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
-           style="fill:#cc0000" />
-        <polygon
-           id="rect3935-11-24-8-1-2-2"
-           class="st31"
-           points="122.3,80.9 134.4,47.8 142.8,47.8 130.8,80.9 "
-           transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
-           style="fill:#9eabb0" />
-        <polygon
-           id="rect4227-3-4-4"
-           class="st32"
-           points="173.2,24.3 177.2,13.7 243.8,13.7 240,24.3 "
-           style="fill:url(#rect4227-3-4-4_1_)"
-           transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)" />
-        <polygon
-           id="rect4227-5-8-5-5"
-           class="st33"
-           points="167.2,42.5 171.5,30.4 216.7,30.4 212.4,42.5 "
-           style="fill:url(#rect4227-5-8-5-5_1_)"
-           transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)" />
-        <polygon
-           id="rect3935-11-24-8-0-9-5-5"
-           class="st31"
-           points="109.6,80.9 112.7,72.6 121,72.6 118,80.9 "
-           transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
-           style="fill:#9eabb0" />
-        <g
-           id="text3074-1"
-           transform="matrix(0.94601609,0,0,0.78282948,-3.1762696,144.43819)">
-          <path
-             id="path3092-7"
-             inkscape:connector-curvature="0"
-             class="st31"
-             d="m 231.5,-76.4 -1.3,0 0,-2.1 -2.5,0 0,8.5 -1.3,0 0,-9.8 1.3,0 0,0.2 c 0.4,0 0.9,-0.2 1.3,-0.2 0.6,0 0.9,-0.2 1.3,-0.2 0.8,0 1.1,0.4 1.1,1.1 l 0.1,2.5 0,0 z"
-             style="fill:#9eabb0" />
-          <path
-             id="path3094-1"
-             inkscape:connector-curvature="0"
-             class="st31"
-             d="m 238.9,-69.7 -1.3,0 0,-0.2 c -0.6,0 -1.1,0.2 -1.5,0.2 -0.6,0 -1.1,0.2 -1.5,0.2 -0.8,0 -1.1,-0.4 -1.1,-1.1 l 0,-3.6 c 0,-0.8 0.4,-1.1 1.1,-1.1 l 3.2,0 0,-3 -2.8,0 0,1.7 -1.3,0 0,-1.7 c 0,-0.8 0.4,-1.1 1.1,-1.1 l 3.2,0 c 0.8,0 1.1,0.4 1.1,1.1 l -0.2,8.6 z m -1.3,-1.2 0,-3.4 -3,0 0,3.6 3,-0.2 z"
-             style="fill:#9eabb0" />
-          <path
-             id="path3096-1"
-             inkscape:connector-curvature="0"
-             class="st31"
-             d="m 246.4,-70.9 c 0,0.8 -0.4,1.1 -1.1,1.1 l -3.2,0 c -0.8,0 -1.1,-0.4 -1.1,-1.1 l 0,-7.6 c 0,-0.8 0.4,-1.1 1.1,-1.1 l 3.2,0 c 0.8,0 1.1,0.4 1.1,1.1 l 0,1.9 -1.3,0 0,-1.9 -2.8,0 0,7.4 2.8,0 0,-2.3 1.3,0 0,2.5 z"
-             style="fill:#9eabb0" />
-          <path
-             id="path3098-5"
-             sodipodi:nodetypes="ccccc"
-             inkscape:connector-curvature="0"
-             class="st31"
-             d="m 250,-69.7 -1.3,0 0,-9.8 1.3,0 0,9.8 z"
-             style="fill:#9eabb0" />
-          <path
-             id="path3100-2"
-             inkscape:connector-curvature="0"
-             class="st31"
-             d="m 258,-69.7 -1.3,0 0,-8.7 -3,0 0,8.5 -1.3,0 0,-9.8 1.3,0 0,0.2 c 0.6,0 1.1,-0.2 1.5,-0.2 0.6,0 1.1,-0.2 1.5,-0.2 0.8,0 1.1,0.4 1.1,1.1 l 0.2,9.1 z"
-             style="fill:#9eabb0" />
-          <path
-             id="path3102-7"
-             inkscape:connector-curvature="0"
-             class="st31"
-             d="m 265.7,-67.1 c 0,0.8 -0.4,1.1 -1.1,1.1 l -3.2,0 c -0.8,0 -1.1,-0.6 -1.1,-1.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 l 1.3,0 0,1.3 2.8,0 0,-2.6 -2.3,0 c -0.6,0 -1.1,-0.2 -1.5,-0.6 -0.4,-0.4 -0.6,-0.9 -0.6,-1.5 l 0,-5.7 c 0,-0.6 0.2,-1.1 0.6,-1.5 0.4,-0.4 0.8,-0.6 1.3,-0.6 0.2,0 0.9,0.2 2.5,0.4 l 0,-0.2 1.3,0 0,12.6 0,0 z m -1.3,-3.8 0,-7.4 c -1.1,0 -1.7,-0.2 -1.9,-0.2 -0.8,0 -1.1,0.4 -1.1,1.1 l 0,5.3 c 0,0.8 0.4,1.1 1.1,1.1 l 1.9,0.1 0,0 z"
-             style="fill:#9eabb0" />
-        </g>
-      </g>
-    </g>
+    <rect
+       x="160"
+       y="172.3622"
+       class="st0"
+       width="480"
+       height="120"
+       id="rect5261"
+       inkscape:export-filename="/tmp/logo.png"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45" />
+    <path
+       style="display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 160.5,152.36133 c -6.66667,-2.9e-4 -10.28585,0.28585 -15,5 -4.71415,4.71414 -5,8.33305 -5,15 l 0,839.99997 c 0,6.6664 0.28605,10.2861 5,15 4.71394,4.714 8.33333,4.9997 15,5 l 479.99997,0 c 6.6667,-3e-4 10.2861,-0.286 15,-5 4.714,-4.7139 5,-8.3336 5,-15 l 0,-839.99997 c 0,-6.66695 -0.2858,-10.28586 -5,-15 -4.7141,-4.71415 -8.3333,-5.00029 -15,-5 l -479.99997,0 z m 0,20 479.99997,0 0,60 -479.99997,0 0,-60 z m 0,140 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,99.99997 -479.99997,0 0,-99.99997 z m 0,119.99997 479.99997,0 0,100 -479.99997,0 0,-50 0,-50 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z"
+       id="rect3359"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/tmp/board.png"
+       inkscape:export-xdpi="44.948921"
+       inkscape:export-ydpi="44.948921" />
     <g
        class="st34"
        id="g5291"
-       transform="matrix(1.4377973,0,0,1.4316955,-86.734278,169.08653)"
-       style="fill:#4d4d4d;enable-background:new"
+       transform="matrix(1.4377973,0,0,1.4316955,-83.198744,12.815931)"
+       style="display:inline;fill:#4d4d4d;enable-background:new"
        inkscape:export-filename="/tmp/logo.png"
        inkscape:export-xdpi="45"
        inkscape:export-ydpi="45">
@@ -2248,9 +2210,9 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="547.44922"
-       y="283.20053"
+       style="font-style:normal;font-weight:normal;font-size:50px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="352.99484"
+       y="103.59541"
        id="text5303"
        sodipodi:linespacing="125%"
        inkscape:export-filename="/tmp/logo.png"
@@ -2258,109 +2220,136 @@
        inkscape:export-ydpi="45"><tspan
          sodipodi:role="line"
          id="tspan5305"
-         x="547.44922"
-         y="283.20053"
+         x="352.99484"
+         y="103.59541"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Helvetica Neue LT Com';-inkscape-font-specification:'Helvetica Neue LT Com Bold';fill:#e6e6e6">0xd</tspan></text>
-  </g>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     style="display:inline">
-    <path
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 160.5,152.36133 c -6.66667,-2.9e-4 -10.28585,0.28585 -15,5 -4.71415,4.71414 -5,8.33305 -5,15 l 0,839.99997 c 0,6.6664 0.28605,10.2861 5,15 4.71394,4.714 8.33333,4.9997 15,5 l 479.99997,0 c 6.6667,-3e-4 10.2861,-0.286 15,-5 4.714,-4.7139 5,-8.3336 5,-15 l 0,-839.99997 c 0,-6.66695 -0.2858,-10.28586 -5,-15 -4.7141,-4.71415 -8.3333,-5.00029 -15,-5 l -479.99997,0 z m 0,20 479.99997,0 0,60 -479.99997,0 0,-60 z m 0,140 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,99.99997 -479.99997,0 0,-99.99997 z m 0,119.99997 479.99997,0 0,100 -479.99997,0 0,-50 0,-50 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z m 0,120 479.99997,0 0,100 -479.99997,0 0,-100 z"
-       id="rect3359"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/tmp/board.png"
-       inkscape:export-xdpi="44.948921"
-       inkscape:export-ydpi="44.948921" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="740"
-       y="-97.637794"
-       id="text4770"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4772"
-         x="740"
-         y="-97.637794" /></text>
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="Layer"
-     style="display:none">
-    <rect
-       style="fill:url(#linearGradient5250);fill-opacity:1;stroke:none"
-       id="rect4472"
-       width="80"
-       height="100.00001"
-       x="160"
-       y="432.36218"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
-    <rect
-       style="fill:url(#linearGradient5373-28);fill-opacity:1;stroke:none;display:inline"
-       id="rect4472-0-7"
-       width="80"
-       height="100.00001"
-       x="240"
-       y="432.00507"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
-    <rect
-       style="fill:url(#linearGradient5373-62);fill-opacity:1;stroke:none;display:inline"
-       id="rect4472-0-5"
-       width="80"
-       height="100.00001"
-       x="320"
-       y="432.005"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
-    <rect
-       style="fill:url(#linearGradient5373-9);fill-opacity:1;stroke:none;display:inline"
-       id="rect4472-0-50"
-       width="80"
-       height="100.00001"
-       x="160"
-       y="552.00507"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
-    <rect
-       style="fill:url(#linearGradient5373-0);fill-opacity:1;stroke:none;display:inline"
-       id="rect4472-0-56"
-       width="80"
-       height="100.00001"
-       x="240"
-       y="552.005"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
-    <rect
-       style="fill:url(#linearGradient5373-7);fill-opacity:1;stroke:none;display:inline"
-       id="rect4472-0-95"
-       width="80"
-       height="100.00001"
-       x="320"
-       y="552.005"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
-    <rect
-       style="fill:url(#linearGradient5373-4);fill-opacity:1;stroke:none;display:inline"
-       id="rect4472-0-3"
-       width="80"
-       height="100.00001"
-       x="400"
-       y="552.005"
-       inkscape:export-filename="/tmp/pit.png"
-       inkscape:export-xdpi="60.43364"
-       inkscape:export-ydpi="60.43364" />
+    <g
+       id="g6500"
+       transform="matrix(1.25,0,0,1.25,-99.22897,-16.983459)"
+       inkscape:export-filename="/tmp/logo.png"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45">
+      <g
+         transform="matrix(0.92620764,0,-0.27730108,0.79957156,26.424168,-52.044455)"
+         id="text2985-4-9-4-4">
+        <path
+           style="fill:#ffffff"
+           d="m 201.8,160.3 c 0,2.1 -1.1,3.2 -3.2,3.2 l -11.6,0 c -2.1,0 -3.2,-1.1 -3.2,-3.2 l 0,-28.8 c 0,-2.1 1.1,-3.2 3.2,-3.2 l 11.5,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,28.8 0.1,0 z m -5.3,-1.4 0,-26.3 -7.2,0 0,26.3 7.2,0 z"
+           class="st29"
+           inkscape:connector-curvature="0"
+           id="path3520" />
+        <path
+           style="fill:#ffffff"
+           d="m 223.7,160.3 c 0,2.1 -1.1,3.2 -3.2,3.2 l -11.5,0 c -2.1,0 -3.2,-1.1 -3.2,-3.2 l 0,-28.8 c 0,-2.1 1.1,-3.2 3.2,-3.2 l 11.5,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,28.8 z m -5.1,-1.4 0,-26.3 -7.2,0 0,26.3 7.2,0 z"
+           class="st29"
+           inkscape:connector-curvature="0"
+           id="path3522" />
+        <path
+           style="fill:#ffffff"
+           d="m 245.3,160.3 c 0,2.1 -1.1,3.2 -3.2,3.2 l -14,0 0,-35.2 14,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,9.1 c 0,1.1 -0.4,2.1 -1.1,2.8 -0.2,0 -0.9,0.8 -2.8,1.7 1.7,1.1 2.6,1.7 2.8,1.9 0.8,0.8 1.1,1.7 1.1,2.8 l 0,10.5 z m -5.5,-19.1 0,-8.5 -6.6,0 0,10.4 4,0 2.6,-1.9 z m 0.2,17.7 0,-10 -2.6,-1.7 -4.2,0 0,11.7 6.8,0 0,0 z"
+           class="st29"
+           inkscape:connector-curvature="0"
+           id="path3524" />
+        <path
+           style="fill:#ffffff"
+           d="m 267.4,163.5 -5.3,0 -1.1,-6.6 -6.6,0 -1.1,6.6 -5.3,0 0,0 6.8,-35.2 5.5,0 7.1,35.2 z m -7.2,-11.2 -2.6,-15.9 -2.6,15.9 5.2,0 z"
+           class="st29"
+           inkscape:connector-curvature="0"
+           id="path3526" />
+        <path
+           style="fill:#ffffff"
+           d="m 288.4,163.5 -5.4,0 -5.9,-16.5 c 0,0 0,-1.1 0,-3.2 l 5.1,0 0,-11.2 -6.6,0 0,30.7 -5.3,0 0,-35.2 14,0 c 2.1,0 3.2,1.1 3.2,3.2 l 0,12.9 c 0,1.5 -0.6,2.5 -1.5,2.8 -0.6,0.2 -1.7,0.4 -3.4,0.4 l 5.8,16.1 z"
+           class="st29"
+           inkscape:connector-curvature="0"
+           id="path3528" />
+      </g>
+      <polygon
+         style="fill:#cc0000"
+         transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
+         points="148.6,80.9 135,80.9 159.6,13.5 173,13.5 "
+         class="st30"
+         id="rect3935-11-24-6-8-8" />
+      <polygon
+         style="fill:#9eabb0"
+         transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
+         points="130.8,80.9 122.3,80.9 134.4,47.8 142.8,47.8 "
+         class="st31"
+         id="rect3935-11-24-8-1-2-2" />
+      <polygon
+         transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
+         style="fill:url(#rect4227-3-4-4_1_)"
+         points="240,24.3 173.2,24.3 177.2,13.7 243.8,13.7 "
+         class="st32"
+         id="rect4227-3-4-4" />
+      <polygon
+         transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
+         style="fill:url(#rect4227-5-8-5-5_1_)"
+         points="212.4,42.5 167.2,42.5 171.5,30.4 216.7,30.4 "
+         class="st33"
+         id="rect4227-5-8-5-5" />
+      <polygon
+         style="fill:#9eabb0"
+         transform="matrix(0.86056335,0,0,0.86056335,18.817791,9.4585388)"
+         points="118,80.9 109.6,80.9 112.7,72.6 121,72.6 "
+         class="st31"
+         id="rect3935-11-24-8-0-9-5-5" />
+      <g
+         transform="matrix(0.94601609,0,0,0.78282948,-3.1762696,144.43819)"
+         id="text3074-1">
+        <path
+           style="fill:#9eabb0"
+           d="m 231.5,-76.4 -1.3,0 0,-2.1 -2.5,0 0,8.5 -1.3,0 0,-9.8 1.3,0 0,0.2 c 0.4,0 0.9,-0.2 1.3,-0.2 0.6,0 0.9,-0.2 1.3,-0.2 0.8,0 1.1,0.4 1.1,1.1 l 0.1,2.5 0,0 z"
+           class="st31"
+           inkscape:connector-curvature="0"
+           id="path3092-7" />
+        <path
+           style="fill:#9eabb0"
+           d="m 238.9,-69.7 -1.3,0 0,-0.2 c -0.6,0 -1.1,0.2 -1.5,0.2 -0.6,0 -1.1,0.2 -1.5,0.2 -0.8,0 -1.1,-0.4 -1.1,-1.1 l 0,-3.6 c 0,-0.8 0.4,-1.1 1.1,-1.1 l 3.2,0 0,-3 -2.8,0 0,1.7 -1.3,0 0,-1.7 c 0,-0.8 0.4,-1.1 1.1,-1.1 l 3.2,0 c 0.8,0 1.1,0.4 1.1,1.1 l -0.2,8.6 z m -1.3,-1.2 0,-3.4 -3,0 0,3.6 3,-0.2 z"
+           class="st31"
+           inkscape:connector-curvature="0"
+           id="path3094-1" />
+        <path
+           style="fill:#9eabb0"
+           d="m 246.4,-70.9 c 0,0.8 -0.4,1.1 -1.1,1.1 l -3.2,0 c -0.8,0 -1.1,-0.4 -1.1,-1.1 l 0,-7.6 c 0,-0.8 0.4,-1.1 1.1,-1.1 l 3.2,0 c 0.8,0 1.1,0.4 1.1,1.1 l 0,1.9 -1.3,0 0,-1.9 -2.8,0 0,7.4 2.8,0 0,-2.3 1.3,0 0,2.5 z"
+           class="st31"
+           inkscape:connector-curvature="0"
+           id="path3096-1" />
+        <path
+           style="fill:#9eabb0"
+           d="m 250,-69.7 -1.3,0 0,-9.8 1.3,0 0,9.8 z"
+           class="st31"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc"
+           id="path3098-5" />
+        <path
+           style="fill:#9eabb0"
+           d="m 258,-69.7 -1.3,0 0,-8.7 -3,0 0,8.5 -1.3,0 0,-9.8 1.3,0 0,0.2 c 0.6,0 1.1,-0.2 1.5,-0.2 0.6,0 1.1,-0.2 1.5,-0.2 0.8,0 1.1,0.4 1.1,1.1 l 0.2,9.1 z"
+           class="st31"
+           inkscape:connector-curvature="0"
+           id="path3100-2" />
+        <path
+           style="fill:#9eabb0"
+           d="m 265.7,-67.1 c 0,0.8 -0.4,1.1 -1.1,1.1 l -3.2,0 c -0.8,0 -1.1,-0.6 -1.1,-1.5 0,-0.2 0,-0.4 0,-0.6 0,-0.2 0,-0.4 0,-0.6 l 1.3,0 0,1.3 2.8,0 0,-2.6 -2.3,0 c -0.6,0 -1.1,-0.2 -1.5,-0.6 -0.4,-0.4 -0.6,-0.9 -0.6,-1.5 l 0,-5.7 c 0,-0.6 0.2,-1.1 0.6,-1.5 0.4,-0.4 0.8,-0.6 1.3,-0.6 0.2,0 0.9,0.2 2.5,0.4 l 0,-0.2 1.3,0 0,12.6 0,0 z m -1.3,-3.8 0,-7.4 c -1.1,0 -1.7,-0.2 -1.9,-0.2 -0.8,0 -1.1,0.4 -1.1,1.1 l 0,5.3 c 0,0.8 0.4,1.1 1.1,1.1 l 1.9,0.1 0,0 z"
+           class="st31"
+           inkscape:connector-curvature="0"
+           id="path3102-7" />
+      </g>
+    </g>
+    <g
+       id="g5372"
+       transform="matrix(0.84786636,0,0,0.84786636,20.419731,35.628089)"
+       inkscape:export-xdpi="45"
+       inkscape:export-ydpi="45">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4802"
+         d="m 167.42051,301.51363 c -0.20358,-0.24531 -0.29646,-4.87925 -0.31124,-15.52835 l -0.0211,-15.1787 39.71922,-39.71634 c 24.57035,-24.56855 39.90757,-39.71634 40.21307,-39.71634 0.27159,0 0.63587,0.14206 0.80949,0.31569 0.24179,0.24179 0.31569,7.24632 0.31569,29.92513 l 0,29.60945 -13.89951,13.89766 c -12.68434,12.68264 -13.96652,13.89001 -14.66615,13.81024 l -0.76664,-0.0874 -0.13154,-13.62275 -0.13153,-13.62274 -25.10481,25.13205 c -13.80764,13.82263 -25.24655,25.13206 -25.4198,25.13206 -0.17325,0 -0.44558,-0.15735 -0.60518,-0.34965 z"
+         style="fill:#ffffff" />
+      <path
+         inkscape:connector-curvature="0"
+         d="m 254.8978,243.0233 c -0.0965,-0.0965 -0.17539,-6.97669 -0.17539,-15.28939 l 0,-15.11401 25.03513,-25.15761 c 13.76932,-13.83669 25.19881,-25.19698 25.3989,-25.2451 0.20007,-0.0481 0.53564,0.0552 0.74573,0.22951 0.32581,0.27041 0.38195,2.5439 0.38195,15.46578 l 0,15.14878 -25.05157,25.06871 c -24.2107,24.22725 -25.64503,25.58306 -26.33475,24.89333 z m 0.0877,19.24119 0,-10.13496 13.67632,-13.67287 c 7.52199,-7.52008 13.83172,-13.67288 14.02163,-13.67288 0.91964,0 0.97649,0.51287 0.98999,8.93123 l 0.0134,8.29985 25.18534,-25.35056 c 19.14981,-19.27542 25.30912,-25.32674 25.7018,-25.25114 0.50531,0.0973 0.51788,0.43346 0.58431,15.60365 l 0.0679,15.50422 -24.9223,24.9392 -24.9223,24.93921 -15.19799,0 -15.198,0 0,-10.13495 z"
+         style="fill:#ff0202;fill-opacity:1"
+         id="path4772" />
+    </g>
   </g>
 </svg>

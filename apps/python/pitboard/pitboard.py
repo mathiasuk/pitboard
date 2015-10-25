@@ -54,7 +54,8 @@ COLOURS = {
     'y': (1, 204 / 255, 0),
 }
 
-DEFAULT_COLOUR = 'w'  # Default is to use white which is transparent
+# Set default colour applied over cards' text texture
+DEFAULT_COLOUR = 'y'
 
 # Mapping for special characters filenames
 CHARS_MAPS = {
@@ -339,7 +340,16 @@ class Board(object):
         ]
 
         self.texture = ac.newTexture(os.path.join(TEX_PATH, 'board.png'))
-        logo_path = os.path.join(TEX_PATH, 'logo.png')
+
+        # Look for a player logo, otherwise the default
+        name = ac.getDriverName(0)
+        logo_path = os.path.join(TEX_PATH, 'logo_%s.png' % name)
+
+        if os.path.exists(logo_path):
+            self.logo = ac.newTexture(logo_path)
+            return
+
+        logo_path = os.path.join(TEX_PATH, 'logo.png' % name)
         if os.path.exists(logo_path):
             self.logo = ac.newTexture(logo_path)
         else:
