@@ -45,7 +45,7 @@ DETAILED_DELTA = True
 
 DEBUG = True
 
-APP_SIZE_X = 260 * FULLSIZE_SCALE
+APP_SIZE_X = 100 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
 TEX_PATH = 'apps/python/pitboard/imgs/'
 
@@ -724,7 +724,7 @@ class Session(object):
             if ahead in self.last_splits:
                 delta = splits[ahead] - self.last_splits[ahead]
 
-                if DETAILED_DELTA:
+                if self.detailed_delta:
                     line += ' (%s)' % split_to_str(delta)
                 else:
                     line += ' (%s)' % split_to_str(delta)[0]
@@ -750,7 +750,7 @@ class Session(object):
             if behind in self.last_splits:
                 delta = splits[behind] - self.last_splits[behind]
 
-                if DETAILED_DELTA:
+                if self.detailed_delta:
                     line += ' (%s)' % split_to_str(delta)
                 else:
                     line += ' (%s)' % split_to_str(delta)[0]
