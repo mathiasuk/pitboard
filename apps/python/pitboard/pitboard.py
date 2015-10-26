@@ -803,11 +803,12 @@ class Session(object):
 
             car.update_data(self.session_type)
 
-        # Update the cars' race position, we could use
-        # ac.getCarRealTimeLeaderboardPosition but it's not always reliabe:
-        for i, car in enumerate(
-                sorted(self.cars, key=lambda car: (-car.lap, -car.spline_pos))):
-            car.position = i + 1
+        if self.session_type == RACE:
+            # Update the cars' race position, we could use
+            # ac.getCarRealTimeLeaderboardPosition but it's not always reliable:
+            for i, car in enumerate(sorted(
+                    self.cars, key=lambda car: (-car.lap, -car.spline_pos))):
+                car.position = i + 1
 
     def get_car_by_position(self, position):
         '''
