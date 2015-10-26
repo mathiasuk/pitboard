@@ -151,12 +151,13 @@ class Car(object):
     '''
     Store information about car
     '''
-    def __init__(self, index, name, session_type):
+    def __init__(self, index, name, _session, session_type):
         self.best_lap = None
         self.index = index
         self.lap = -1
         self.name = name
         self.position = -1
+        self.session = _session
         self.spline_pos = 0
 
         if session_type == RACE:
@@ -219,7 +220,7 @@ class Car(object):
         '''
         Returns the driver's name
         '''
-        if SHORT_NAMES:
+        if self.session.short_names:
             return self.name[:3]
         else:
             return self.name
@@ -411,6 +412,8 @@ class UI(object):
         self.board = Board(self.library)
         self.session = session_
         self.prefs_button = None
+        self.prefs_controls = {}
+        self.prefs_visible = False
         self.widget = None
 
         self._create_widget()
@@ -440,12 +443,53 @@ class UI(object):
 
         return library
 
+    def _create_prefs_controls(self):
+        spin = ac.addSpinner(self.widget, 'Display duration, -1 for always on')
+        ac.setPosition(spin, 90, 55)
+        ac.setRange(spin, -1, 60)
+        ac.setStep(spin, 1)
+        ac.setValue(spin, self.session.display_timeout)
+        ac.setSize(spin, 80, 25)
+        ac.addOnValueChangeListener(spin,
+                                    callback_display_timeout_spinner_changed)
+        ac.setVisible(spin, 0)
+        self.prefs_controls['display_timeout_spinner'] = spin
+
+        spin = ac.addSpinner(self.widget, 'Full size duration')
+        ac.setPosition(spin, 90, 110)
+        ac.setRange(spin, 0, 60)
+        ac.setStep(spin, 1)
+        ac.setValue(spin, self.session.fullsize_timeout)
+        ac.setSize(spin, 80, 25)
+        ac.addOnValueChangeListener(spin,
+                                    callback_fullsize_timeout_spinner_changed)
+        ac.setVisible(spin, 0)
+        self.prefs_controls['fullsize_timeout_spinner'] = spin
+
+        check = ac.addCheckBox(self.widget, 'Use short name')
+        ac.setPosition(check, 20, 145)
+        ac.setSize(check, 10, 10)
+        ac.setValue(check, self.session.short_names)
+        ac.addOnCheckBoxChanged(check,
+                                callback_short_name_checkbox_changed)
+        ac.setVisible(check, 0)
+        self.prefs_controls['short_name_checkbox'] = check
+
+        check = ac.addCheckBox(self.widget, 'Detailed delta')
+        ac.setPosition(check, 20, 165)
+        ac.setSize(check, 10, 10)
+        ac.setValue(check, self.session.detailed_delta)
+        ac.addOnCheckBoxChanged(check,
+                                callback_detailed_delta_checkbox_changed)
+        ac.setVisible(check, 0)
+        self.prefs_controls['detailed_delta_checkbox'] = check
+
     def _create_widget(self):
         self.widget = ac.newApp('pitboard')
         ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y)
         ac.setIconPosition(self.widget, -10000, -10000)
         ac.drawBorder(self.widget, 0)
-        self.hide_bg()
+        ac.setBackgroundOpacity(self.widget, 0.2)
 
         # Create prefs button
         self.prefs_button = ac.addButton(self.widget, '')
@@ -455,22 +499,25 @@ class UI(object):
         ac.drawBorder(self.prefs_button, 0)
         ac.setBackgroundTexture(self.prefs_button,
                                 os.path.join(TEX_PATH, 'prefs.png'))
-#        ac.addOnClickedListener(self.prefs_button, click_button_options)
+        ac.addOnClickedListener(self.prefs_button, callback_prefs_button)
 
-        # TODO:
-        # - Spinner for DISPLAY_TIMEOUT
-        # - Spinner for FULLSIZE_TIMEOUT
-        # - Spinner for OPACITY
-        # - Opacity for small?
-        # - Spinner for FULLSIZE_SCALE
-        # - Spinner for SMALLSIZE_SCALE
-        # - Button for SHORT_NAMES
-        # - Button for DETAILED_DELTA
+        self._create_prefs_controls()
 
         ac.addRenderCallback(self.widget, render_callback)
 
-    def hide_bg(self):
-        ac.setBackgroundOpacity(self.widget, 0)
+    def prefs_button_click(self):
+        self.prefs_visible = not self.prefs_visible
+
+        if self.prefs_visible:
+            # Increase side of the widget, make controls visible
+            ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y + 165)
+            for control in self.prefs_controls.values():
+                ac.setVisible(control, 1)
+        else:
+            # Decrease side of the widget, hide controls
+            ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y)
+            for control in self.prefs_controls.values():
+                ac.setVisible(control, 0)
 
     def render(self, scale):
         self.board.render(scale)
@@ -483,6 +530,12 @@ class Session(object):
     def __init__(self):
         self.ui = None
         self._reset()
+
+        # TODO: these should be loaded/save from/to JSON if available
+        self.display_timeout = DISPLAY_TIMEOUT
+        self.fullsize_timeout = FULLSIZE_TIMEOUT
+        self.short_names = SHORT_NAMES
+        self.detailed_delta = DETAILED_DELTA
 
     def _check_session(self):
         '''
@@ -548,11 +601,11 @@ class Session(object):
         '''
         Set the board based on the current time
         '''
-        if current_time > FULLSIZE_TIMEOUT:
+        if current_time > self.fullsize_timeout:
             # Set the scale
-            if current_time <= FULLSIZE_TIMEOUT + ZOOM_TRANSITION:
+            if current_time <= self.fullsize_timeout + ZOOM_TRANSITION:
                 self.scale = FULLSIZE_SCALE - \
-                    ((current_time - FULLSIZE_TIMEOUT) / ZOOM_TRANSITION) \
+                    ((current_time - self.fullsize_timeout) / ZOOM_TRANSITION) \
                     * (FULLSIZE_SCALE - SMALLSIZE_SCALE)
             else:
                 self.scale = SMALLSIZE_SCALE
@@ -611,7 +664,7 @@ class Session(object):
         # Display time left in session
         text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
 
-        if current_time > 0.2 and current_time < DISPLAY_TIMEOUT and \
+        if current_time > 0.2 and current_time < self.display_timeout and \
                 self.current_lap > 0 and (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
 
@@ -712,7 +765,7 @@ class Session(object):
         else:
             text += [Text(), Text()]
 
-        if current_time > 0.2 and current_time < DISPLAY_TIMEOUT and \
+        if current_time > 0.2 and current_time < self.display_timeout and \
                 self.current_lap > 0 or self.laps - self.current_lap == 0:
             # Display the board for the first 30 seconds, or once passed
             # the finish line
@@ -745,7 +798,7 @@ class Session(object):
                 if name == -1:
                     # No such car
                     break
-                car = Car(i, name, self.session_type)
+                car = Car(i, name, self, self.session_type)
                 self.cars.append(car)
 
             car.update_data(self.session_type)
@@ -828,3 +881,34 @@ def render_callback(deltaT):
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
         ac.log(repr(traceback.format_exception(exc_type, exc_value, exc_traceback)))
+
+
+#  Misc UI callbacks
+def callback_prefs_button(x, y):
+    global session  # pylint: disable=W0602
+
+    session.ui.prefs_button_click()
+
+
+def callback_display_timeout_spinner_changed(value):
+    global session  # pylint: disable=W0602
+
+    session.display_timeout = value
+
+
+def callback_fullsize_timeout_spinner_changed(value):
+    global session  # pylint: disable=W0602
+
+    session.fullsize_timeout = value
+
+
+def callback_short_name_checkbox_changed(name, state):
+    global session  # pylint: disable=W0602
+
+    session.short_names = state is 1
+
+
+def callback_detailed_delta_checkbox_changed(name, state):
+    global session  # pylint: disable=W0602
+
+    session.detailed_delta = state is 1
