@@ -110,6 +110,17 @@ def debug(msg):
         ac.log('Pitboard: %s' % msg)
 
 
+def debug_splits(splits):
+    '''
+    Return a string representation of the splits for logging
+    '''
+    s = ''
+    for car, split in splits.items():
+        s += '  %s (%s): %s\n' % (car.index, car.name, split.total_seconds())
+
+    return s
+
+
 def ms_to_str(ms, precise=True, arrows=False):
     '''
     Convert a time in milliseconds to a formatted string
@@ -815,8 +826,8 @@ class Session(object):
             # displayed
             if self.ui.board.display is False:
                 debug('Updating board (race), lap: %d' % self.current_lap)
-                debug('Last splits: %s' % self.last_splits)
-                debug('Current splits: %s' % splits)
+                debug('Last splits:\n%s' % debug_splits(self.last_splits))
+                debug('Current splits:\n%s' % debug_splits(splits))
                 for car in self.cars:
                     debug(car)
                 debug('Text:\n %s \n' % '\n'.join([str(t) for t in text]))
