@@ -664,8 +664,10 @@ class Session(object):
         # Display time left in session
         text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
 
-        if current_time > 0.2 and current_time < self.display_timeout and \
-                self.current_lap > 0 and (not pit_limiter_on or not is_in_pit):
+        if current_time > 0.2 and self.current_lap > 0 and \
+                (current_time < self.display_timeout or
+                 self.display_timeout == -1) and \
+                (not pit_limiter_on or not is_in_pit):
             # Display the board for the first 30 seconds, if not in pits
 
             self._set_scale(current_time)
@@ -765,8 +767,10 @@ class Session(object):
         else:
             text += [Text(), Text()]
 
-        if current_time > 0.2 and current_time < self.display_timeout and \
-                self.current_lap > 0 or self.laps - self.current_lap == 0:
+        if current_time > 0.2 and self.current_lap > 0 or \
+                self.laps - self.current_lap == 0 and \
+                (current_time < self.display_timeout or
+                 self.display_timeout == -1 ):
             # Display the board for the first 30 seconds, or once passed
             # the finish line
 
