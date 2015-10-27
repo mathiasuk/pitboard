@@ -732,9 +732,9 @@ class Session(object):
                     line += ' (%s)' % split_to_str(delta)[0]
 
                 if delta.total_seconds() > 0:
-                    colour += 'r'
+					colour = 'r' + colour[1:] + 'r'
                 else:
-                    colour += 'g'
+					colour = 'g' + colour[1:] + 'g'
 
             text.append(Text(line, colour))
         else:
@@ -758,9 +758,9 @@ class Session(object):
                     line += ' (%s)' % split_to_str(delta)[0]
 
                 if delta.total_seconds() > 0:
-                    colour += 'r'
+					colour = 'g' + colour[1:] + 'g'
                 else:
-                    colour += 'g'
+					colour = 'r' + colour[1:] + 'r'
 
             text.append(Text(line, colour))
             text.append(Text(behind.get_name()))
