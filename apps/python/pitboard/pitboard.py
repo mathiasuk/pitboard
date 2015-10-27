@@ -16,6 +16,7 @@
 from __future__ import unicode_literals
 
 import glob
+import json
 import os
 import platform
 import re
@@ -45,9 +46,17 @@ DETAILED_DELTA = True
 
 DEBUG = True
 
-APP_SIZE_X = 100 * FULLSIZE_SCALE
+APP_SIZE_X = 120 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
 TEX_PATH = 'apps/python/pitboard/imgs/'
+PREFS_PATH = 'apps/python/pitboard/prefs.json'
+
+PREFS_KEYS = (
+    'display_timeout',
+    'fullsize_timeout',
+    'short_names',
+    'detailed_delta',
+)
 
 # Define colours
 COLOURS = {
@@ -445,7 +454,7 @@ class UI(object):
 
     def _create_prefs_controls(self):
         spin = ac.addSpinner(self.widget, 'Display duration, -1 for always on')
-        ac.setPosition(spin, 90, 55)
+        ac.setPosition(spin, 350, 55)
         ac.setRange(spin, -1, 60)
         ac.setStep(spin, 1)
         ac.setValue(spin, self.session.display_timeout)
@@ -456,7 +465,7 @@ class UI(object):
         self.prefs_controls['display_timeout_spinner'] = spin
 
         spin = ac.addSpinner(self.widget, 'Full size duration')
-        ac.setPosition(spin, 90, 110)
+        ac.setPosition(spin, 350, 110)
         ac.setRange(spin, 0, 60)
         ac.setStep(spin, 1)
         ac.setValue(spin, self.session.fullsize_timeout)
@@ -467,7 +476,7 @@ class UI(object):
         self.prefs_controls['fullsize_timeout_spinner'] = spin
 
         check = ac.addCheckBox(self.widget, 'Use short name')
-        ac.setPosition(check, 20, 145)
+        ac.setPosition(check, 280, 145)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.short_names)
         ac.addOnCheckBoxChanged(check,
@@ -476,7 +485,7 @@ class UI(object):
         self.prefs_controls['short_name_checkbox'] = check
 
         check = ac.addCheckBox(self.widget, 'Detailed delta')
-        ac.setPosition(check, 20, 165)
+        ac.setPosition(check, 280, 165)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.detailed_delta)
         ac.addOnCheckBoxChanged(check,
@@ -510,7 +519,7 @@ class UI(object):
 
         if self.prefs_visible:
             # Increase side of the widget, make controls visible
-            ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y + 165)
+            ac.setSize(self.widget, 520, APP_SIZE_Y + 165)
             for control in self.prefs_controls.values():
                 ac.setVisible(control, 1)
         else:
@@ -518,6 +527,9 @@ class UI(object):
             ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y)
             for control in self.prefs_controls.values():
                 ac.setVisible(control, 0)
+
+            # Save preferences
+            self.session.save_prefs()
 
     def render(self, scale):
         self.board.render(scale)
@@ -531,11 +543,7 @@ class Session(object):
         self.ui = None
         self._reset()
 
-        # TODO: these should be loaded/save from/to JSON if available
-        self.display_timeout = DISPLAY_TIMEOUT
-        self.fullsize_timeout = FULLSIZE_TIMEOUT
-        self.short_names = SHORT_NAMES
-        self.detailed_delta = DETAILED_DELTA
+        self._load_prefs()
 
     def _check_session(self):
         '''
@@ -587,6 +595,33 @@ class Session(object):
             splits[car] = self._get_split(player, car)
 
         return splits
+
+    def _load_prefs(self):
+        '''
+        Loads preferences from JSON file
+        '''
+        # Set default
+        self.display_timeout = DISPLAY_TIMEOUT
+        self.fullsize_timeout = FULLSIZE_TIMEOUT
+        self.short_names = SHORT_NAMES
+        self.detailed_delta = DETAILED_DELTA
+
+        if not os.path.exists(PREFS_PATH):
+            return
+
+        try:
+            f = open(PREFS_PATH)
+        except Exception as e:
+            ac.console('Pitboard: Error opining "%s": %s' % (PREFS_PATH, e))
+            return
+
+        data = f.readline()
+        data = json.loads(data)
+        for key, value in data.items():
+            if key in PREFS_KEYS:
+                setattr(self, key, value)
+            else:
+                ac.console('Unknown key "%s" in "%s"' % (key, PREFS_PATH))
 
     def _reset(self):
         self.current_lap = 0
@@ -732,9 +767,9 @@ class Session(object):
                     line += ' (%s)' % split_to_str(delta)[0]
 
                 if delta.total_seconds() > 0:
-					colour = 'r' + colour[1:] + 'r'
+                    colour = 'r' + colour[1:] + 'r'
                 else:
-					colour = 'g' + colour[1:] + 'g'
+                    colour = 'g' + colour[1:] + 'g'
 
             text.append(Text(line, colour))
         else:
@@ -758,9 +793,9 @@ class Session(object):
                     line += ' (%s)' % split_to_str(delta)[0]
 
                 if delta.total_seconds() > 0:
-					colour = 'g' + colour[1:] + 'g'
+                    colour = 'g' + colour[1:] + 'g'
                 else:
-					colour = 'r' + colour[1:] + 'r'
+                    colour = 'r' + colour[1:] + 'r'
 
             text.append(Text(line, colour))
             text.append(Text(behind.get_name()))
@@ -837,6 +872,23 @@ class Session(object):
         Render the UI at the given scale
         '''
         self.ui.render(self.scale)
+
+    def save_prefs(self):
+        '''
+        Save preferences to JSON file
+        '''
+        try:
+            f = open(PREFS_PATH, 'w')
+        except Exception as e:
+            ac.console('Can\'t open file "%s" for writing: %s' %
+                       (PREFS_PATH, e))
+            return
+
+        data = dict((key, getattr(self, key)) for key in PREFS_KEYS)
+
+        f.write(json.dumps(data))
+        f.close()
+        ac.console('Wrote prefs to file: %s' % data)
 
     def update_board(self):
         if self.session_type == RACE:
