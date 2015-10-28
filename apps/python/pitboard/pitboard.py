@@ -116,7 +116,8 @@ def debug_splits(splits):
     '''
     s = ''
     for car, split in splits.items():
-        s += '  %s (%s): %s\n' % (car.index, car.name, split.total_seconds())
+        s += '  %s (%s): %s\n' % (car.index, car.name,
+                                  split.total_seconds() if split else 'none')
 
     return s
 
@@ -708,7 +709,10 @@ class Session(object):
                 text.append(Text())
 
         # Display time left in session
-        text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
+        if time_left > 0:
+            text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
+        else:
+            text.append(Text('SESSION ENDED'))
 
         if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or
