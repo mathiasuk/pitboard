@@ -774,8 +774,6 @@ class Session(object):
 
                 if self.detailed_delta:
                     line += ' (%s)' % split_to_str(delta)
-                else:
-                    line += ' (%s)' % split_to_str(delta)[0]
 
                 if delta.total_seconds() > 0:
                     colour = 'r' + colour[1:] + 'r'
@@ -813,8 +811,7 @@ class Session(object):
         else:
             text += [Text(), Text()]
 
-        if current_time > 0.2 and self.current_lap > 0 or \
-                self.laps - self.current_lap == 0 and \
+        if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or
                  self.display_timeout == -1 ):
             # Display the board for the first 30 seconds, or once passed
