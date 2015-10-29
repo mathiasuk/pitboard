@@ -649,7 +649,7 @@ class Session(object):
 
         # Display own lap time
         if last_lap and car.best_lap:
-            text.append(Text(time_to_str(car.best_lap)))
+            text.append(Text(time_to_str(last_lap)))
             if self.last_best_lap and car.best_lap != self.last_best_lap:
                 # There is a new best lap
                 delta = (last_lap - self.last_best_lap)
