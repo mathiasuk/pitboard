@@ -711,8 +711,6 @@ class Session(object):
         # Display time left in session
         if time_left > 0:
             text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
-        else:
-            text.append(Text('SESSION ENDED'))
 
         if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or
