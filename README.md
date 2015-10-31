@@ -4,9 +4,12 @@ Pitboard is all about removing the clutter from your screen, and showing you wha
 
 There are two modes depending on the session: race or practice/quali.
 
+![Quali mode](http://i.imgur.com/cjhSUuQ.png)
+![Race mode](http://i.imgur.com/E73rWm5.png)
+
 In quali mode the pitboard will show up each time you pass the start finish line. The board will display your current position in the standings, the name of the driver ahead in the standing and the delta**, as well as your last laptime and delta, and finally the time left in the session.
 
-In race mode the board will display your current position and number of laps left, the car ahead and behind along with their delta, (and the delta compared to the previous lap).
+In race mode the board will display your current position and number of laps left, the car ahead and behind along with their delta, and the delta compared to the previous lap. If you're gaining on the car ahead the delta to the previous lap will be green, and red otherwise; the opposite with the delta with the car behind.
 
 Contrary to most apps (such as my own [actracker](https://github.com/mathiasuk/actracker)), pitboard doesn't estimate the delta between cars, but actually splits the track in 10 seconds and meaures actual delta time at each sector, this means that the delta showns are not dependent on the track section, and much more similar to what you get in actual racing.
 
