@@ -11,7 +11,7 @@ In quali mode the pitboard will show up each time you pass the start finish line
 
 In race mode the board will display your current position and number of laps left, the car ahead and behind along with their delta, and the delta compared to the previous lap. If you're gaining on the car ahead the delta to the previous lap will be green, and red otherwise; the opposite with the delta with the car behind.
 
-Contrary to most apps (such as my own [actracker](https://github.com/mathiasuk/actracker)), pitboard doesn't estimate the delta between cars, but actually splits the track in 10 sectors and meaures actual delta time at each sector, this means that the delta shown are not dependent on the track section, and much more similar to what you get in actual racing.
+Contrary to most apps (such as my own [actracker](https://github.com/mathiasuk/actracker)), pitboard doesn't estimate the delta between cars, but actually splits the track in 10 sectors and measures actual delta time at each sector, this means that the delta shown are not dependent on the track section, and much more similar to what you get in actual racing.
 
 By default the pitboard is displayed in full size for 15 seconds after the start/finish line, after which it scales down to a smaller version for another 30 seconds. This can be changed by clicking the settings icon on the left of the title. You can also set it to use short names instead of full names (e.g.: FAN instead of FANGIO), as well as showing a detailed delta or not during the race). These settings are saved and remembered across session.
 
