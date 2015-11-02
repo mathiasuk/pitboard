@@ -44,7 +44,7 @@ ZOOM_TRANSITION = 0.25
 SHORT_NAMES = False
 DETAILED_DELTA = True
 
-DEBUG = True
+DEBUG = False
 
 APP_SIZE_X = 120 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
@@ -403,6 +403,7 @@ class Board(object):
                               self.texture)
 
             if self.logo:
+                ac.glColor4f(1, 1, 1, OPACITY)
                 ac.glQuadTextured(10 * scale, APP_SIZE_Y + 10 * scale,
                                   240 * scale, 60 * scale, self.logo)
 
@@ -711,8 +712,6 @@ class Session(object):
         # Display time left in session
         if time_left > 0:
             text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
-        else:
-            text.append(Text('SESSION ENDED'))
 
         if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or

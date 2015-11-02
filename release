@@ -11,6 +11,6 @@ RELEASE=$1
 
 cp LICENSE "apps/python/$APPNAME/"
 
-zip -r "$APPNAME-$RELEASE.zip" apps content 
+zip -r "$APPNAME-$RELEASE.zip" apps content
 
 rm "apps/python/$APPNAME/LICENSE"
