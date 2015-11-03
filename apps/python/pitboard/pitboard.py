@@ -46,7 +46,7 @@ DISPLAY_TIMEOUT = 45
 FULLSIZE_TIMEOUT = 15
 SHORT_NAMES = False
 DETAILED_DELTA = True
-ORIENTATION_X = 'L'  # 'L' or 'R'
+ORIENTATION_X = 'R'  # 'L' or 'R'
 ORIENTATION_Y = 'D'  # 'U' or 'D'
 
 DEBUG = False
@@ -414,7 +414,7 @@ class Board(object):
             width = 260 * scale
             height = 440 * scale
 
-            if ORIENTATION_X == 'L':
+            if ORIENTATION_X == 'R':
                 x = 0
             else:
                 x = APP_SIZE_X - width
