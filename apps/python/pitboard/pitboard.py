@@ -411,8 +411,6 @@ class Board(object):
         for all the Rows
         '''
         if self.display:
-            ac.glColor4f(1, 1, 1, OPACITY)
-
             width = 260 * scale
             height = 440 * scale
 
@@ -426,6 +424,7 @@ class Board(object):
             else:
                 y = -height
 
+            ac.glColor4f(1, 1, 1, OPACITY)
             ac.glQuadTextured(x, y, width, height, self.texture)
 
             if self.logo:
@@ -467,6 +466,7 @@ class UI(object):
         self.board = Board(self.library)
         self.session = session_
         self.prefs_button = None
+        self.prefs_texture = ac.newTexture(os.path.join(TEX_PATH, 'prefs.png'))
         self.prefs_controls = {}
         self.prefs_visible = False
         self.widget = None
@@ -555,8 +555,6 @@ class UI(object):
         ac.setSize(self.prefs_button, 16, 16)
         ac.setBackgroundOpacity(self.prefs_button, 0)
         ac.drawBorder(self.prefs_button, 0)
-        ac.setBackgroundTexture(self.prefs_button,
-                                os.path.join(TEX_PATH, 'prefs.png'))
         ac.addOnClickedListener(self.prefs_button, callback_prefs_button)
 
         self._create_prefs_controls()
@@ -614,6 +612,10 @@ class UI(object):
 
     def render(self, scale):
         self.board.render(scale)
+
+        if self.display_title or self.prefs_visible:
+            ac.glColor4f(1, 1, 1, OPACITY)
+            ac.glQuadTextured(7, 7, 16, 16, self.prefs_texture)
 
 
 class Session(object):
