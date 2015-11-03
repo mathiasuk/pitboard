@@ -35,14 +35,18 @@ sys.path.insert(
 from pitboardDLL.sim_info import info
 
 # Customisable constants
-DISPLAY_TIMEOUT = 45
-FULLSIZE_TIMEOUT = 15
 OPACITY = 0.8
 FULLSIZE_SCALE = 1.0
 SMALLSIZE_SCALE = 0.5
 ZOOM_TRANSITION = 0.25
+
+# Default for settings that can be changed in game
+DISPLAY_TIMEOUT = 45
+FULLSIZE_TIMEOUT = 15
 SHORT_NAMES = False
 DETAILED_DELTA = True
+ORIENTATION_X = 'L'  # 'L' or 'R'
+ORIENTATION_Y = 'U'  # 'U' or 'D'
 
 DEBUG = False
 
@@ -331,7 +335,7 @@ class Row(object):
     Represents a row of cards
     '''
     def __init__(self, x, y, max_width, library):
-        self.x = x  # Coordinates of top-left corner of the row
+        self.x = x  # Relative coordinates of top-left corner of the row
         self.y = y
         self.max_width = max_width
         self.library = library
@@ -350,9 +354,13 @@ class Row(object):
             self.colours.append(COLOURS[colour])
             self.width += card.width
 
-    def render(self, scale):
-        x = self.x * scale
-        y = APP_SIZE_Y + self.y * scale
+    def render(self, scale, board_x, board_y):
+        '''
+        Render the given row, x and y correspond to the absolute
+        coordinate of the top left corner of the board
+        '''
+        x = board_x + self.x * scale
+        y = board_y + APP_SIZE_Y + self.y * scale
         for card, colour in zip(self.cards, self.colours):
             card.render(x, y, scale, colour)
             x += card.width * scale
@@ -397,18 +405,39 @@ class Board(object):
             self.logo = None
 
     def render(self, scale):
+        '''
+        Render the board frame and logo, call render
+        for all the Rows
+        '''
         if self.display:
             ac.glColor4f(1, 1, 1, OPACITY)
-            ac.glQuadTextured(0, APP_SIZE_Y, 260 * scale, 440 * scale,
-                              self.texture)
 
+            width = 260 * scale
+            height = 440 * scale
+
+            if ORIENTATION_X == 'L':
+                x = 0
+            else:
+                x = APP_SIZE_X - width
+
+            if ORIENTATION_Y == 'D':
+                y = APP_SIZE_Y
+            else:
+                y = -height
+
+            ac.glQuadTextured(x, y, width, height)
             if self.logo:
                 ac.glColor4f(1, 1, 1, OPACITY)
-                ac.glQuadTextured(10 * scale, APP_SIZE_Y + 10 * scale,
-                                  240 * scale, 60 * scale, self.logo)
+                ac.glQuadTextured(
+                    x + 10 * scale,
+                    y + 10 * scale,
+                    240 * scale,
+                    60 * scale,
+                    self.logo
+                )
 
             for row in self.rows:
-                row.render(scale)
+                row.render(scale, x, y)
 
     def update_rows(self, text):
         row = 0
