@@ -1,5 +1,10 @@
 0.1
-	Initial release
+	- Initial release
 
 0.2
-	Cleaned up boards inner border
+	- Title and background auto-hide after 5 seconds
+	- Title and settings appear when the widget is moved or the app activated
+	- It is now possible to set if the board should appear on the top, bottom,
+	  left or right to fit regardless of the position of the app on screen
+	- Fixed 32bit support (was providing the wrong pyd file)
+	- Cleaned up boards inner border and opacity

@@ -39,6 +39,7 @@ OPACITY = 0.8
 FULLSIZE_SCALE = 1.0
 SMALLSIZE_SCALE = 0.5
 ZOOM_TRANSITION = 0.25
+TITLE_TIMEOUT = 5  # Time in seconds during which we show the title
 
 # Default for settings that can be changed in game
 DISPLAY_TIMEOUT = 45
@@ -46,7 +47,7 @@ FULLSIZE_TIMEOUT = 15
 SHORT_NAMES = False
 DETAILED_DELTA = True
 ORIENTATION_X = 'L'  # 'L' or 'R'
-ORIENTATION_Y = 'U'  # 'U' or 'D'
+ORIENTATION_Y = 'D'  # 'U' or 'D'
 
 DEBUG = False
 
@@ -360,7 +361,7 @@ class Row(object):
         coordinate of the top left corner of the board
         '''
         x = board_x + self.x * scale
-        y = board_y + APP_SIZE_Y + self.y * scale
+        y = board_y + self.y * scale
         for card, colour in zip(self.cards, self.colours):
             card.render(x, y, scale, colour)
             x += card.width * scale
@@ -425,7 +426,8 @@ class Board(object):
             else:
                 y = -height
 
-            ac.glQuadTextured(x, y, width, height)
+            ac.glQuadTextured(x, y, width, height, self.texture)
+
             if self.logo:
                 ac.glColor4f(1, 1, 1, OPACITY)
                 ac.glQuadTextured(
@@ -458,6 +460,8 @@ class UI(object):
     Object that deals with everything related to the app's widget
     '''
     def __init__(self, session_):
+        self.display_title = False
+        self.display_title_start = None
         self.labels = {}
         self.library = self._create_library()
         self.board = Board(self.library)
@@ -466,8 +470,11 @@ class UI(object):
         self.prefs_controls = {}
         self.prefs_visible = False
         self.widget = None
+        self.x = 0  # Absolute x on screen
+        self.y = 0  # Absolute y on screen
 
         self._create_widget()
+        self.activated()
 
     def _create_library(self):
         '''
@@ -540,7 +547,7 @@ class UI(object):
         ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y)
         ac.setIconPosition(self.widget, -10000, -10000)
         ac.drawBorder(self.widget, 0)
-        ac.setBackgroundOpacity(self.widget, 0.2)
+        ac.setBackgroundOpacity(self.widget, 0.1)
 
         # Create prefs button
         self.prefs_button = ac.addButton(self.widget, '')
@@ -555,6 +562,14 @@ class UI(object):
         self._create_prefs_controls()
 
         ac.addRenderCallback(self.widget, render_callback)
+        ac.addOnAppActivatedListener(self.widget, activated_callback)
+
+    def activated(self):
+        '''
+        Called at start or when the app is (re)activated
+        '''
+        self.display_title = True
+        self.display_title_start = datetime.now()
 
     def prefs_button_click(self):
         self.prefs_visible = not self.prefs_visible
@@ -572,6 +587,30 @@ class UI(object):
 
             # Save preferences
             self.session.save_prefs()
+
+    def update_ui(self):
+        '''
+        Called with on acUpdate, to update the title, opacity, etc.
+        '''
+        # Check if the widget has moved
+        x, y = ac.getPosition(self.widget)
+        if x != self.x or y != self.y:
+            self.activated()
+            self.x, self.y = x, y
+
+        if self.display_title or self.prefs_visible:
+            ac.setBackgroundOpacity(self.widget, 0.3)
+            ac.setTitle(self.widget, 'pitboard')
+
+            if self.display_title:
+                display_time = (datetime.now() -
+                                self.display_title_start).total_seconds()
+                if display_time > TITLE_TIMEOUT:
+                    self.display_title = False
+        else:
+            ac.setBackgroundOpacity(self.widget, 0)
+            ac.setTitle(self.widget, '')
+            ac.drawBorder(self.widget, 0)
 
     def render(self, scale):
         self.board.render(scale)
@@ -742,7 +781,9 @@ class Session(object):
         if time_left > 0:
             text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
 
-        if current_time > 0.2 and self.current_lap > 0 and \
+# FIXME
+#        if current_time > 0.2 and self.current_lap > 0 and \
+        if current_time > 0.2 and \
                 (current_time < self.display_timeout or
                  self.display_timeout == -1) and \
                 (not pit_limiter_on or not is_in_pit):
@@ -963,6 +1004,7 @@ def acUpdate(deltaT):
     try:
         session.update_data()
         session.update_board()
+        session.ui.update_ui()
     except:  # pylint: disable=W0702
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
@@ -978,6 +1020,11 @@ def render_callback(deltaT):
         exc_type, exc_value, exc_traceback = sys.exc_info()
         ac.console('pitboard Error (logged to file)')
         ac.log(repr(traceback.format_exception(exc_type, exc_value, exc_traceback)))
+
+
+def activated_callback(value):
+    global session  # pylint: disable=W0602
+    session.ui.activated()
 
 
 #  Misc UI callbacks
