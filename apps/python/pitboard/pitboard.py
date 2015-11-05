@@ -49,7 +49,10 @@ DETAILED_DELTA = True
 ORIENTATION_X = 'L'  # 'L' or 'R'
 ORIENTATION_Y = 'U'  # 'U' or 'D'
 
-DEBUG = False
+if ac.getDriverName(0) == '0xdeadbee':
+    DEBUG = True
+else:
+    DEBUG = False
 
 APP_SIZE_X = 120 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
@@ -348,10 +351,17 @@ class Row(object):
         self.width = 0
 
     def _add_card(self, card, colour):
-        if self.width + card.width <= self.max_width:
-            self.cards.append(card)
-            self.colours.append(COLOURS[colour])
-            self.width += card.width
+        '''
+        Add a card to the row, return True on success, False if
+        the row if already full
+        '''
+        if self.width + card.width > self.max_width:
+            return False
+
+        self.cards.append(card)
+        self.colours.append(COLOURS[colour])
+        self.width += card.width
+        return True
 
     def render(self, scale, board_x, board_y):
         '''
@@ -371,7 +381,9 @@ class Row(object):
                 card = self.library[letter]
             except KeyError:
                 card = self.library['?']
-            self._add_card(card, colour)
+
+            if not self._add_card(card, colour):
+                break
 
 
 class Board(object):
