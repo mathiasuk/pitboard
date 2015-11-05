@@ -385,10 +385,16 @@ class Board(object):
             for y in range(80, 440, 60)
         ]
 
-        self.texture = ac.newTexture(os.path.join(TEX_PATH, 'board.png'))
-
-        # Look for a player logo, otherwise the default
+        # Look for a custom board, otherwise use the default
         name = ac.getDriverName(0)
+        logo_path = os.path.join(TEX_PATH, 'board_%s.png' % name)
+
+        if not os.path.exists(logo_path):
+            logo_path = os.path.join(TEX_PATH, 'board.png')
+
+        self.texture = ac.newTexture(TEX_PATH, logo_path)
+
+        # Look for a player logo, otherwise use the default
         logo_path = os.path.join(TEX_PATH, 'logo_%s.png' % name)
 
         if os.path.exists(logo_path):
