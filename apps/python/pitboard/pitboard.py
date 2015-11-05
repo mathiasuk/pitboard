@@ -140,17 +140,13 @@ def ms_to_str(ms, precise=True, arrows=False):
     else:
         seconds = '%+d' % round(seconds)
 
-    # Strip heading 0: 0.1 -> .1
-    if seconds[1] == 0:
-        seconds = seconds[0] + seconds[2:]
-
     if arrows:
         if seconds[0] == '+':
             seconds = '^' + seconds[1:]
         else:
             seconds = '|' + seconds[1:]
 
-    return seconds.rstrip('0').rstrip('.')
+    return seconds
 
 
 def split_to_str(split, arrows=False):
