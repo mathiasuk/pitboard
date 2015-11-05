@@ -46,8 +46,8 @@ DISPLAY_TIMEOUT = 45
 FULLSIZE_TIMEOUT = 15
 SHORT_NAMES = False
 DETAILED_DELTA = True
-ORIENTATION_X = 'R'  # 'L' or 'R'
-ORIENTATION_Y = 'D'  # 'U' or 'D'
+ORIENTATION_X = 'L'  # 'L' or 'R'
+ORIENTATION_Y = 'U'  # 'U' or 'D'
 
 DEBUG = False
 
@@ -57,10 +57,12 @@ TEX_PATH = 'apps/python/pitboard/imgs/'
 PREFS_PATH = 'apps/python/pitboard/prefs.json'
 
 PREFS_KEYS = (
+    'detailed_delta',
     'display_timeout',
     'fullsize_timeout',
+    'orientation_x',
+    'orientation_y',
     'short_names',
-    'detailed_delta',
 )
 
 # Define colours
@@ -387,12 +389,12 @@ class Board(object):
 
         # Look for a custom board, otherwise use the default
         name = ac.getDriverName(0)
-        logo_path = os.path.join(TEX_PATH, 'board_%s.png' % name)
+        board_path = os.path.join(TEX_PATH, 'board_%s.png' % name)
 
-        if not os.path.exists(logo_path):
-            logo_path = os.path.join(TEX_PATH, 'board.png')
+        if not os.path.exists(board_path):
+            board_path = os.path.join(TEX_PATH, 'board.png')
 
-        self.texture = ac.newTexture(TEX_PATH, logo_path)
+        self.texture = ac.newTexture(board_path)
 
         # Look for a player logo, otherwise use the default
         logo_path = os.path.join(TEX_PATH, 'logo_%s.png' % name)
@@ -407,7 +409,7 @@ class Board(object):
         else:
             self.logo = None
 
-    def render(self, scale):
+    def render(self, scale, orientation_x, orientation_y):
         '''
         Render the board frame and logo, call render
         for all the Rows
@@ -416,12 +418,12 @@ class Board(object):
             width = 260 * scale
             height = 440 * scale
 
-            if ORIENTATION_X == 'R':
+            if orientation_x == 'L':
                 x = 0
             else:
                 x = APP_SIZE_X - width
 
-            if ORIENTATION_Y == 'D':
+            if orientation_y == 'U':
                 y = APP_SIZE_Y
             else:
                 y = -height
@@ -463,7 +465,6 @@ class UI(object):
     def __init__(self, session_):
         self.display_title = False
         self.display_title_start = None
-        self.labels = {}
         self.library = self._create_library()
         self.board = Board(self.library)
         self.session = session_
@@ -477,6 +478,12 @@ class UI(object):
 
         self._create_widget()
         self.activated()
+
+    def _create_label(self, name, text, x, y):
+        label = ac.addLabel(self.widget, name)
+        ac.setText(label, text)
+        ac.setPosition(label, x, y)
+        return label
 
     def _create_library(self):
         '''
@@ -544,12 +551,23 @@ class UI(object):
         ac.setVisible(check, 0)
         self.prefs_controls['detailed_delta_checkbox'] = check
 
+        label = self._create_label('orientation', 'Orientation:', 280, 185)
+        ac.setVisible(label, 0)
+        self.prefs_controls['orientation'] = label
+
+        button = ac.addButton(self.widget, 'change')
+        ac.setPosition(button, 450, 185)
+        ac.setSize(button, 60, 20)
+        ac.setVisible(button, 0)
+        self.prefs_controls['orientation_button'] = button
+        ac.addOnClickedListener(button, callback_orientation_button)
+
     def _create_widget(self):
         self.widget = ac.newApp('pitboard')
         ac.setSize(self.widget, APP_SIZE_X, APP_SIZE_Y)
         ac.setIconPosition(self.widget, -10000, -10000)
         ac.drawBorder(self.widget, 0)
-        ac.setBackgroundOpacity(self.widget, 0.1)
+        ac.setBackgroundOpacity(self.widget, 0.2)
 
         # Create prefs button
         self.prefs_button = ac.addButton(self.widget, '')
@@ -564,6 +582,21 @@ class UI(object):
         ac.addRenderCallback(self.widget, render_callback)
         ac.addOnAppActivatedListener(self.widget, activated_callback)
 
+    def _set_orientation_label(self):
+        text = 'Orientation: '
+        if self.session.orientation_x == 'L':
+            if self.session.orientation_y == 'U':
+                text += 'top-left'
+            else:
+                text += 'bottom-left'
+        else:
+            if self.session.orientation_y == 'U':
+                text += 'top-right'
+            else:
+                text += 'bottom-right'
+
+        ac.setText(self.prefs_controls['orientation'], text)
+
     def activated(self):
         '''
         Called at start or when the app is (re)activated
@@ -571,12 +604,28 @@ class UI(object):
         self.display_title = True
         self.display_title_start = datetime.now()
 
+    def orientation_button_click(self):
+        if self.session.orientation_x == 'L':
+            if self.session.orientation_y == 'U':
+                self.session.orientation_x = 'R'
+            else:
+                self.session.orientation_y = 'U'
+        else:
+            if self.session.orientation_y == 'U':
+                self.session.orientation_y = 'B'
+            else:
+                self.session.orientation_x = 'L'
+
+        self._set_orientation_label()
+
     def prefs_button_click(self):
         self.prefs_visible = not self.prefs_visible
 
         if self.prefs_visible:
+            self._set_orientation_label()
+
             # Increase side of the widget, make controls visible
-            ac.setSize(self.widget, 520, APP_SIZE_Y + 165)
+            ac.setSize(self.widget, 520, APP_SIZE_Y + 185)
             for control in self.prefs_controls.values():
                 ac.setVisible(control, 1)
         else:
@@ -602,7 +651,7 @@ class UI(object):
             ac.setBackgroundOpacity(self.widget, 0.3)
             ac.setTitle(self.widget, 'pitboard')
 
-            if self.display_title:
+            if not self.prefs_visible:
                 display_time = (datetime.now() -
                                 self.display_title_start).total_seconds()
                 if display_time > TITLE_TIMEOUT:
@@ -610,10 +659,11 @@ class UI(object):
         else:
             ac.setBackgroundOpacity(self.widget, 0)
             ac.setTitle(self.widget, '')
-            ac.drawBorder(self.widget, 0)
 
-    def render(self, scale):
-        self.board.render(scale)
+        ac.drawBorder(self.widget, 0)
+
+    def render(self, scale, orientation_x, orientation_y):
+        self.board.render(scale, orientation_x, orientation_y)
 
         if self.display_title or self.prefs_visible:
             ac.glColor4f(1, 1, 1, OPACITY)
@@ -626,6 +676,13 @@ class Session(object):
     '''
     def __init__(self):
         self.ui = None
+        self.display_timeout = DISPLAY_TIMEOUT
+        self.fullsize_timeout = FULLSIZE_TIMEOUT
+        self.short_names = SHORT_NAMES
+        self.detailed_delta = DETAILED_DELTA
+        self.orientation_x = ORIENTATION_X
+        self.orientation_y = ORIENTATION_Y
+
         self._reset()
 
         self._load_prefs()
@@ -685,12 +742,6 @@ class Session(object):
         '''
         Loads preferences from JSON file
         '''
-        # Set default
-        self.display_timeout = DISPLAY_TIMEOUT
-        self.fullsize_timeout = FULLSIZE_TIMEOUT
-        self.short_names = SHORT_NAMES
-        self.detailed_delta = DETAILED_DELTA
-
         if not os.path.exists(PREFS_PATH):
             return
 
@@ -785,9 +836,7 @@ class Session(object):
         if time_left > 0:
             text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
 
-# FIXME
-#        if current_time > 0.2 and self.current_lap > 0 and \
-        if current_time > 0.2 and \
+        if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or
                  self.display_timeout == -1) and \
                 (not pit_limiter_on or not is_in_pit):
@@ -956,7 +1005,7 @@ class Session(object):
         '''
         Render the UI at the given scale
         '''
-        self.ui.render(self.scale)
+        self.ui.render(self.scale, self.orientation_x, self.orientation_y)
 
     def save_prefs(self):
         '''
@@ -1032,6 +1081,12 @@ def activated_callback(value):
 
 
 #  Misc UI callbacks
+def callback_orientation_button(x, y):
+    global session  # pylint: disable=W0602
+
+    session.ui.orientation_button_click()
+
+
 def callback_prefs_button(x, y):
     global session  # pylint: disable=W0602
 
