@@ -301,19 +301,19 @@ class Card(object):
         self.width = width
         self.height = height
 
-    def render(self, x, y, scale, colour):
+    def render(self, x, y, opacity, scale, colour):
         if self.texture:
             width = self.width * scale
             height = self.height * scale
-            ac.glColor4f(1, 1, 1, OPACITY)
+            ac.glColor4f(1, 1, 1, opacity)
             ac.glQuadTextured(x, y, width, height, self.background)
 
             # Render text with colour
-            args = colour + (OPACITY, )
+            args = colour + (opacity, )
             ac.glColor4f(*args)
             ac.glQuadTextured(x, y, width, height, self.texture)
 
-            ac.glColor4f(1, 1, 1, OPACITY)
+            ac.glColor4f(1, 1, 1, opacity)
             ac.glQuadTextured(x, y, width, height, self.reflection)
 
 
@@ -368,7 +368,7 @@ class Row(object):
         self.width += card.width
         return True
 
-    def render(self, scale, board_x, board_y):
+    def render(self, opacity, scale, board_x, board_y):
         '''
         Render the given row, x and y correspond to the absolute
         coordinate of the top left corner of the board
@@ -376,7 +376,7 @@ class Row(object):
         x = board_x + self.x * scale
         y = board_y + self.y * scale
         for card, colour in zip(self.cards, self.colours):
-            card.render(x, y, scale, colour)
+            card.render(x, y, opacity, scale, colour)
             x += card.width * scale
 
     def set_text(self, text):
@@ -426,7 +426,7 @@ class Board(object):
         else:
             self.logo = None
 
-    def render(self, scale, orientation_x, orientation_y):
+    def render(self, opacity, scale, orientation_x, orientation_y):
         '''
         Render the board frame and logo, call render
         for all the Rows
@@ -445,11 +445,11 @@ class Board(object):
             else:
                 y = -height
 
-            ac.glColor4f(1, 1, 1, OPACITY)
+            ac.glColor4f(1, 1, 1, opacity)
             ac.glQuadTextured(x, y, width, height, self.texture)
 
             if self.logo:
-                ac.glColor4f(1, 1, 1, OPACITY)
+                ac.glColor4f(1, 1, 1, opacity)
                 ac.glQuadTextured(
                     x + 10 * scale,
                     y + 10 * scale,
@@ -459,7 +459,7 @@ class Board(object):
                 )
 
             for row in self.rows:
-                row.render(scale, x, y)
+                row.render(opacity, scale, x, y)
 
     def update_rows(self, text):
         row = 0
@@ -529,60 +529,62 @@ class UI(object):
 
     def _create_prefs_controls(self):
         spin = ac.addSpinner(self.widget, 'Display duration, -1 for always on')
-        ac.setPosition(spin, 350, 55)
+        ac.setPosition(spin, 340, 55)
         ac.setRange(spin, -1, 60)
         ac.setStep(spin, 1)
         ac.setValue(spin, self.session.display_timeout)
-        ac.setSize(spin, 80, 25)
+        ac.setSize(spin, 120, 25)
         ac.addOnValueChangeListener(spin,
                                     callback_display_timeout_spinner_changed)
         ac.setVisible(spin, 0)
         self.prefs_controls['display_timeout_spinner'] = spin
 
         spin = ac.addSpinner(self.widget, 'Full size duration')
-        ac.setPosition(spin, 350, 110)
+        ac.setPosition(spin, 340, 110)
         ac.setRange(spin, 0, 60)
         ac.setStep(spin, 1)
         ac.setValue(spin, self.session.fullsize_timeout)
-        ac.setSize(spin, 80, 25)
+        ac.setSize(spin, 120, 25)
         ac.addOnValueChangeListener(spin,
                                     callback_fullsize_timeout_spinner_changed)
         ac.setVisible(spin, 0)
         self.prefs_controls['fullsize_timeout_spinner'] = spin
 
-        spin = ac.addSpinner(self.widget, 'Full size scale')
-        ac.setPosition(spin, 350, 145)
-        ac.setRange(spin, 0.2, 2.0)
-        ac.setStep(spin, 0.1)
-        ac.setValue(spin, self.session.fullsize_scale)
-        ac.setSize(spin, 80, 25)
+        spin = ac.addSpinner(self.widget, 'Full size scale in %')
+        ac.setPosition(spin, 340, 165)
+        ac.setRange(spin, 20, 200)
+        ac.setStep(spin, 10)
+        ac.setValue(spin, self.session.fullsize_scale * 100)
+        ac.setSize(spin, 120, 25)
         ac.addOnValueChangeListener(spin,
                                     callback_fullsize_scale_spinner_changed)
         ac.setVisible(spin, 0)
         self.prefs_controls['fullsize_scale_spinner'] = spin
 
-        spin = ac.addSpinner(self.widget, 'Small size scale')
-        ac.setPosition(spin, 350, 180)
-        ac.setRange(spin, 0.1, 2.0)
-        ac.setStep(spin, 0.1)
-        ac.setValue(spin, self.session.smallsize_scale)
-        ac.setSize(spin, 80, 25)
+        spin = ac.addSpinner(self.widget, 'Small size scale in %')
+        ac.setPosition(spin, 340, 220)
+        ac.setRange(spin, 10, 200)
+        ac.setStep(spin, 10)
+        ac.setValue(spin, self.session.smallsize_scale * 100)
+        ac.setSize(spin, 120, 25)
         ac.addOnValueChangeListener(spin,
                                     callback_smallsize_scale_spinner_changed)
         ac.setVisible(spin, 0)
-        self.prefs_controls['fullsize_scale_spinner'] = spin
+        self.prefs_controls['smallsize_scale_spinner'] = spin
 
-        spin = ac.addSpinner(self.widget, 'Opacity')
-        ac.setPosition(spin, 350, 215)
-        ac.setRange(spin, 0.1, 1.0)
-        ac.setStep(spin, 0.1)
-        ac.setValue(spin, self.session.opacity)
-        ac.setSize(spin, 80, 25)
+        spin = ac.addSpinner(self.widget, 'Opacity in %')
+        ac.setPosition(spin, 340, 275)
+        ac.setRange(spin, 10, 100)
+        ac.setStep(spin, 10)
+        ac.setValue(spin, self.session.opacity * 100)
+        ac.setSize(spin, 120, 25)
         ac.addOnValueChangeListener(spin,
                                     callback_opacity_spinner_changed)
+        ac.setVisible(spin, 0)
+        self.prefs_controls['opacity_spinner'] = spin
 
         check = ac.addCheckBox(self.widget, 'Use short name')
-        ac.setPosition(check, 280, 250)
+        ac.setPosition(check, 270, 320)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.short_names)
         ac.addOnCheckBoxChanged(check,
@@ -591,7 +593,7 @@ class UI(object):
         self.prefs_controls['short_name_checkbox'] = check
 
         check = ac.addCheckBox(self.widget, 'Detailed delta')
-        ac.setPosition(check, 280, 270)
+        ac.setPosition(check, 270, 340)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.detailed_delta)
         ac.addOnCheckBoxChanged(check,
@@ -599,12 +601,12 @@ class UI(object):
         ac.setVisible(check, 0)
         self.prefs_controls['detailed_delta_checkbox'] = check
 
-        label = self._create_label('orientation', 'Orientation:', 280, 290)
+        label = self._create_label('orientation', 'Orientation:', 270, 360)
         ac.setVisible(label, 0)
         self.prefs_controls['orientation'] = label
 
         button = ac.addButton(self.widget, 'change')
-        ac.setPosition(button, 450, 290)
+        ac.setPosition(button, 440, 360)
         ac.setSize(button, 60, 20)
         ac.setVisible(button, 0)
         self.prefs_controls['orientation_button'] = button
@@ -673,7 +675,7 @@ class UI(object):
             self._set_orientation_label()
 
             # Increase side of the widget, make controls visible
-            ac.setSize(self.widget, 520, APP_SIZE_Y + 185)
+            ac.setSize(self.widget, 520, APP_SIZE_Y + 340)
             for control in self.prefs_controls.values():
                 ac.setVisible(control, 1)
         else:
@@ -710,11 +712,11 @@ class UI(object):
 
         ac.drawBorder(self.widget, 0)
 
-    def render(self, scale, orientation_x, orientation_y):
-        self.board.render(scale, orientation_x, orientation_y)
+    def render(self, opacity, scale, orientation_x, orientation_y):
+        self.board.render(opacity, scale, orientation_x, orientation_y)
 
         if self.display_title or self.prefs_visible:
-            ac.glColor4f(1, 1, 1, OPACITY)
+            ac.glColor4f(1, 1, 1, opacity)
             ac.glQuadTextured(7, 7, 16, 16, self.prefs_texture)
 
 
@@ -815,7 +817,7 @@ class Session(object):
         self.last_best_lap = None
         self.laps = 0
         self.cars = []
-        self.scale = FULLSIZE_SCALE
+        self.scale = self.fullsize_scale
         self.session_type = -1
         self.last_splits = {}
 
@@ -826,13 +828,13 @@ class Session(object):
         if current_time > self.fullsize_timeout:
             # Set the scale
             if current_time <= self.fullsize_timeout + ZOOM_TRANSITION:
-                self.scale = FULLSIZE_SCALE - \
+                self.scale = self.fullsize_scale - \
                     ((current_time - self.fullsize_timeout) / ZOOM_TRANSITION) \
-                    * (FULLSIZE_SCALE - SMALLSIZE_SCALE)
+                    * (self.fullsize_scale - self.smallsize_scale)
             else:
-                self.scale = SMALLSIZE_SCALE
+                self.scale = self.smallsize_scale
         else:
-            self.scale = FULLSIZE_SCALE
+            self.scale = self.fullsize_scale
 
     def _update_board_quali(self):
         '''
@@ -908,7 +910,7 @@ class Session(object):
             self.ui.board.display = True
         else:
             self.ui.board.display = False
-            self.scale = FULLSIZE_SCALE
+            self.scale = self.fullsize_scale
 
         return
 
@@ -1011,7 +1013,7 @@ class Session(object):
             self.ui.board.display = True
         else:
             self.ui.board.display = False
-            self.scale = FULLSIZE_SCALE
+            self.scale = self.fullsize_scale
 
     def _update_cars(self):
         for i in range(ac.getCarsCount()):
@@ -1056,7 +1058,8 @@ class Session(object):
         '''
         Render the UI at the given scale
         '''
-        self.ui.render(self.scale, self.orientation_x, self.orientation_y)
+        self.ui.render(self.opacity, self.scale, self.orientation_x,
+                       self.orientation_y)
 
     def save_prefs(self):
         '''
@@ -1147,7 +1150,7 @@ def callback_display_timeout_spinner_changed(value):
 def callback_fullsize_scale_spinner_changed(value):
     global session
 
-    session.fullsize_scale = value
+    session.fullsize_scale = value / 100.0
 
 
 def callback_fullsize_timeout_spinner_changed(value):
@@ -1165,13 +1168,13 @@ def callback_short_name_checkbox_changed(name, state):
 def callback_smallsize_scale_spinner_changed(value):
     global session
 
-    session.smallsize_scale = value
+    session.smallsize_scale = value / 100.0
 
 
 def callback_opacity_spinner_changed(value):
     global session
 
-    session.opacity = value
+    session.opacity = value / 100.0
 
 
 def callback_orientation_button(x, y):
