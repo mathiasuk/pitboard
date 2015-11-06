@@ -13,6 +13,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Copyright (C) 2014 - Mathias André
 
+# pylint: disable=W0602
+
 from __future__ import unicode_literals
 
 import glob
@@ -35,19 +37,19 @@ sys.path.insert(
 from pitboardDLL.sim_info import info
 
 # Customisable constants
-OPACITY = 0.8
-FULLSIZE_SCALE = 1.0
-SMALLSIZE_SCALE = 0.5
 ZOOM_TRANSITION = 0.25
-TITLE_TIMEOUT = 5  # Time in seconds during which we show the title
+TITLE_TIMEOUT = 10  # Time in seconds during which we show the title
 
 # Default for settings that can be changed in game
-DISPLAY_TIMEOUT = 45
-FULLSIZE_TIMEOUT = 15
-SHORT_NAMES = False
 DETAILED_DELTA = True
+DISPLAY_TIMEOUT = 45
+FULLSIZE_SCALE = 1.0
+FULLSIZE_TIMEOUT = 15
+OPACITY = 0.8
 ORIENTATION_X = 'L'  # 'L' or 'R'
 ORIENTATION_Y = 'U'  # 'U' or 'D'
+SHORT_NAMES = False
+SMALLSIZE_SCALE = 0.5
 
 if ac.getDriverName(0) == '0xdeadbee':
     DEBUG = True
@@ -62,10 +64,13 @@ PREFS_PATH = 'apps/python/pitboard/prefs.json'
 PREFS_KEYS = (
     'detailed_delta',
     'display_timeout',
+    'fullsize_scale',
     'fullsize_timeout',
+	'opacity',
     'orientation_x',
     'orientation_y',
     'short_names',
+    'smallsize_scale',
 )
 
 # Define colours
@@ -545,8 +550,39 @@ class UI(object):
         ac.setVisible(spin, 0)
         self.prefs_controls['fullsize_timeout_spinner'] = spin
 
+        spin = ac.addSpinner(self.widget, 'Full size scale')
+        ac.setPosition(spin, 350, 145)
+        ac.setRange(spin, 0.2, 2.0)
+        ac.setStep(spin, 0.1)
+        ac.setValue(spin, self.session.fullsize_scale)
+        ac.setSize(spin, 80, 25)
+        ac.addOnValueChangeListener(spin,
+                                    callback_fullsize_scale_spinner_changed)
+        ac.setVisible(spin, 0)
+        self.prefs_controls['fullsize_scale_spinner'] = spin
+
+        spin = ac.addSpinner(self.widget, 'Small size scale')
+        ac.setPosition(spin, 350, 180)
+        ac.setRange(spin, 0.1, 2.0)
+        ac.setStep(spin, 0.1)
+        ac.setValue(spin, self.session.smallsize_scale)
+        ac.setSize(spin, 80, 25)
+        ac.addOnValueChangeListener(spin,
+                                    callback_smallsize_scale_spinner_changed)
+        ac.setVisible(spin, 0)
+        self.prefs_controls['fullsize_scale_spinner'] = spin
+
+        spin = ac.addSpinner(self.widget, 'Opacity')
+        ac.setPosition(spin, 350, 215)
+        ac.setRange(spin, 0.1, 1.0)
+        ac.setStep(spin, 0.1)
+        ac.setValue(spin, self.session.opacity)
+        ac.setSize(spin, 80, 25)
+        ac.addOnValueChangeListener(spin,
+                                    callback_opacity_spinner_changed)
+
         check = ac.addCheckBox(self.widget, 'Use short name')
-        ac.setPosition(check, 280, 145)
+        ac.setPosition(check, 280, 250)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.short_names)
         ac.addOnCheckBoxChanged(check,
@@ -555,7 +591,7 @@ class UI(object):
         self.prefs_controls['short_name_checkbox'] = check
 
         check = ac.addCheckBox(self.widget, 'Detailed delta')
-        ac.setPosition(check, 280, 165)
+        ac.setPosition(check, 280, 270)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.detailed_delta)
         ac.addOnCheckBoxChanged(check,
@@ -563,12 +599,12 @@ class UI(object):
         ac.setVisible(check, 0)
         self.prefs_controls['detailed_delta_checkbox'] = check
 
-        label = self._create_label('orientation', 'Orientation:', 280, 185)
+        label = self._create_label('orientation', 'Orientation:', 280, 290)
         ac.setVisible(label, 0)
         self.prefs_controls['orientation'] = label
 
         button = ac.addButton(self.widget, 'change')
-        ac.setPosition(button, 450, 185)
+        ac.setPosition(button, 450, 290)
         ac.setSize(button, 60, 20)
         ac.setVisible(button, 0)
         self.prefs_controls['orientation_button'] = button
@@ -688,12 +724,15 @@ class Session(object):
     '''
     def __init__(self):
         self.ui = None
-        self.display_timeout = DISPLAY_TIMEOUT
-        self.fullsize_timeout = FULLSIZE_TIMEOUT
-        self.short_names = SHORT_NAMES
         self.detailed_delta = DETAILED_DELTA
+        self.display_timeout = DISPLAY_TIMEOUT
+        self.fullsize_scale = FULLSIZE_SCALE
+        self.fullsize_timeout = FULLSIZE_TIMEOUT
+        self.opacity = OPACITY
         self.orientation_x = ORIENTATION_X
         self.orientation_y = ORIENTATION_Y
+        self.short_names = SHORT_NAMES
+        self.smallsize_scale = SMALLSIZE_SCALE
 
         self._reset()
 
@@ -1064,7 +1103,7 @@ def acMain(ac_version):
 
 
 def acUpdate(deltaT):
-    global session  # pylint: disable=W0602
+    global session
 
     try:
         session.update_data()
@@ -1077,7 +1116,7 @@ def acUpdate(deltaT):
 
 
 def render_callback(deltaT):
-    global session  # pylint: disable=W0602
+    global session
 
     try:
         session.render()
@@ -1088,42 +1127,60 @@ def render_callback(deltaT):
 
 
 def activated_callback(value):
-    global session  # pylint: disable=W0602
+    global session
     session.ui.activated()
 
 
 #  Misc UI callbacks
-def callback_orientation_button(x, y):
-    global session  # pylint: disable=W0602
+def callback_detailed_delta_checkbox_changed(name, state):
+    global session
 
-    session.ui.orientation_button_click()
-
-
-def callback_prefs_button(x, y):
-    global session  # pylint: disable=W0602
-
-    session.ui.prefs_button_click()
+    session.detailed_delta = state is 1
 
 
 def callback_display_timeout_spinner_changed(value):
-    global session  # pylint: disable=W0602
+    global session
 
     session.display_timeout = value
 
 
+def callback_fullsize_scale_spinner_changed(value):
+    global session
+
+    session.fullsize_scale = value
+
+
 def callback_fullsize_timeout_spinner_changed(value):
-    global session  # pylint: disable=W0602
+    global session
 
     session.fullsize_timeout = value
 
 
 def callback_short_name_checkbox_changed(name, state):
-    global session  # pylint: disable=W0602
+    global session
 
     session.short_names = state is 1
 
 
-def callback_detailed_delta_checkbox_changed(name, state):
-    global session  # pylint: disable=W0602
+def callback_smallsize_scale_spinner_changed(value):
+    global session
 
-    session.detailed_delta = state is 1
+    session.smallsize_scale = value
+
+
+def callback_opacity_spinner_changed(value):
+    global session
+
+    session.opacity = value
+
+
+def callback_orientation_button(x, y):
+    global session
+
+    session.ui.orientation_button_click()
+
+
+def callback_prefs_button(x, y):
+    global session
+
+    session.ui.prefs_button_click()
