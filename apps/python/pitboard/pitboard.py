@@ -25,7 +25,7 @@ import re
 import string  # pylint: disable=W0402
 import sys
 import traceback
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import ac
 import acsys
@@ -66,7 +66,7 @@ PREFS_KEYS = (
     'display_timeout',
     'fullsize_scale',
     'fullsize_timeout',
-	'opacity',
+    'opacity',
     'orientation_x',
     'orientation_y',
     'short_names',
@@ -157,6 +157,13 @@ def ms_to_str(ms, precise=True, arrows=False):
             seconds = '|' + seconds[1:]
 
     return seconds
+
+
+def round_delta(delta):
+    '''
+    Round the delta to seconds and deciseconds
+    '''
+    return timedelta(seconds=round(delta.total_seconds() * 10) / 10)
 
 
 def split_to_str(split, arrows=False):
@@ -949,7 +956,8 @@ class Session(object):
             colour = len(line) * 'r'
 
             if ahead in self.last_splits:
-                delta = splits[ahead] - self.last_splits[ahead]
+                delta = round_delta(splits[ahead]) - \
+                        round_delta(self.last_splits[ahead])
 
                 if self.detailed_delta:
                     line += ' (%s)' % split_to_str(delta)
@@ -973,7 +981,8 @@ class Session(object):
             colour = len(line) * 'g'
 
             if behind in self.last_splits:
-                delta = splits[behind] - self.last_splits[behind]
+                delta = round_delta(splits[behind]) - \
+                        round_delta(self.last_splits[behind])
 
                 if self.detailed_delta:
                     line += ' (%s)' % split_to_str(delta)
