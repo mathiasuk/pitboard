@@ -935,6 +935,9 @@ class Session(object):
 
         current_time = info.graphics.iCurrentTime / 1000  # convert to seconds
         last_lap = info.graphics.iLastTime
+        session_time_left = 0
+        if info.graphics.sessionTimeLeft > 0:
+            session_time_left = info.graphics.sessionTimeLeft
 
         car = self.get_player_car()
         if not car:
@@ -943,8 +946,12 @@ class Session(object):
         ahead = self.get_car_by_position(car.position - 1)
         behind = self.get_car_by_position(car.position + 1)
 
-        text.append(Text('P%d - L%d' %
-                         (car.position, self.laps - self.current_lap)))
+        if info.static.isTimedRace:
+            text.append(Text('P%d - R%s' %
+                (car.position, time_to_str(session_time_left, show_ms=False))))
+        else:
+            text.append(Text('P%d - L%d' %
+                (car.position, self.laps - self.current_lap)))
 
         # Get current split times
         splits = self._get_splits(car)

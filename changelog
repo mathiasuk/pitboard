@@ -10,3 +10,8 @@
 	- Cleaned up boards inner border and opacity
 	- Add option for custom board if a file with name board_<username>.png
 	  exists
+
+0.3
+	- Added support for timed raced (Thanks to Ch4rL1E on AC forums for the
+	patch!)
+	- Fix rounding "display error" in some corner cases
