@@ -12,6 +12,7 @@
 	  exists
 
 0.3
-	- Added support for timed raced (Thanks to Ch4rL1E on AC forums for the
-	patch!)
+	- Add support for timed raced (Thanks to Ch4rL1E on AC forums for the patch!)
+	- Add option to only display surnames
+	- Hide pitboard in replay mode
 	- Fix rounding "display error" in some corner cases

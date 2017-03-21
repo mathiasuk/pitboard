@@ -50,11 +50,9 @@ ORIENTATION_X = 'L'  # 'L' or 'R'
 ORIENTATION_Y = 'U'  # 'U' or 'D'
 SHORT_NAMES = False
 SMALLSIZE_SCALE = 0.5
+USE_SURNAME = False
 
-if ac.getDriverName(0) == '0xdeadbee':
-    DEBUG = True
-else:
-    DEBUG = False
+DEBUG = ac.getDriverName(0) == '0xdeadbee'
 
 APP_SIZE_X = 120 * FULLSIZE_SCALE
 APP_SIZE_Y = 30
@@ -71,6 +69,7 @@ PREFS_KEYS = (
     'orientation_y',
     'short_names',
     'smallsize_scale',
+    'use_surname',
 )
 
 # Define colours
@@ -106,10 +105,18 @@ CHARS_MAPS = {
     '_': 'uscore',
 }
 
+# Session status
+OFF = 0
+REPLAY = 1
+LIVE = 2
+PAUSE = 3
+
+# Session type
 PRACTICE = 0
 QUALIFY = 1
 RACE = 2
 HOTLAP = 3
+
 
 # Define sectors frequency (0, 0.1, .., 0.9)
 SECTORS = [n / 100.0 for n in range(0, 100, 10)]
@@ -259,10 +266,15 @@ class Car(object):
         '''
         Returns the driver's name
         '''
-        if self.session.short_names:
-            return self.name[:3]
+        if self.session.use_surname and ' ' in self.name:
+            name = self.name.split()[1]
         else:
-            return self.name
+            name = self.name
+
+        if self.session.short_names:
+            return name[:3]
+        else:
+            return name
 
     def update_data(self, session_type):
         self.spline_pos = ac.getCarState(
@@ -599,8 +611,17 @@ class UI(object):
         ac.setVisible(check, 0)
         self.prefs_controls['short_name_checkbox'] = check
 
-        check = ac.addCheckBox(self.widget, 'Detailed delta')
+        check = ac.addCheckBox(self.widget, 'Use surname')
         ac.setPosition(check, 270, 340)
+        ac.setSize(check, 10, 10)
+        ac.setValue(check, self.session.use_surname)
+        ac.addOnCheckBoxChanged(check,
+                                callback_use_surname_checkbox_changed)
+        ac.setVisible(check, 0)
+        self.prefs_controls['short_name_checkbox'] = check
+
+        check = ac.addCheckBox(self.widget, 'Detailed delta')
+        ac.setPosition(check, 270, 360)
         ac.setSize(check, 10, 10)
         ac.setValue(check, self.session.detailed_delta)
         ac.addOnCheckBoxChanged(check,
@@ -608,12 +629,12 @@ class UI(object):
         ac.setVisible(check, 0)
         self.prefs_controls['detailed_delta_checkbox'] = check
 
-        label = self._create_label('orientation', 'Orientation:', 270, 360)
+        label = self._create_label('orientation', 'Orientation:', 270, 380)
         ac.setVisible(label, 0)
         self.prefs_controls['orientation'] = label
 
         button = ac.addButton(self.widget, 'change')
-        ac.setPosition(button, 440, 360)
+        ac.setPosition(button, 440, 380)
         ac.setSize(button, 60, 20)
         ac.setVisible(button, 0)
         self.prefs_controls['orientation_button'] = button
@@ -742,6 +763,7 @@ class Session(object):
         self.orientation_y = ORIENTATION_Y
         self.short_names = SHORT_NAMES
         self.smallsize_scale = SMALLSIZE_SCALE
+        self.use_surname = USE_SURNAME
 
         self._reset()
 
@@ -752,6 +774,7 @@ class Session(object):
         Set the current session ID and the number of laps,
         Reset if a new session has started
         '''
+        session_status = info.graphics.status
         session_type = info.graphics.session
         current_lap = info.graphics.completedLaps
 
@@ -761,6 +784,7 @@ class Session(object):
             self._reset()
 
         self.current_lap = current_lap
+        self.session_status = session_status
         self.session_type = session_type
 
     def _get_split(self, car1, car2):
@@ -918,8 +942,6 @@ class Session(object):
         else:
             self.ui.board.display = False
             self.scale = self.fullsize_scale
-
-        return
 
     def _update_board_race(self):
         '''
@@ -1095,7 +1117,10 @@ class Session(object):
         ac.console('Wrote prefs to file: %s' % data)
 
     def update_board(self):
-        if self.session_type == RACE:
+        if self.session_type == REPLAY:
+            # The board is not shown in replay mode
+            self.ui.board.display = False
+        elif self.session_type == RACE:
             self._update_board_race()
         elif self.session_type in (PRACTICE, QUALIFY, HOTLAP):
             self._update_board_quali()
@@ -1185,6 +1210,12 @@ def callback_smallsize_scale_spinner_changed(value):
     global session
 
     session.smallsize_scale = value / 100.0
+
+
+def callback_use_surname_checkbox_changed(name, state):
+    global session
+
+    session.use_surname = state is 1
 
 
 def callback_opacity_spinner_changed(value):
