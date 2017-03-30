@@ -16,3 +16,4 @@
 	- Add option to only display surnames
 	- Hide pitboard in replay mode
 	- Fix rounding "display error" in some corner cases
+	- Fix potential problems with ctypes permissions
