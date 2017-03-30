@@ -1030,7 +1030,7 @@ class Session(object):
 
         if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or
-                 self.display_timeout == -1 ):
+                 self.display_timeout == -1):
             # Display the board for the first 30 seconds, or once passed
             # the finish line
 
