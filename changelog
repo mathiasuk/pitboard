@@ -17,3 +17,6 @@
 	- Hide pitboard in replay mode
 	- Fix rounding "display error" in some corner cases
 	- Fix potential problems with ctypes permissions
+
+0.3.1
+	- Fix app not working in races (missing values in shared memory)
