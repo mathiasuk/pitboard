@@ -1117,7 +1117,7 @@ class Session(object):
         ac.console('Wrote prefs to file: %s' % data)
 
     def update_board(self):
-        if self.session_type == REPLAY:
+        if self.session_status == REPLAY:
             # The board is not shown in replay mode
             self.ui.board.display = False
         elif self.session_type == RACE:
