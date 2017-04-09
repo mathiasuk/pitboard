@@ -759,6 +759,7 @@ class Session(object):
         self.ui = None
         self.detailed_delta = DETAILED_DELTA
         self.display_timeout = DISPLAY_TIMEOUT
+        self.fuel_consumption = -1
         self.fullsize_scale = FULLSIZE_SCALE
         self.fullsize_timeout = FULLSIZE_TIMEOUT
         self.opacity = OPACITY
@@ -767,6 +768,13 @@ class Session(object):
         self.short_names = SHORT_NAMES
         self.smallsize_scale = SMALLSIZE_SCALE
         self.use_surname = USE_SURNAME
+
+        # Fuel variables
+        self.current_fuel = -1
+        self.fuel_consumption = -1
+        self.initial_fuel = -1
+        self.refuel_lap = -1
+        self.travelled_laps = 0
 
         self._reset()
 
@@ -870,6 +878,18 @@ class Session(object):
         else:
             self.scale = self.fullsize_scale
 
+    def _should_display_board_quali(self, current_time):
+        '''
+        Return True if the board should be displayed
+        '''
+        is_in_pit = info.graphics.isInPit
+        pit_limiter_on = info.physics.pitLimiterOn
+
+        return current_time > 0.2 and self.current_lap > 0 and \
+            (current_time < self.display_timeout or
+                self.display_timeout == -1) and \
+            (not pit_limiter_on or not is_in_pit)
+
     def _update_board_quali(self):
         '''
         Displays:
@@ -880,9 +900,7 @@ class Session(object):
         text = []
 
         current_time = info.graphics.iCurrentTime / 1000  # convert to seconds
-        is_in_pit = info.graphics.isInPit
         last_lap = info.graphics.iLastTime
-        pit_limiter_on = info.physics.pitLimiterOn
         time_left = info.graphics.sessionTimeLeft
 
         car = self.get_player_car()
@@ -923,12 +941,7 @@ class Session(object):
         if time_left > 0:
             text.append(Text('LEFT ' + time_to_str(time_left, show_ms=False)))
 
-        if current_time > 0.2 and self.current_lap > 0 and \
-                (current_time < self.display_timeout or
-                 self.display_timeout == -1) and \
-                (not pit_limiter_on or not is_in_pit):
-            # Display the board for the first 30 seconds, if not in pits
-
+        if self._should_display_board_quali(current_time):
             self._set_scale(current_time)
 
             # Update the text when the board is displayed
@@ -1034,6 +1047,7 @@ class Session(object):
         if current_time > 0.2 and self.current_lap > 0 and \
                 (current_time < self.display_timeout or
                  self.display_timeout == -1):
+            # TODO: hide/display in pits (same as quali)
             # Display the board for the first 30 seconds, or once passed
             # the finish line
 
@@ -1082,7 +1096,7 @@ class Session(object):
         # Add variables to session
         #  - initial_fuel = -1
         #  - current_fuel = -1
-        #  - initial_lap, or a lap counter since initial fuel was set
+        #  - refule_lap
         #  - fuel_consumption = -1
         #
         # If car is out of pit current fuel is > initial_fuel then update
@@ -1102,7 +1116,51 @@ class Session(object):
         #
         # Also keep track of min and max pit window: the player should pit
         # before the end of the pit window
-        pass
+        #
+        # TODO: handle race/session restarts
+        # TODO: How to handle when refueling with less fuel? (fuel change with car stopped?)
+
+        current_fuel = info.physics.fuel
+
+        # In hotlap mode the car starts before the pit straight but still
+        # appears a lap 0, so we can compare the expected distance with the
+        # actual distance
+        if self.current_lap == 0 and info.graphics.distanceTraveled < (info.static.trackSPlineLength * info.graphics.normalizedCarPosition):
+            return
+
+        # When the car is in the pits we don't update the fuel info:
+        if info.graphics.isInPit:
+            return
+
+        if current_fuel > 0 and current_fuel > self.current_fuel:
+            # Player has refueled
+            self.initial_fuel = current_fuel
+            self.refuel_lap = self.current_lap + info.graphics.normalizedCarPosition
+            # TODO: Should we reset fuel consumption as well?
+
+            debug('Refuel: %s' % current_fuel)
+            debug('Refuel lap: %f' % self.refuel_lap)
+            debug('Consumption: %f' % self.fuel_consumption)
+
+        self.current_fuel = current_fuel
+
+        # If we've travelled at least one lap, update the average fuel consumption
+        travelled_laps = self.current_lap + info.graphics.normalizedCarPosition - self.refuel_lap
+
+        if travelled_laps < self.travelled_laps or \
+                (travelled_laps - self.travelled_laps > 0.5):
+            # When crossing the start finish line sometimes the spline gets
+            # at a different time than  the current_lap which results in
+            # incorrect data
+            # We skip it if it looks like we've moved more than 1/2 a lap
+            # since last update
+            return
+        else:
+            self.travelled_laps = travelled_laps
+
+        if travelled_laps > 1:
+            self.fuel_consumption = (self.initial_fuel - current_fuel) / travelled_laps
+        debug('Consumption: %f %d %f' % (self.fuel_consumption, self.current_lap, info.graphics.normalizedCarPosition))
 
     def get_car_by_position(self, position):
         '''
