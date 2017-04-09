@@ -525,6 +525,9 @@ class UI(object):
         '''
         Create a library of all available cards
         '''
+        # TODO: Add support for lowercase letter (with option in gui to
+        # enable/disable)
+        # Filenames should be e.g. b_low_29_50.png
         library = {}
         chars = string.ascii_uppercase + string.digits + \
             ''.join(CHARS_MAPS.keys()) + ' '
@@ -1074,6 +1077,33 @@ class Session(object):
                     self.cars, key=lambda car: (-car.lap, -car.spline_pos))):
                 car.position = i + 1
 
+    def _update_fuel(self):
+        # TODO:
+        # Add variables to session
+        #  - initial_fuel = -1
+        #  - current_fuel = -1
+        #  - initial_lap, or a lap counter since initial fuel was set
+        #  - fuel_consumption = -1
+        #
+        # If car is out of pit current fuel is > initial_fuel then update
+        # initial fuel and reset initial_lap and fuel_consumption
+        # (perhaps keep track of the old fuel_consumption in case of refueling
+        # during pit stop?)
+        #
+        # If the car has travelled more than 1 lap since fuel reset then
+        # update fuel consumption
+        #
+        # Add variable "should pit" if the amount of fuel left is less than 2
+        # laps (configurable in UI?)
+        #
+        # Add variable "fuel need" to keep track of how much fuel is needed
+        # to finish the race from the end of the current lap (check if
+        # the new AC pit app asks for total amount or added amount of fuel
+        #
+        # Also keep track of min and max pit window: the player should pit
+        # before the end of the pit window
+        pass
+
     def get_car_by_position(self, position):
         '''
         Returns the car in the given position, or None
@@ -1128,6 +1158,7 @@ class Session(object):
     def update_data(self):
         self._check_session()
         self._update_cars()
+        self._update_fuel()
 
         if self.session_type == RACE:
             self.laps = info.graphics.numberOfLaps
